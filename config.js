@@ -55,22 +55,36 @@ module.exports = {
     // 'box-sync',
     //'comicbooklover',
     //'diffmerge',
+    'docker'
     //'dropbox',
     //'evernote',
+    'firefox'
+    'gitkraken'
+    // Manage your GPG Keychain - https://gpgtools.org/
     'gpg-suite',
     //'ireadfast',
+    // Replacement for Terminal and the successor to iTerm - https://www.iterm2.com/
     'iterm2',
-    'little-snitch',
-    'micro-snitch',
+    //'little-snitch',
+    'jumpcut'
+    'meld'
+    'nextcloud'
+    //'micro-snitch',
     //'macvim',
+    // Powerful, keyboard-centric window management - http://www.irradiatedsoftware.com/sizeup/
     'sizeup',
     //'sketchup',
     'slack',
+    // A sophisticated text editor for code, markup and prose - https://www.sublimetext.com
+    'sublime'
+    // Free Unarchiving Software for macOS - https://theunarchiver.com/
     'the-unarchiver',
+    'tunnelblick'
     //'torbrowser',
     //'transmission',
-    //'vlc',
-    'xquartz'
+    'vlc',
+    //'virtualbox'
+    //'xquartz'
   ],
   gem: [
     'git-up'
