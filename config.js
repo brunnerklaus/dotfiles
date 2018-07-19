@@ -92,19 +92,19 @@ module.exports = {
     //'xquartz'
   ],
   gem: [
-    'git-up'
+    //'git-up'
   ],
   npm: [
-    'antic',
-    'buzzphrase',
-    'eslint',
-    'instant-markdown-d',
+    //'antic',
+    //'buzzphrase',
+    //'eslint',
+    //'instant-markdown-d',
     // 'generator-dockerize',
-    'gulp',
-    'npm-check',
-    'prettyjson',
-    'trash',
-    'vtop'
+    //'gulp',
+    //'npm-check',
+    //'prettyjson',
+    //'trash',
+    //'vtop'
     // ,'yo'
   ]
 };
