@@ -47,7 +47,7 @@ fi
 
 # github account
 read -r -p "Setup github acc? [y|N] " response
-  if [[ $response =~ (yes|y|Y) ]];then
+if [[ $response =~ (yes|y|Y) ]];then
   grep 'user = GITHUBUSER' ./homedir/.gitconfig > /dev/null 2>&1
   if [[ $? = 0 ]]; then
       read -r -p "What is your github.com username? " githubuser
