@@ -1,26 +1,31 @@
 module.exports = {
   brew: [
-    // http://conqueringthecommandline.com/book/ack_ag
+    // Search tool like grep, but optimized for programmers - http://conqueringthecommandline.com/book/ack_ag
     'ack',
+    // Code-search similar to ack - https://github.com/ggreer/the_silver_searcher
     'ag',
     // Install GNU core utilities (those that come with macOS are outdated)
     // Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
     'coreutils',
+    // Convert text between DOS, UNIX, and Mac formats - https://waterlan.home.xs4all.nl/dos2unix.html
     'dos2unix',
     // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
     'findutils',
     // 'fortune',
+    // Library for command-line editing
     'readline', // ensure gawk gets good readline
+    // GNU awk utility - https://www.gnu.org/software/gawk/
     'gawk',
     // http://www.lcdf.org/gifsicle/ (because I'm a gif junky)
     'gifsicle',
+    // GNU Pretty Good Privacy (PGP) package - https://gnupg.org/
     'gnupg',
     // Install GNU `sed`, overwriting the built-in `sed`
     // so we can do "sed -i 's/foo/bar/' file" instead of "sed -i '' 's/foo/bar/' file"
     'gnu-sed --with-default-names',
     // better, more recent grep
     'homebrew/dupes/grep',
-    // https://github.com/jkbrzt/httpie
+    // User-friendly cURL replacement (command-line HTTP client) - https://github.com/jkbrzt/httpie
     'httpie',
     // jq is a sort of JSON grep
     'jq',
@@ -28,10 +33,10 @@ module.exports = {
     'mas',
     // Install some other useful utilities like `sponge`
     'moreutils',
-    // The Network Mapper - Free Security Scanner https://nmap.org/
+    // Port scanning utility for large networks - https://nmap.org/
     'nmap',
     // 'openconnect',
-    // https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
+    // Reattach process (e.g., tmux) to background - https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
     'reattach-to-user-namespace',
     // better/more recent version of screen
     'homebrew/dupes/screen',
@@ -39,7 +44,7 @@ module.exports = {
     'tmux',
     // Recursive directory listing command - http://mama.indstate.edu/users/ice/tree/
     'tree',
-    // TTC recordning - http://0xcc.net/ttyrec/
+    // Terminal interaction recorder and player - http://0xcc.net/ttyrec/
     'ttyrec',
     // better, more recent vim
     'vim --with-override-system-vi',
