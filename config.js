@@ -9,7 +9,7 @@ module.exports = {
     'dos2unix',
     // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
     'findutils',
-    'fortune',
+    // 'fortune',
     'readline', // ensure gawk gets good readline
     'gawk',
     // http://www.lcdf.org/gifsicle/ (because I'm a gif junky)
@@ -29,17 +29,19 @@ module.exports = {
     // Install some other useful utilities like `sponge`
     'moreutils',
     'nmap',
-    'openconnect',
+    // 'openconnect',
+    // https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
     'reattach-to-user-namespace',
     // better/more recent version of screen
     'homebrew/dupes/screen',
     'tmux',
     'tree',
+    // http://0xcc.net/ttyrec/
     'ttyrec',
     // better, more recent vim
     'vim --with-override-system-vi',
     'watch',
-    // Install wget with IRI support
+    // Install wget with IRI support (enable internationalized URI)
     'wget --enable-iri'
   ],
   cask: [
