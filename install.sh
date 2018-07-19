@@ -189,8 +189,8 @@ require_brew fontconfig
 require_brew zsh
 # update ruby to latest
 # use versions of packages installed with homebrew
-RUBY_CONFIGURE_OPTS="--with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline` --with-libyaml-dir=`brew --prefix libyaml`"
-require_brew ruby
+# RUBY_CONFIGURE_OPTS="--with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline` --with-libyaml-dir=`brew --prefix libyaml`"
+# require_brew ruby
 # set zsh as the user login shell
 CURRENTSHELL=$(dscl . -read /Users/$USER UserShell | awk '{print $2}')
 if [[ "$CURRENTSHELL" != "/usr/local/bin/zsh" ]]; then
@@ -249,11 +249,11 @@ require_cask font-roboto-mono-for-powerline
 require_cask font-source-code-pro
 ok
 
-if [[ -d "/Library/Ruby/Gems/2.0.0" ]]; then
-  running "Fixing Ruby Gems Directory Permissions"
-  sudo chown -R $(whoami) /Library/Ruby/Gems/2.0.0
-  ok
-fi
+#if [[ -d "/Library/Ruby/Gems/2.0.0" ]]; then
+#  running "Fixing Ruby Gems Directory Permissions"
+#  sudo chown -R $(whoami) /Library/Ruby/Gems/2.0.0
+#  ok
+#fi
 
 # node version manager
 require_brew nvm
