@@ -28,18 +28,22 @@ module.exports = {
     'mas',
     // Install some other useful utilities like `sponge`
     'moreutils',
+    // The Network Mapper - Free Security Scanner https://nmap.org/
     'nmap',
     // 'openconnect',
     // https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
     'reattach-to-user-namespace',
     // better/more recent version of screen
     'homebrew/dupes/screen',
+    // Terminal multiplexer - https://github.com/tmux/tmux
     'tmux',
+    // Recursive directory listing command - http://mama.indstate.edu/users/ice/tree/
     'tree',
-    // http://0xcc.net/ttyrec/
+    // TTC recordning - http://0xcc.net/ttyrec/
     'ttyrec',
     // better, more recent vim
     'vim --with-override-system-vi',
+    // Command line and full screen utilities for browsing procfs - https://gitlab.com/procps-ng/procps
     'watch',
     // Install wget with IRI support (enable internationalized URI)
     'wget --enable-iri'
