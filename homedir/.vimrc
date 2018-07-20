@@ -1,3 +1,8 @@
+"python3 issue fix https://github.com/vim/vim/issues/3117
+if has('python3')
+  silent! python3 1
+endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Must Have
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
