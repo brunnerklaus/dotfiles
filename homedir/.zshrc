@@ -56,3 +56,9 @@ unsetopt correct
 
 # run fortune on new terminal :)
 #fortune
+
+#import work related stuff
+test -e "$HOME/bin/.workrc" && source "$HOME/bin/.workrc"
+
+#python
+#export PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH
