@@ -98,7 +98,8 @@ module.exports = {
     //'antic',
     //'buzzphrase',
     //'eslint',
-    //'instant-markdown-d',
+    // Instantly preview finnicky markdown files - https://github.com/suan/vim-instant-markdown
+    'instant-markdown-d',
     // 'generator-dockerize',
     //'gulp',
     //'npm-check',
