@@ -206,29 +206,29 @@ if [[ ! -d "./oh-my-zsh/custom/themes/powerlevel9k" ]]; then
   git clone https://github.com/bhilburn/powerlevel9k.git oh-my-zsh/custom/themes/powerlevel9k
 fi
 
-#bot "creating symlinks for project dotfiles..."
-#pushd homedir > /dev/null 2>&1
-#now=$(date +"%Y.%m.%d.%H.%M.%S")
-#
-#for file in .*; do
-#  if [[ $file == "." || $file == ".." ]]; then
-#    continue
-#  fi
-#  running "~/$file"
-#  # if the file exists:
-#  if [[ -e ~/$file ]]; then
-#      mkdir -p ~/.dotfiles_backup/$now
-#      mv ~/$file ~/.dotfiles_backup/$now/$file
-#      echo "backup saved as ~/.dotfiles_backup/$now/$file"
-#  fi
-#  # symlink might still exist
-#  unlink ~/$file > /dev/null 2>&1
-#  # create the link
-#  ln -s ~/.dotfiles/homedir/$file ~/$file
-#  echo -en '\tlinked';ok
-#done
-#
-#popd > /dev/null 2>&1
+ bot "creating symlinks for project dotfiles..."
+ pushd homedir > /dev/null 2>&1
+ now=$(date +"%Y.%m.%d.%H.%M.%S")
+ 
+ for file in .*; do
+   if [[ $file == "." || $file == ".." ]]; then
+     continue
+   fi
+   running "~/$file"
+   # if the file exists:
+   if [[ -e ~/$file ]]; then
+       mkdir -p ~/.dotfiles_backup/$now
+       mv ~/$file ~/.dotfiles_backup/$now/$file
+       echo "backup saved as ~/.dotfiles_backup/$now/$file"
+   fi
+   # symlink might still exist
+   unlink ~/$file > /dev/null 2>&1
+   # create the link
+   ln -s ~/.dotfiles/homedir/$file ~/$file
+   echo -en '\tlinked';ok
+ done
+ 
+ popd > /dev/null 2>&1
 
 
 bot "Installing vim plugins"
@@ -871,6 +871,11 @@ defaults write com.apple.mail DisableInlineAttachmentViewing -bool true;ok
 
 running "Disable automatic spell checking"
 defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled";ok
+
+###############################################################################
+bot "Set sublime as default editor"
+###############################################################################
+defaults write com.apple.LaunchServices LSHandlers -array-add '{LSHandlerContentType=public.plain-text;LSHandlerRoleAll=com.sublimetext.3;}'
 
 ###############################################################################
 bot "Spotlight"
