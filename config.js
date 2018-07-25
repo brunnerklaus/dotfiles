@@ -56,7 +56,7 @@ module.exports = {
   cask: [
     //'adium',
     //'amazon-cloud-drive',
-    //'atom',
+    'atom',
     // 'box-sync',
     //'comicbooklover',
     //'diffmerge',
