@@ -26,29 +26,29 @@ if ! sudo grep -q "%wheel		ALL=(ALL) NOPASSWD: ALL #atomantic/dotfiles" "/etc/su
   read -r -p "Make sudo passwordless? [y|N] " response
 
   if [[ $response =~ (yes|y|Y) ]];then
-      sudo cp /etc/sudoers /etc/sudoers.back
-      echo '%wheel		ALL=(ALL) NOPASSWD: ALL #atomantic/dotfiles' | sudo tee -a /etc/sudoers > /dev/null
-      sudo dscl . append /Groups/wheel GroupMembership $(whoami)
-      bot "You can now run sudo commands without password!"
+    sudo cp /etc/sudoers /etc/sudoers.back
+    echo '%wheel		ALL=(ALL) NOPASSWD: ALL #atomantic/dotfiles' | sudo tee -a /etc/sudoers > /dev/null
+    sudo dscl . append /Groups/wheel GroupMembership $(whoami)
+    bot "You can now run sudo commands without password!"
   fi
 fi
 
 # /etc/hosts
 read -r -p "Overwrite /etc/hosts with the ad-blocking hosts file from someonewhocares.org? (from ./configs/hosts file) [y|N] " response
 if [[ $response =~ (yes|y|Y) ]];then
-    action "cp /etc/hosts /etc/hosts.backup"
-    sudo cp /etc/hosts /etc/hosts.backup
-    ok
-    action "cp ./configs/hosts /etc/hosts"
-    sudo cp ./configs/hosts /etc/hosts
-    ok
-    bot "Your /etc/hosts file has been updated. Last version is saved in /etc/hosts.backup"
+  action "cp /etc/hosts /etc/hosts.backup"
+  sudo cp /etc/hosts /etc/hosts.backup
+  ok
+  action "cp ./configs/hosts /etc/hosts"
+  sudo cp ./configs/hosts /etc/hosts
+  ok
+  bot "Your /etc/hosts file has been updated. Last version is saved in /etc/hosts.backup"
 fi
 
 # github account
 grep 'user = GITHUBUSER' ./homedir/.gitconfig > /dev/null 2>&1
 if [[ $? = 0 ]]; then
-    read -r -p "What is your github.com username? " githubuser
+  read -r -p "What is your github.com username? " githubuser
 
   fullname=`osascript -e "long user name of (system info)"`
 
@@ -147,10 +147,10 @@ running "checking homebrew install"
 brew_bin=$(which brew) 2>&1 > /dev/null
 if [[ $? != 0 ]]; then
   action "installing homebrew"
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    if [[ $? != 0 ]]; then
-      error "unable to install homebrew, script $0 abort!"
-      exit 2
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  if [[ $? != 0 ]]; then
+    error "unable to install homebrew, script $0 abort!"
+    exit 2
   fi
 else
   ok
@@ -161,12 +161,12 @@ else
   bot "before installing brew packages, we can upgrade any outdated packages."
   read -r -p "run brew upgrade? [y|N] " response
   if [[ $response =~ ^(y|yes|Y) ]];then
-      # Upgrade any already-installed formulae
-      action "upgrade brew packages..."
-      brew upgrade
-      ok "brews updated..."
+    # Upgrade any already-installed formulae
+    action "upgrade brew packages..."
+    brew upgrade
+    ok "brews updated..."
   else
-      ok "skipped brew package upgrades.";
+    ok "skipped brew package upgrades.";
   fi
 fi
 
@@ -206,29 +206,29 @@ if [[ ! -d "./oh-my-zsh/custom/themes/powerlevel9k" ]]; then
   git clone https://github.com/bhilburn/powerlevel9k.git oh-my-zsh/custom/themes/powerlevel9k
 fi
 
- bot "creating symlinks for project dotfiles..."
- pushd homedir > /dev/null 2>&1
- now=$(date +"%Y.%m.%d.%H.%M.%S")
- 
- for file in .*; do
-   if [[ $file == "." || $file == ".." ]]; then
-     continue
-   fi
-   running "~/$file"
-   # if the file exists:
-   if [[ -e ~/$file ]]; then
-       mkdir -p ~/.dotfiles_backup/$now
-       mv ~/$file ~/.dotfiles_backup/$now/$file
-       echo "backup saved as ~/.dotfiles_backup/$now/$file"
-   fi
-   # symlink might still exist
-   unlink ~/$file > /dev/null 2>&1
-   # create the link
-   ln -s ~/.dotfiles/homedir/$file ~/$file
-   echo -en '\tlinked';ok
- done
- 
- popd > /dev/null 2>&1
+bot "creating symlinks for project dotfiles..."
+pushd homedir > /dev/null 2>&1
+now=$(date +"%Y.%m.%d.%H.%M.%S")
+
+for file in .*; do
+  if [[ $file == "." || $file == ".." ]]; then
+    continue
+  fi
+  running "~/$file"
+  # if the file exists:
+  if [[ -e ~/$file ]]; then
+    mkdir -p ~/.dotfiles_backup/$now
+    mv ~/$file ~/.dotfiles_backup/$now/$file
+    echo "backup saved as ~/.dotfiles_backup/$now/$file"
+  fi
+  # symlink might still exist
+  unlink ~/$file > /dev/null 2>&1
+  # create the link
+  ln -s ~/.dotfiles/homedir/$file ~/$file
+  echo -en '\tlinked';ok
+done
+
+popd > /dev/null 2>&1
 
 
 bot "Installing vim plugins"
@@ -495,15 +495,15 @@ defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false;ok
 #running "Menu bar: hide the Time Machine, Volume, User, and Bluetooth icons"
 #for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
 #  defaults write "${domain}" dontAutoLoad -array \
-#    "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
-#    "/System/Library/CoreServices/Menu Extras/Volume.menu" \
-#    "/System/Library/CoreServices/Menu Extras/User.menu"
+  #    "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
+  #    "/System/Library/CoreServices/Menu Extras/Volume.menu" \
+  #    "/System/Library/CoreServices/Menu Extras/User.menu"
 #done;
 #defaults write com.apple.systemuiserver menuExtras -array \
-#  "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
-#  "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-#  "/System/Library/CoreServices/Menu Extras/Battery.menu" \
-#  "/System/Library/CoreServices/Menu Extras/Clock.menu"
+  #  "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
+  #  "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
+  #  "/System/Library/CoreServices/Menu Extras/Battery.menu" \
+  #  "/System/Library/CoreServices/Menu Extras/Clock.menu"
 #ok
 
 #running "Set highlight color to green"
@@ -733,8 +733,8 @@ bot "Dock & Dashboard"
 running "Enable highlight hover effect for the grid view of a stack (Dock)"
 defaults write com.apple.dock mouse-over-hilite-stack -bool true;ok
 
-running "Set the icon size of Dock items to 36 pixels"
-defaults write com.apple.dock tilesize -int 36;ok
+running "Set the icon size of Dock items to 49 pixels"
+defaults write com.apple.dock tilesize -int 49;ok
 
 running "Change minimize/maximize window effect to scale"
 defaults write com.apple.dock mineffect -string "scale";ok
@@ -748,8 +748,8 @@ defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
 running "Show indicator lights for open applications in the Dock"
 defaults write com.apple.dock show-process-indicators -bool true;ok
 
-running "Don’t animate opening applications from the Dock"
-defaults write com.apple.dock launchanim -bool false;ok
+running "Animate opening applications from the Dock"
+defaults write com.apple.dock launchanim -bool true;ok
 
 running "Speed up Mission Control animations"
 defaults write com.apple.dock expose-animation-duration -float 0.1;ok
@@ -774,7 +774,7 @@ running "Remove the animation when hiding/showing the Dock"
 defaults write com.apple.dock autohide-time-modifier -float 0;ok
 
 running "Automatically hide and show the Dock"
-defaults write com.apple.dock autohide -bool true;ok
+defaults write com.apple.dock autohide -bool false;ok
 
 running "Make Dock icons of hidden applications translucent"
 defaults write com.apple.dock showhidden -bool true;ok
@@ -784,6 +784,11 @@ defaults write com.apple.dock hide-mirror -bool true;ok
 
 running "Reset Launchpad, but keep the desktop wallpaper intact"
 find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete;ok
+
+#restore default dock settings
+#defaults delete com.apple.dock autohide
+#defaults delete com.apple.dock autohide-delay
+#defaults delete com.apple.dock autohide-time-modifier
 
 bot "Configuring Hot Corners"
 # Possible values:
@@ -873,9 +878,9 @@ running "Disable automatic spell checking"
 defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled";ok
 
 ###############################################################################
-bot "Set sublime as default editor"
-###############################################################################
-defaults write com.apple.LaunchServices LSHandlers -array-add '{LSHandlerContentType=public.plain-text;LSHandlerRoleAll=com.sublimetext.3;}'
+bot "Set atom as default editor"
+#########################it######################################################
+defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType=public.plain-text;LSHandlerRoleAll=com.github.atom;}'
 
 ###############################################################################
 bot "Spotlight"
