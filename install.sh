@@ -1050,6 +1050,41 @@ defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false;ok
 killall cfprefsd
 
 ###############################################################################
+bot "Set Dock items"
+###############################################################################
+OLDIFS=$IFS
+IFS=''
+
+apps=(
+  Launchpad
+  'System Preferences'
+  iTerm
+  Atom
+  Safari
+  Calendar
+  Notes
+  GitKraken
+  'Google Chrome'
+  Slack
+  KeePassX
+  'Keychain Access'
+)
+
+running "Removing all dock icons"
+dockutil --no-restart --remove all $HOME;ok
+for app in "${apps[@]}"
+do
+  echo "Keeping $app in Dock"
+  dockutil --no-restart --add /Applications/$app.app $HOME;ok
+done
+
+running "Restarting Dock"
+killall Dock
+
+# restore $IFS
+IFS=$OLDIFS
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 bot "OK. Note that some of these changes require a logout/restart to take effect. Killing affected applications (so they can reboot)...."
