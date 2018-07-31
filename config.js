@@ -66,7 +66,7 @@ module.exports = {
     //'dropbox',
     //'evernote',
     'firefox',
-    'gitkraken',
+    //'gitkraken',
     // Manage your GPG Keychain - https://gpgtools.org/
     'gpg-suite',
     //'ireadfast',
@@ -79,15 +79,15 @@ module.exports = {
     //'micro-snitch',
     //'macvim',
     // Powerful, keyboard-centric window management - http://www.irradiatedsoftware.com/sizeup/
-    'sizeup',
+    //'sizeup',
     //'sketchup',
     'slack',
     // A sophisticated text editor for code, markup and prose - https://www.sublimetext.com
-    'sublime',
+    //'sublime',
     // Free Unarchiving Software for macOS - https://theunarchiver.com/
     'the-unarchiver',
     'tunnelblick',
-    //'torbrowser',
+    'torbrowser',
     //'transmission',
     'vlc',
     //'virtualbox'
