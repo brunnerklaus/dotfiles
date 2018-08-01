@@ -6,7 +6,8 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Must Have
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme solarized
+"colorscheme solarized
+colorscheme zenburn
 " syntax on " syntax highlighting on
 syntax enable
 let g:solarized_termtrans = 1
