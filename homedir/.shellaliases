@@ -92,3 +92,9 @@ alias spoton="sudo mdutil -a -i on"
 alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; mas upgrade; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
 
 alias vtop="vtop --theme wizard"
+
+# remove .DS_Store files recursively
+alias dsclean='find . -type f -name .DS_Store -delete'
+
+# list directory sizes sorted
+alias duh='gdu --human-readable --max-depth 1 | sort --reverse --human-numeric-sort'
