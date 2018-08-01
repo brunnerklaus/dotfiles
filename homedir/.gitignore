@@ -23,6 +23,7 @@ Temporary Items
 # Security #
 ############
 id_rsa
+*id_rsa
 
 ###########
 # Tooling #

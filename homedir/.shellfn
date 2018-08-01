@@ -113,11 +113,33 @@ function sri() {
 }
 
 ## output directory/file tree, excluding ignorables
-function tre(){
+function tre() {
   tree -aC -I '.git|node_modules|bower_components|.DS_Store' --dirsfirst "$@"
 }
 
-## weather seattle
+## weather in...
 function weather() {
-  curl wttr.in/$1
+  location="${1:-vienna}"
+  curl wttr.in/$location
+}
+
+#ping host or ip with custom output
+function pingi() {
+  host=$1
+  if [ -z $host ]; then
+      echo "Usage: `basename $0` [HOST]"
+      exit 1
+  fi
+  count=0
+  while :; do
+    ((count++))
+    result=`ping -c 1 $host | grep 'bytes from '`
+    if [ $? -gt 0 ]; then
+        echo -e "`date +'%Y/%m/%d %H:%M:%S'` - $count - host $host is \033[0;31mdown\033[0m"
+        sleep 2
+    else
+        echo -e "`date +'%Y/%m/%d %H:%M:%S'` - $count - host $host is \033[0;32mok\033[0m -`echo $result | cut -d ':' -f 2`"
+        sleep 2 # avoid ping rain
+    fi
+  done
 }
