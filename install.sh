@@ -883,7 +883,7 @@ bot "Configure Atom editor"
 running "Set atom as default editor"
 defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType=public.plain-text;LSHandlerRoleAll=com.github.atom;}';ok
 
-running "Installing atom packages"
+running "Installing Atom Community Packages"
 apm install \
   Sublime-Style-Column-Selection \
   ask-stack \
