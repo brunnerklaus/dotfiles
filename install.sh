@@ -878,9 +878,23 @@ running "Disable automatic spell checking"
 defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled";ok
 
 ###############################################################################
-bot "Set atom as default editor"
+bot "Configure Atom editor"
 #########################it######################################################
-defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType=public.plain-text;LSHandlerRoleAll=com.github.atom;}'
+running "Set atom as default editor"
+defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType=public.plain-text;LSHandlerRoleAll=com.github.atom;}';ok
+
+running "Installing atom packages"
+apm install \
+  Sublime-Style-Column-Selection \
+  ask-stack \
+  atom-beautify \
+  atom-ide-ui \
+  file-icons \
+  highlight-selected \
+  language-liquid \
+  minimap \
+  pigments \
+  zenburn-syntax
 
 ###############################################################################
 bot "Spotlight"
