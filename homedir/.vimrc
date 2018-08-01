@@ -34,7 +34,9 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'Valloric/YouCompleteMe'
 " Navigation (IDE frame)
 Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
@@ -93,8 +95,8 @@ filetype plugin indent on    " required
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set UTF-8 encoding
-set enc=utf-8
-set fenc=utf-8
+set enc=utf-8 "output encoding that is shown in the terminal
+set fenc=utf-8 "output encoding of the file that is written
 set termencoding=utf-8
 set history=1000 " How many lines of history to remember
 set cf " enable error files and error jumping
@@ -107,9 +109,9 @@ set nosol " leave my cursor where it was
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files/Backups/Sessions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nobackup
-set nowb
-set noswapfile
+set nobackup "no backup files
+set nowb "only in case you don't want a backup file while editing
+set noswapfile "no swap files
 set directory=~/.vim/temp " directory for temp files
 set makeef=error.err " When using make, where should it dump the file
 set sessionoptions+=globals " What should be saved during sessions being saved
@@ -131,7 +133,7 @@ set lz " do not redraw while running macros (much faster) (LazyRedraw)
 set hid " you can change buffer without saving
 set backspace=2 " make backspace work normal
 set whichwrap+=<,>,h,l  " backspace and cursor keys wrap to
-set mouse-=a " use mouse everywhere
+set mouse-=a " don't use mouse everywhere
 set shortmess=atI " shortens messages to avoid 'press a key' prompt
 set report=0 " tell us when anything is changed via :...
 set noerrorbells " don't make noise
@@ -143,7 +145,7 @@ set listchars=tab:>-,trail:- " show tabs and trailing whitespace
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set showmatch " show matching brackets
 set mat=5 " how many tenths of a second to blink matching brackets for
-set nohlsearch " do not highlight searched for phrases
+set hlsearch " do highlight searched for phrases
 set incsearch " BUT do highlight as you type you search phrase
 set so=5 " Keep 5 lines (top/bottom) for scope
 set novisualbell " don't blink
@@ -232,6 +234,21 @@ endfunction
 " map <left> <ESC>:NERDTreeToggle<RETURN>  " moves left fa split
 " map <F2> <ESC>ggVG:call SuperRetab()<left>
 " map <F12> ggVGg? " apply rot13 for people snooping over shoulder, good fun
+
+"F3 will open NERDTree panel and highlight current file. And when you're in the NERDTree panel, F3 will open file under cursor. So, I can use one button to jump between buffer and NERDTree. (And F4 for preview because it's next to F3) - via https://stackoverflow.com/questions/10303557/map-f2-to-neerdtreetoggle
+
+" Ctrl-P to Display the file browser tree
+silent! nmap <C-p> :NERDTreeToggle<CR>
+" Toogle between file browser tree and buffer"
+silent! map <F3> :NERDTreeFind<CR>
+
+let g:NERDTreeMapActivateNode="<F3>"
+let g:NERDTreeMapPreview="<F4>"
+
+" nerdcommenter
+" ,/ to invert comment on the current line/selection
+nmap <leader>/ :call NERDComment(0, "invert")<cr>
+vmap <leader>/ :call NERDComment(0, "invert")<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Useful abbrevs
