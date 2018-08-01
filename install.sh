@@ -896,10 +896,6 @@ apm install \
   pigments \
   zenburn-syntax
 
-running "Linking atom config"
-rm -rf ~/.atom/config.cson
-ln -s ~/.dotfiles/homedir/.atom/config.cson ~/.atom/config.cson;ok
-
 ###############################################################################
 bot "Spotlight"
 ###############################################################################
