@@ -620,6 +620,13 @@ defaults write NSGlobalDomain AppleMetricUnits -bool true;ok
 #running "Disable auto-correct"
 #defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false;ok
 
+# Read the current state with the following. (1 for F-keys, 0 for media/brightness etc)
+#defaults read "Apple Global Domain" "com.apple.keyboard.fnState"
+
+running "Use all F1, F2 as standard keys"
+defaults write "Apple Global Domain" "com.apple.keyboard.fnState" "1";ok ## F1 F2 etc
+#defaults write "Apple Global Domain" "com.apple.keyboard.fnState" "0" ## Brightness/Media
+
 ###############################################################################
 bot "Configuring the Screen"
 ###############################################################################
