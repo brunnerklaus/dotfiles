@@ -1,0 +1,33 @@
+ "*":
+  "atom-beautify":
+    bash:
+      beautify_on_save: true
+    js:
+      beautify_on_save: true
+    json:
+      beautify_on_save: true
+    markdown:
+      beautify_on_save: true
+    php:
+      beautify_on_save: true
+    python:
+      beautify_on_save: true
+  core:
+    disabledPackages: [
+      "metrics"
+      "exception-reporting"
+    ]
+    telemetryConsent: "no"
+    themes: [
+      "atom-dark-ui"
+      "zenburn-syntax"
+    ]
+  editor:
+    softWrap: true
+  "file-icons":
+    coloured: false
+  minimap: {}
+  "tree-view":
+    hideVcsIgnoredFiles: true
+  welcome:
+    showOnStartup: false
