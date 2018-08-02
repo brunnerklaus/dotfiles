@@ -62,19 +62,24 @@ module.exports = {
     'atom',
     // 'box-sync',
     //'comicbooklover',
+    // Get a list of all active short cuts of the current applicatio - https://mediaatelier.com/CheatSheet/
+    //'cheatsheet',
     //'diffmerge',
     'docker',
     //'dropbox',
     //'evernote',
+    // f.lux - https://justgetflux.com
     'flux',
     'firefox',
     //'gitkraken',
+    'google-chrome',
     // Manage your GPG Keychain - https://gpgtools.org/
     'gpg-suite',
     //'ireadfast',
     // Replacement for Terminal and the successor to iTerm - https://www.iterm2.com/
     'iterm2',
     //'little-snitch',
+    // Your Personal Ergonomic Assistant - http://www.publicspace.net/MacBreakZ/
     'macbreakz',
     'jumpcut',
     'meld',
@@ -90,6 +95,7 @@ module.exports = {
     //'sublime',
     // Free Unarchiving Software for macOS - https://theunarchiver.com/
     'the-unarchiver',
+    'thunderbird',
     'tunnelblick',
     'torbrowser',
     //'transmission',
