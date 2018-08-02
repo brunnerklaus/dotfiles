@@ -93,6 +93,15 @@ alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup
 
 alias vtop="vtop --theme wizard"
 
+alias jsonfix="pbpaste | jq . | pbcopy"
+
+alias lookbusy="cat /dev/urandom | hexdump -C | grep \"34 32\""
+
+alias td="todo.sh"
+alias tda="todo.sh add"
+alias tdl="todo.sh list"
+alias tdd="todo.sh do"
+
 # remove .DS_Store files recursively
 alias dsclean='find . -type f -name .DS_Store -delete'
 
