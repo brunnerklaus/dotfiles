@@ -5,12 +5,9 @@ bindkey -v
 #########################################################################
 # Temporary aliases useful for demos, other current projects
 #########################################################################
-export MYTEMP=~/Documents/Temp
-export MYCODE=~/Documents/Code
-export MYSCRATCH=~/Documents/Temp/Scratch
+export MYREPOS=~/Documents/Repository
 export MYDOWNLOADS=~/Downloads
 export MYDOCUMENTS=~/Documents
-export MYDEVAPPS=/Applications/Dev
 
 #########################################################################
 # Tool paths
@@ -25,5 +22,5 @@ export MYDEVAPPS=/Applications/Dev
 #########################################################################
 # Tool settings
 #########################################################################
-export FONTCONFIG_PATH=/opt/X11/lib/X11/fontconfig
+#export FONTCONFIG_PATH=/opt/X11/lib/X11/fontconfig
 export NVM_DIR=~/.nvm

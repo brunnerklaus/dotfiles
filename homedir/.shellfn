@@ -172,3 +172,17 @@ extract () {
     echo "'$1' is not a valid file"
   fi
 }
+
+
+# New password maker
+#credit: https://github.com/cspeterson/dotfiles/blob/master/.bash_aliases
+newpass() {
+  local len
+  if [ -z "${1}" ]; then
+    len=30
+  else
+    len="${1}"
+  fi
+  openssl rand -base64 "${len}" | tr -d '\n' | head -c "${len}"
+  echo
+}
