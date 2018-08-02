@@ -13,7 +13,6 @@ module.exports = {
     'dos2unix',
     // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
     'findutils',
-    // 'fortune',
     // Library for command-line editing
     'readline', // ensure gawk gets good readline
     // GNU awk utility - https://www.gnu.org/software/gawk/
@@ -44,6 +43,8 @@ module.exports = {
     'homebrew/dupes/screen',
     // Terminal multiplexer - https://github.com/tmux/tmux
     'tmux',
+    // If you want to get it done, first write it down - http://todotxt.org/
+    'todo-txt',
     // Recursive directory listing command - http://mama.indstate.edu/users/ice/tree/
     'tree',
     // Terminal interaction recorder and player - http://0xcc.net/ttyrec/
@@ -65,6 +66,7 @@ module.exports = {
     'docker',
     //'dropbox',
     //'evernote',
+    'flux',
     'firefox',
     //'gitkraken',
     // Manage your GPG Keychain - https://gpgtools.org/
@@ -73,10 +75,12 @@ module.exports = {
     // Replacement for Terminal and the successor to iTerm - https://www.iterm2.com/
     'iterm2',
     //'little-snitch',
+    'macbreakz',
     'jumpcut',
     'meld',
     'nextcloud',
     //'micro-snitch',
+    'signal',
     //'macvim',
     // Powerful, keyboard-centric window management - http://www.irradiatedsoftware.com/sizeup/
     //'sizeup',
@@ -89,13 +93,12 @@ module.exports = {
     'tunnelblick',
     'torbrowser',
     //'transmission',
+    //'visual-studio-code',
     'vlc',
     //'virtualbox'
     //'xquartz'
   ],
-  gem: [
-    //'git-up'
-  ],
+  gem: [],
   npm: [
     //'antic',
     //'buzzphrase',
@@ -104,7 +107,7 @@ module.exports = {
     'instant-markdown-d',
     // 'generator-dockerize',
     //'gulp',
-    //'npm-check',
+    //'npm-check-updates',
     //'prettyjson',
     //'trash',
     'vtop',
