@@ -114,6 +114,26 @@ Do the following to upgrade your ~/.dotfiles safely:
 
 # Additional
 
+If `~/.extra` exists, it will be sourced along with the other files. You can use this to add a few custom commands without the need to fork this entire repository, or to add commands you don’t want to commit to a public repository.
+
+My `~/.extra` looks something like this:
+
+```bash
+#!/bin/bash
+# Git credentials
+# https://github.com/blog/180-local-github-config
+GIT_AUTHOR_NAME="FIRSTNAME LASTNAME"
+GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
+git config --file=$HOME/.gitconfig.extra user.name "$GIT_AUTHOR_NAME"
+GIT_AUTHOR_EMAIL="your@email"
+GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
+git config --file=$HOME/.gitconfig.extra user.email "$GIT_AUTHOR_EMAIL"
+GIT_GITHUB_USER_NAME="username"
+git config --file=$HOME/.gitconfig.extra github.user "$GIT_GITHUB_USER_NAME"
+```
+
+Don't use it to add new environment variables via `~/.extra` to override settings, functions and aliases from my dotfiles repository. The only usage is to execute commands if you open a new shell and set the git configuration. It’s probably better to [fork this repository](https://github.com/brunnerklaus/dotfiles/fork) instead, though.
+
 ## VIM as IDE
 
 I am moving away from using `Atom` and instead using `vim` as my IDE. I use Vundle to manage vim plugins (instead of pathogen). Vundle is better in many ways and is compatible with pathogen plugins. Additionally, vundle will manage and install its own plugins so we don't have to use git submodules for all of them.

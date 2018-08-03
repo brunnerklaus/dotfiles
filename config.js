@@ -21,6 +21,8 @@ module.exports = {
     'gawk',
     // http://www.lcdf.org/gifsicle/ (because I'm a gif junky)
     'gifsicle',
+    // Good-lookin' diffs for git - https://github.com/so-fancy/diff-so-fancy
+    'diff-so-fancy',
     // GNU Pretty Good Privacy (PGP) package - https://gnupg.org/
     'gnupg',
     // Install GNU `sed`, overwriting the built-in `sed`
