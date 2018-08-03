@@ -4,6 +4,8 @@ module.exports = {
     'ack',
     // Code-search similar to ack - https://github.com/ggreer/the_silver_searcher
     'ag',
+    // Programmable completion for Bash 3.2 - https://salsa.debian.org/debian/bash-completion
+    //'bash-completion',
     // Install GNU core utilities (those that come with macOS are outdated)
     // Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
     'coreutils',
@@ -28,6 +30,8 @@ module.exports = {
     'homebrew/dupes/grep',
     // User-friendly cURL replacement (command-line HTTP client) - https://github.com/jkbrzt/httpie
     'httpie',
+    // Utility to optimize/compress JPEG files http://www.iki.fi/tjko/projects.html
+    //'jpegoptim',
     // jq is a sort of JSON grep
     'jq',
     // Mac App Store CLI: https://github.com/mas-cli/mas
@@ -41,6 +45,7 @@ module.exports = {
     'reattach-to-user-namespace',
     // better/more recent version of screen
     'homebrew/dupes/screen',
+    //'ssh-copy-id',
     // Terminal multiplexer - https://github.com/tmux/tmux
     'tmux',
     // If you want to get it done, first write it down - http://todotxt.org/
@@ -81,6 +86,7 @@ module.exports = {
     //'little-snitch',
     // Your Personal Ergonomic Assistant - http://www.publicspace.net/MacBreakZ/
     'macbreakz',
+    //'java',
     'jumpcut',
     'meld',
     'nextcloud',
