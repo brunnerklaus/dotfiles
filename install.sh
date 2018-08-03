@@ -507,6 +507,9 @@ defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false;ok
   #  "/System/Library/CoreServices/Menu Extras/Clock.menu"
 #ok
 
+# Disable transparency in the menu bar and elsewhere on Yosemite
+#defaults write com.apple.universalaccess reduceTransparency -bool true
+
 #running "Set highlight color to green"
 #defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600";ok
 
@@ -613,10 +616,15 @@ defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 10;ok
 
 running "Set language and text formats (english/US)"
-defaults write NSGlobalDomain AppleLanguages -array "en"
+# Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
+# `Inches`, `en_GB` with `en_US`, and `true` with `false`.
+defaults write NSGlobalDomain AppleLanguages -array "en" "de"
 defaults write NSGlobalDomain AppleLocale -string "en_US@currency=EUR"
 defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
 defaults write NSGlobalDomain AppleMetricUnits -bool true;ok
+
+running "Show language menu in the top right corner of the boot screen"
+sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true;ok
 
 #running "Disable auto-correct"
 #defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false;ok
@@ -652,7 +660,7 @@ running "Enable HiDPI display modes (requires restart)"
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true;ok
 
 ###############################################################################
-bot "Finder Configs"
+bot "Finder Configuration"
 ###############################################################################
 running "Keep folders on top when sorting by name (Sierra only)"
 defaults write com.apple.finder _FXSortFoldersFirst -bool true;ok
@@ -727,7 +735,6 @@ defaults write com.apple.finder EmptyTrashSecurely -bool true;ok
 running "Show the ~/Library folder"
 chflags nohidden ~/Library;ok
 
-
 running "Expand the following File Info panes: “General”, “Open with”, and “Sharing & Permissions”"
 defaults write com.apple.finder FXInfoPanesExpanded -dict \
   General -bool true \
@@ -735,7 +742,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
   Privileges -bool true;ok
 
 ###############################################################################
-bot "Dock & Dashboard"
+bot "Dock & Dashboard and hot corners"
 ###############################################################################
 
 running "Enable highlight hover effect for the grid view of a stack (Dock)"
@@ -793,6 +800,15 @@ defaults write com.apple.dock hide-mirror -bool true;ok
 running "Reset Launchpad, but keep the desktop wallpaper intact"
 find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete;ok
 
+# Add iOS & Watch Simulator to Launchpad
+#sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app" "/Applications/Simulator.app"
+#sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator (Watch).app" "/Applications/Simulator (Watch).app"
+
+# Add a spacer to the left side of the Dock (where the applications are)
+#defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
+# Add a spacer to the right side of the Dock (where the Trash is)
+#defaults write com.apple.dock persistent-others -array-add '{tile-data={}; tile-type="spacer-tile";}'
+
 #restore default dock settings
 #defaults delete com.apple.dock autohide
 #defaults delete com.apple.dock autohide-delay
@@ -810,7 +826,6 @@ bot "Configuring Hot Corners"
 # 10: Put display to sleep
 # 11: Launchpad
 # 12: Notification Center
-
 running "Top left screen corner → Mission Control"
 defaults write com.apple.dock wvous-tl-corner -int 2
 defaults write com.apple.dock wvous-tl-modifier -int 0;ok
@@ -824,6 +839,17 @@ defaults write com.apple.dock wvous-br-modifier -int 0;ok
 ###############################################################################
 bot "Configuring Safari & WebKit"
 ###############################################################################
+
+running "Privacy: don’t send search queries to Apple"
+defaults write com.apple.Safari UniversalSearchEnabled -bool false
+defaults write com.apple.Safari SuppressSearchSuggestions -bool true;ok
+
+running "Press Tab to highlight each item on a web page"
+defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true;ok
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
+
+running "Show the full URL in the address bar (note: this still hides the scheme)"
+defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true;ok
 
 running "Set Safari’s home page to ‘about:blank’ for faster loading"
 defaults write com.apple.Safari HomePage -string "about:blank";ok
@@ -860,6 +886,46 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 running "Add a context menu item for showing the Web Inspector in web views"
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true;ok
 
+#running "Enable continuous spellchecking"
+#defaults write com.apple.Safari WebContinuousSpellCheckingEnabled -bool true;ok
+
+#running "Disable auto-correct"
+#defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool false;ok
+
+#running "Disable AutoFill"
+#defaults write com.apple.Safari AutoFillFromAddressBook -bool false;ok
+#defaults write com.apple.Safari AutoFillPasswords -bool false;ok
+#defaults write com.apple.Safari AutoFillCreditCardData -bool false;ok
+#defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false;ok
+
+#running "Warn about fraudulent websites"
+#defaults write com.apple.Safari WarnAboutFraudulentWebsites -bool true;ok
+
+#running "Disable plug-ins"
+#defaults write com.apple.Safari WebKitPluginsEnabled -bool false;ok
+#defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled -bool false;ok
+
+running "Disable Java"
+defaults write com.apple.Safari WebKitJavaEnabled -bool false;ok
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false;ok
+
+running "Block pop-up windows"
+defaults write com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically -bool false;ok
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool false;ok
+
+running "Disable auto-playing video"
+#defaults write com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false
+#defaults write com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline -bool false
+#defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
+#defaults write com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
+
+running "Enable 'Do Not Track'"
+defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true;ok
+
+running "Update extensions automatically"
+#defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true;ok
+
+
 ###############################################################################
 bot "Configuring Mail"
 ###############################################################################
@@ -888,7 +954,7 @@ defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnab
 ###############################################################################
 bot "Configure Atom editor"
 #########################it######################################################
-running "Set atom as default editor"
+running "Set Atom as default editor"
 defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType=public.plain-text;LSHandlerRoleAll=com.github.atom;}';ok
 
 running "Installing Atom Community Packages"
@@ -915,6 +981,14 @@ running "Disable Spotlight indexing for any volume that gets mounted and has not
 # Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
 sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes";ok
 running "Change indexing order and disable some file types from being indexed"
+# Change indexing order and disable some search results
+# Yosemite-specific search results (remove them if you are using macOS 10.9 or older):
+# 	MENU_DEFINITION
+# 	MENU_CONVERSION
+# 	MENU_EXPRESSION
+# 	MENU_SPOTLIGHT_SUGGESTIONS (send search queries to Apple)
+# 	MENU_WEBSEARCH             (send search queries to Apple)
+# 	MENU_OTHER
 defaults write com.apple.spotlight orderedItems -array \
   '{"enabled" = 1;"name" = "APPLICATIONS";}' \
   '{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
@@ -931,7 +1005,13 @@ defaults write com.apple.spotlight orderedItems -array \
   '{"enabled" = 0;"name" = "MOVIES";}' \
   '{"enabled" = 0;"name" = "PRESENTATIONS";}' \
   '{"enabled" = 0;"name" = "SPREADSHEETS";}' \
-  '{"enabled" = 0;"name" = "SOURCE";}';ok
+  '{"enabled" = 0;"name" = "SOURCE";}' \
+  '{"enabled" = 0;"name" = "MENU_DEFINITION";}' \
+  '{"enabled" = 0;"name" = "MENU_OTHER";}' \
+  '{"enabled" = 0;"name" = "MENU_CONVERSION";}' \
+  '{"enabled" = 0;"name" = "MENU_EXPRESSION";}' \
+  '{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
+  '{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}';ok
 running "Load new settings before rebuilding the index"
 killall mds > /dev/null 2>&1;ok
 running "Make sure indexing is enabled for the main volume"
@@ -1036,6 +1116,9 @@ running "Enable the debug menu in Disk Utility"
 defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 defaults write com.apple.DiskUtility advanced-image-options -bool true;ok
 
+running "Auto-play videos when opened with QuickTime Player"
+defaults write com.apple.QuickTimePlayerX MGPlayMovieOnOpen -bool true;ok
+
 ###############################################################################
 bot "Mac App Store"
 ###############################################################################
@@ -1045,6 +1128,34 @@ defaults write com.apple.appstore WebKitDeveloperExtras -bool true;ok
 
 running "Enable Debug Menu in the Mac App Store"
 defaults write com.apple.appstore ShowDebugMenu -bool true;ok
+
+running "Enable the automatic update check"
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+
+running "Check for software updates daily, not just once per week"
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1;ok
+
+#running "Download newly available updates in background"
+#defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1;ok
+
+#running "Install System data files & security updates"
+#defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1;ok
+
+#running "Automatically download apps purchased on other Macs"
+#defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1;ok
+
+#running "Turn on app auto-update"
+#defaults write com.apple.commerce AutoUpdate -bool true;ok
+
+#running "Allow the App Store to reboot machine on macOS updates"
+#defaults write com.apple.commerce AutoUpdateRestartRequired -bool true;ok
+
+###############################################################################
+bot "Configuring Photos"
+###############################################################################
+
+running "Prevent Photos from opening automatically when devices are plugged in"
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true;ok
 
 ###############################################################################
 bot "Messages"
@@ -1058,6 +1169,34 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 
 #running "Disable continuous spell checking"
 #defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false;ok
+
+###############################################################################
+bot "Configuring Google Chrome" #& Google Chrome Canary
+###############################################################################
+
+running "Disable the all too sensitive backswipe on trackpads"
+defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false;ok
+#defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
+
+running "Disable the all too sensitive backswipe on Magic Mouse"
+defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false;ok
+#defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
+
+running "Use the system-native print preview dialog"
+defaults write com.google.Chrome DisablePrintPreview -bool true;ok
+#defaults write com.google.Chrome.canary DisablePrintPreview -bool true
+
+running "Expand the print dialog by default"
+defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true;ok
+#defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool true
+
+###############################################################################
+#bot "Opera & Opera Developer"
+###############################################################################
+
+#running "Expand the print dialog by default"
+#defaults write com.operasoftware.Opera PMPrintingExpandedStateForPrint2 -boolean true;ok
+#defaults write com.operasoftware.OperaDeveloper PMPrintingExpandedStateForPrint2 -boolean true;ok
 
 ###############################################################################
 #bot "SizeUp.app"
