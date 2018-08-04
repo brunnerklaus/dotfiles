@@ -402,8 +402,8 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 # SSD-specific tweaks                                                         #
 ###############################################################################
 
-running "Disable local Time Machine snapshots"
-sudo tmutil disablelocal;ok
+#running "Disable local Time Machine snapshots"
+#sudo tmutil disablelocal;ok
 
 # running "Disable hibernation (speeds up entering sleep mode)"
 # sudo pmset -a hibernatemode 0;ok
@@ -577,6 +577,11 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false;ok
 running "Disable smart dashes as they’re annoying when typing code"
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false;ok
 
+running "Enable 24 hour time"
+defaults write -g AppleICUForce24HourTime -bool true;ok
+
+running "Set monday: first day of week"
+defaults write -g AppleFirstWeekday -dict gregorian 2;ok
 
 ###############################################################################
 bot "Trackpad, mouse, keyboard, Bluetooth accessories, and input"
@@ -906,14 +911,14 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true;ok
 #defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled -bool false;ok
 
 running "Disable Java"
-defaults write com.apple.Safari WebKitJavaEnabled -bool false;ok
+defaults write com.apple.Safari WebKitJavaEnabled -bool false
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false;ok
 
 running "Block pop-up windows"
-defaults write com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically -bool false;ok
+defaults write com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically -bool false
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool false;ok
 
-running "Disable auto-playing video"
+#running "Disable auto-playing video"
 #defaults write com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false
 #defaults write com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline -bool false
 #defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
@@ -922,9 +927,8 @@ running "Disable auto-playing video"
 running "Enable 'Do Not Track'"
 defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true;ok
 
-running "Update extensions automatically"
+#running "Update extensions automatically"
 #defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true;ok
-
 
 ###############################################################################
 bot "Configuring Mail"
@@ -1076,8 +1080,8 @@ bot "Time Machine"
 running "Prevent Time Machine from prompting to use new hard drives as backup volume"
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true;ok
 
-running "Disable local Time Machine backups"
-hash tmutil &> /dev/null && sudo tmutil disablelocal;ok
+#running "Disable local Time Machine backups"
+#hash tmutil &> /dev/null && sudo tmutil disablelocal;ok
 
 ###############################################################################
 bot "Activity Monitor"
@@ -1130,7 +1134,7 @@ running "Enable Debug Menu in the Mac App Store"
 defaults write com.apple.appstore ShowDebugMenu -bool true;ok
 
 running "Enable the automatic update check"
-defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true;ok
 
 running "Check for software updates daily, not just once per week"
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1;ok
