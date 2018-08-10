@@ -61,7 +61,9 @@ module.exports = {
     // Command line and full screen utilities for browsing procfs - https://gitlab.com/procps-ng/procps
     'watch',
     // Install wget with IRI support (enable internationalized URI)
-    'wget --enable-iri'
+    'wget --enable-iri',
+    // Download videos from YouTube (and more sites) - https://rg3.github.io/youtube-dl/
+    'youtube-dl'
   ],
   cask: [
     //'adium',
