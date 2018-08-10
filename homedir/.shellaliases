@@ -161,3 +161,6 @@ alias utc='date -u +"%Y-%m-%dT%H:%M:%SZ"'
 
 # sleep display
 alias dark="pmset displaysleepnow"
+
+# review for standups
+alias standup='git log --since="yesterday" --branches"'
