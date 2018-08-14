@@ -12,6 +12,7 @@
       beautify_on_save: true
     python:
       beautify_on_save: true
+  "atom-gpg": {}
   core:
     disabledPackages: [
       "metrics"

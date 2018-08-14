@@ -972,7 +972,8 @@ apm install \
   language-liquid \
   minimap \
   pigments \
-  zenburn-syntax
+  zenburn-syntax \
+  atom-gpg
 
 ###############################################################################
 bot "Spotlight"
