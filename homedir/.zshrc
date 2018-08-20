@@ -21,7 +21,7 @@ POWERLEVEL9K_SHOW_CHANGESET=true
 export CASE_SENSITIVE="true"
 
 # disable weekly auto-update checks
-# export DISABLE_AUTO_UPDATE="true"
+export DISABLE_AUTO_UPDATE="true"
 
 # disable colors in ls
 # export DISABLE_LS_COLORS="true"
