@@ -9,6 +9,8 @@ module.exports = {
     // Install GNU core utilities (those that come with macOS are outdated)
     // Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
     'coreutils',
+    // Curl
+    'curl --with-openssl',
     // Utility for managing Mac OS X dock items - https://github.com/kcrawford/dockutil
     'dockutil',
     // Convert text between DOS, UNIX, and Mac formats - https://waterlan.home.xs4all.nl/dos2unix.html
@@ -66,6 +68,7 @@ module.exports = {
     'youtube-dl'
   ],
   cask: [
+    //'adobe-creative-cloud',
     //'adium',
     //'amazon-cloud-drive',
     'atom',
