@@ -64,6 +64,8 @@ module.exports = {
     'watch',
     // Install wget with IRI support (enable internationalized URI)
     'wget --enable-iri',
+    // Get the password of the wifi you're on (bash) - https://github.com/rauchg/wifi-password
+    //'wifi-password'
     // Download videos from YouTube (and more sites) - https://rg3.github.io/youtube-dl/
     'youtube-dl'
   ],
