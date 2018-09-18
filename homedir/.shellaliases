@@ -2,6 +2,7 @@
 
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
+alias cd..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
@@ -11,6 +12,11 @@ alias -- -="cd -"
 #################################
 # Simple Program Name Shortening
 alias g=git
+alias push="git push"
+
+alias cask='brew cask' # i <3 u cask
+alias where=which # sometimes i forget
+alias brwe=brew  #typos
 
 #############################
 # Utilities
@@ -102,6 +108,9 @@ alias egrep='egrep --color=auto'
 # Get week number
 alias week='date +%V'
 
+# Stopwatch
+alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
+
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
@@ -164,3 +173,31 @@ alias dark="pmset displaysleepnow"
 
 # review for standups
 alias standup='git log --since="yesterday" --branches"'
+
+
+# Quick Config Editing
+alias vimrc='vim ~/.vimrc'
+alias bashrc='vim ~/.bashrc'
+alias reload='source ~/.bashrc'
+
+# Diskspace check
+alias diskspace_report="df -P -kHl"
+alias free_diskspace_report="diskspace_report"
+
+# Recursively delete `.DS_Store` files
+alias cleanup_dsstore="find . -name '*.DS_Store' -type f -ls -delete"
+
+# Empty the Trash on all mounted volumes and the main HDD. then clear the useless sleepimage
+alias emptytrash=" \
+  sudo rm -rfv /Volumes/*/.Trashes; \
+  rm -rfv ~/.Trash/*; \
+  sudo rm -v /private/var/vm/sleepimage; \
+  "
+
+# Update installed Ruby gems, Homebrew, npm, and their installed packages
+alias brew_update="brew -v update; brew upgrade --force-bottle --cleanup; brew cleanup; brew cask cleanup; brew prune; brew doctor; npm-check -g -u"
+alias update_brew_npm_gem='brew_update; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update --no-document'
+
+# View HTTP traffic
+alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
+alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\\: .*|GET \\/.*\""

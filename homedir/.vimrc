@@ -1,3 +1,15 @@
+"
+"                    ██▒   █▓ ██▓ ███▄ ▄███▓ ██▀███   ▄████▄
+"                   ▓██░   █▒▓██▒▓██▒▀█▀ ██▒▓██ ▒ ██▒▒██▀ ▀█
+"                    ▓██  █▒░▒██▒▓██    ▓██░▓██ ░▄█ ▒▒▓█    ▄
+"                     ▒██ █░░░██░▒██    ▒██ ▒██▀▀█▄  ▒▓▓▄ ▄██▒
+"                      ▒▀█░  ░██░▒██▒   ░██▒░██▓ ▒██▒▒ ▓███▀ ░
+"                      ░ ▐░  ░▓  ░ ▒░   ░  ░░ ▒▓ ░▒▓░░ ░▒ ▒  ░
+"                      ░ ░░   ▒ ░░  ░      ░  ░▒ ░ ▒░  ░  ▒
+"                        ░░   ▒ ░░      ░     ░░   ░ ░
+"                         ░   ░         ░      ░     ░ ░
+"                        ░                           ░
+
 "python3 issue fix https://github.com/vim/vim/issues/3117
 if has('python3')
   silent! python3 1
@@ -46,6 +58,9 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-surround'
 Plugin 'dkprice/vim-easygrep'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'tmux-plugins/vim-tmux'
+Plugin 'whatyouhide/vim-gotham'
 " visual undo list
 Plugin 'sjl/gundo.vim'
 " Plugin 'majutsushi/tagbar'
