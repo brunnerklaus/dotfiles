@@ -294,6 +294,9 @@ running "closing any system preferences to prevent issues with automated changes
 osascript -e 'tell application "System Preferences" to quit'
 ok
 
+#running "Enable Dark Mode in High Sierra"
+#defaults write -g NSWindowDarkChocolate -bool TRUE;ok
+
 ##############################################################################
 # Security                                                                   #
 ##############################################################################
@@ -400,8 +403,8 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 # SSD-specific tweaks                                                         #
 ###############################################################################
 
-#running "Disable local Time Machine snapshots"
-#sudo tmutil disablelocal;ok
+running "Disable local Time Machine snapshots"
+sudo tmutil disablelocal;ok
 
 # running "Disable hibernation (speeds up entering sleep mode)"
 # sudo pmset -a hibernatemode 0;ok
@@ -1043,31 +1046,40 @@ bot "Terminal & iTerm2"
 # i.e. hover over a window and start `typing in it without clicking first
 defaults write com.apple.terminal FocusFollowsMouse -bool true
 #defaults write org.x.X11 wm_ffm -bool true;ok
+
 running "Installing the Solarized Light theme for iTerm (opening file)"
 open "./configs/Solarized Light.itermcolors";ok
+
 running "Installing the Patched Solarized Dark theme for iTerm (opening file)"
 open "./configs/Solarized Dark Patch.itermcolors";ok
 
 running "Don’t display the annoying prompt when quitting iTerm"
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false;ok
+
 running "Hide tab title bars"
 defaults write com.googlecode.iterm2 HideTab -bool true;ok
+
 running "Set system-wide hotkey to show/hide iterm with ^\`"
 defaults write com.googlecode.iterm2 Hotkey -bool true;ok
+
 running "Hide pane titles in split panes"
 defaults write com.googlecode.iterm2 ShowPaneTitles -bool false;ok
+
 running "Animate split-terminal dimming"
 defaults write com.googlecode.iterm2 AnimateDimming -bool true;ok
 defaults write com.googlecode.iterm2 HotkeyChar -int 96;
 defaults write com.googlecode.iterm2 HotkeyCode -int 50;
 defaults write com.googlecode.iterm2 FocusFollowsMouse -int 1;
 defaults write com.googlecode.iterm2 HotkeyModifiers -int 262401;
+
 running "Make iTerm2 load new tabs in the same directory"
 /usr/libexec/PlistBuddy -c "set \"New Bookmarks\":0:\"Custom Directory\" Recycle" ~/Library/Preferences/com.googlecode.iterm2.plist
+
 running "Setting fonts"
 defaults write com.googlecode.iterm2 "Normal Font" -string "Hack-Regular 12";
 defaults write com.googlecode.iterm2 "Non Ascii Font" -string "RobotoMonoForPowerline-Regular 12";
 ok
+
 running "Reading iterm settings"
 defaults read -app iTerm > /dev/null 2>&1;
 ok
@@ -1111,6 +1123,7 @@ defaults write com.apple.dashboard devmode -bool true;ok
 
 running "Use plain text mode for new TextEdit documents"
 defaults write com.apple.TextEdit RichText -int 0;ok
+
 running "Open and save files as UTF-8 in TextEdit"
 defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4;ok
@@ -1212,6 +1225,13 @@ defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true;ok
 #defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false;ok
 #
 #killall cfprefsd
+
+###############################################################################
+# Sublime Text                                                                #
+###############################################################################
+
+running "Install Sublime Text settings"
+#cp -r init/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
 
 ###############################################################################
 bot "Set Dock items"
