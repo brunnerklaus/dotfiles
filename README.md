@@ -114,6 +114,11 @@ Do the following to upgrade your ~/.dotfiles safely:
 
 # Additional
 
+.extra for your private configuration
+There will be items that don't belong to be committed to a git repo, because either 1) it shoudn't be the same across your machines or 2) it shouldn't be in a git repo. Kick it off like this:
+
+touch ~/.extra && $EDITOR $\_
+
 If `~/.extra` exists, it will be sourced along with the other files. You can use this to add a few custom commands without the need to fork this entire repository, or to add commands you don’t want to commit to a public repository.
 
 My `~/.extra` looks something like this:
