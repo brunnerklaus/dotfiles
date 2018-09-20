@@ -301,6 +301,26 @@ datedetails() {
     cal
 }
 
+getunixtime(){
+  if [ -z "${1}" ]; then
+		date +%s
+  else
+    date -j -f "%Y-%m-%d" "$1" "+%s"
+	fi;
+}
+
+convertunixtime() {
+  if [ -z "${1}" ]; then
+    echo "ERROR: No timestamp specified.";
+    return 1;
+  fi;
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    date -r "$1"
+    date -r "$1" -u
+  else
+    date -d='@$1'
+  fi
+}
 
 # URL Encode a string
 urlencode() {
