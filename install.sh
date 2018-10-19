@@ -417,7 +417,7 @@ sudo tmutil disablelocal;ok
 #sudo chflags uchg /Private/var/vm/sleepimage;ok
 
 #running "Disable the sudden motion sensor as it’s not useful for SSDs"
-# sudo pmset -a sms 0;ok
+sudo pmset -a sms 0;ok
 
 ################################################
 # Optional / Experimental                      #
@@ -655,6 +655,9 @@ defaults write com.apple.screencapture location -string "${HOME}/Pictures/Screen
 
 running "Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)"
 defaults write com.apple.screencapture type -string "png";ok
+
+running "Hide all desktop icons because who need 'em'"
+defaults write com.apple.finder CreateDesktop -bool false;ok
 
 running "Disable shadow in screenshots"
 defaults write com.apple.screencapture disable-shadow -bool true;ok
