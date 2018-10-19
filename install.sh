@@ -966,7 +966,7 @@ running "Set Atom as default editor"
 defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType=public.plain-text;LSHandlerRoleAll=com.github.atom;}';ok
 
 running "Installing Atom Community Packages"
-apm install \
+apm install --production --compatible \
   Sublime-Style-Column-Selection \
   ask-stack \
   atom-beautify \
