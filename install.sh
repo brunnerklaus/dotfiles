@@ -1034,18 +1034,63 @@ sudo mdutil -i on / > /dev/null;ok
 bot "Terminal & iTerm2"
 ###############################################################################
 
-# running "Only use UTF-8 in Terminal.app"
-# defaults write com.apple.terminal StringEncodings -array 4;ok
-#
-# running "Use a modified version of the Solarized Dark theme by default in Terminal.app"
-# TERM_PROFILE='Solarized Dark xterm-256color';
-# CURRENT_PROFILE="$(defaults read com.apple.terminal 'Default Window Settings')";
-# if [ "${CURRENT_PROFILE}" != "${TERM_PROFILE}" ]; then
-# 	open "./configs/${TERM_PROFILE}.terminal";
-# 	sleep 1; # Wait a bit to make sure the theme is loaded
-# 	defaults write com.apple.terminal 'Default Window Settings' -string "${TERM_PROFILE}";
-# 	defaults write com.apple.terminal 'Startup Window Settings' -string "${TERM_PROFILE}";
-# fi;
+running "Only use UTF-8 in Terminal.app"
+defaults write com.apple.terminal StringEncodings -array 4;ok
+
+# Use a modified version of the Solarized Dark theme by default in Terminal.app
+running "Set Solarized Dark theme by default in Terminal.app"
+osascript <<EOD
+
+tell application "Terminal"
+	local allOpenedWindows
+	local initialOpenedWindows
+	local windowID
+	set themeName to "Solarized Dark xterm-256color"
+	(* Store the IDs of all the open terminal windows. *)
+	set initialOpenedWindows to id of every window
+	(* Open the custom theme so that it gets added to the list
+	   of available terminal themes (note: this will open two
+	   additional terminal windows). *)
+	do shell script "open '$HOME/init/" & themeName & ".terminal'"
+	(* Wait a little bit to ensure that the custom theme is added. *)
+	delay 1
+	(* Set the custom theme as the default terminal theme. *)
+	set default settings to settings set themeName
+	(* Get the IDs of all the currently opened terminal windows. *)
+	set allOpenedWindows to id of every window
+	repeat with windowID in allOpenedWindows
+		(* Close the additional windows that were opened in order
+		   to add the custom theme to the list of terminal themes. *)
+		if initialOpenedWindows does not contain windowID then
+			close (every window whose id is windowID)
+		(* Change the theme for the initial opened terminal windows
+		   to remove the need to close them in order for the custom
+		   theme to be applied. *)
+		else
+			set current settings of tabs of (every window whose id is windowID) to settings set themeName
+		end if
+	end repeat
+end tell
+EOD;ok
+
+# Enable “focus follows mouse” for Terminal.app and all X11 apps
+# i.e. hover over a window and start typing in it without clicking first
+#defaults write com.apple.terminal FocusFollowsMouse -bool true
+#defaults write org.x.X11 wm_ffm -bool true
+
+running "Enable Secure Keyboard Entry in Terminal.app"
+# See: https://security.stackexchange.com/a/47786/8918 and
+# https://developer.apple.com/library/archive/technotes/tn2150/_index.html
+defaults write com.apple.terminal SecureKeyboardEntry -bool true;ok
+
+running "Disable the annoying line marks"
+defaults write com.apple.Terminal ShowLineMarks -int 0;ok
+
+running "Install the Solarized Dark theme for iTerm"
+open "${HOME}/init/Solarized Dark.itermcolors";ok
+
+running "Don’t display the annoying prompt when quitting iTerm"
+defaults write com.googlecode.iterm2 PromptOnQuit -bool false;ok
 
 #running "Enable “focus follows mouse” for Terminal.app and all X11 apps"
 # i.e. hover over a window and start `typing in it without clicking first
@@ -1115,6 +1160,29 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0;ok
 running "Sort Activity Monitor results by CPU usage"
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0;ok
+
+running "Sets columns for all tabs"
+defaults read com.apple.ActivityMonitor "UserColumnsPerTab v5.0" -dict \
+  '0' '( Command, CPUUsage, CPUTime, Threads, PID, UID, Ports )' \
+  '1' '( Command, ResidentSize, Threads, Ports, PID, UID,  )' \
+  '2' '( Command, PowerScore, 12HRPower, AppSleep, UID, powerAssertion )' \
+  '3' '( Command, bytesWritten, bytesRead, Architecture, PID, UID, CPUUsage )' \
+  '4' '( Command, txBytes, rxBytes, PID, UID, txPackets, rxPackets, CPUUsage )';ok
+
+running "Set sort column"
+defaults write com.apple.ActivityMonitor UserColumnSortPerTab -dict \
+  '0' '{ direction = 0; sort = CPUUsage; }' \
+  '1' '{ direction = 0; sort = ResidentSize; }' \
+  '2' '{ direction = 0; sort = 12HRPower; }' \
+  '3' '{ direction = 0; sort = bytesWritten; }' \
+  '4' '{ direction = 0; sort = rxBytes; }'
+defaults write com.apple.ActivityMonitor SortDirection -int 0;ok
+
+running "Show Data in the Disk graph (instead of IO)"
+defaults write com.apple.ActivityMonitor DiskGraphType -int 1;ok
+
+running "Show Data in the Network graph (instead of packets)"
+defaults write com.apple.ActivityMonitor NetworkGraphType -int 1;ok
 
 ###############################################################################
 bot "Address Book, Dashboard, iCal, TextEdit, and Disk Utility"
@@ -1210,6 +1278,13 @@ defaults write com.google.Chrome DisablePrintPreview -bool true;ok
 running "Expand the print dialog by default"
 defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true;ok
 #defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool true
+
+###############################################################################
+# GPGMail 2                                                                   #
+###############################################################################
+
+#running "Disable signing emails by default"
+#defaults write ~/Library/Preferences/org.gpgtools.gpgmail SignNewEmailsByDefault -bool false;ok
 
 ###############################################################################
 #bot "Opera & Opera Developer"
