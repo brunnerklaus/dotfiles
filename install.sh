@@ -968,8 +968,10 @@ apm install \
   ask-stack \
   atom-beautify \
   atom-ide-ui \
+  atom-yamljson \
   file-icons \
   highlight-selected \
+  language-docker \
   language-liquid \
   minimap \
   pigments \
