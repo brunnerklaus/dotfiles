@@ -42,6 +42,8 @@ module.exports = {
     'mas',
     // Install some other useful utilities like `sponge`
     'moreutils',
+    // Network grep - https://github.com/jpr5/ngrep
+    'ngrep',
     // Port scanning utility for large networks - https://nmap.org/
     'nmap',
     // 'openconnect',
