@@ -8,16 +8,17 @@ module.exports = {
     //'bash-completion',
     // Install GNU core utilities (those that come with macOS are outdated)
     // Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
+    // GNU File, Shell, and Text utilities - https://www.gnu.org/software/coreutils/coreutils.html
     'coreutils',
-    // Curl
+    // Curl - Get a file from an HTTP, HTTPS or FTP server - https://curl.haxx.se/
     'curl --with-openssl',
     // Utility for managing Mac OS X dock items - https://github.com/kcrawford/dockutil
     'dockutil',
     // Convert text between DOS, UNIX, and Mac formats - https://waterlan.home.xs4all.nl/dos2unix.html
     'dos2unix',
-    // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
+    // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed - https://www.gnu.org/software/findutils/
     'findutils',
-    // Library for command-line editing
+    // Library for command-line editing - https://tiswww.case.edu/php/chet/readline/rltop.html
     'readline', // ensure gawk gets good readline
     // GNU awk utility - https://www.gnu.org/software/gawk/
     'gawk',
@@ -29,18 +30,21 @@ module.exports = {
     'gnupg',
     // Install GNU `sed`, overwriting the built-in `sed`
     // so we can do "sed -i 's/foo/bar/' file" instead of "sed -i '' 's/foo/bar/' file"
+    // GNU implementation of the famous stream editor - https://www.gnu.org/software/sed/
     'gnu-sed --with-default-names',
     // better, more recent grep
     'homebrew/dupes/grep',
+    // Open source programming language - https://golang.org
+    'go'
     // User-friendly cURL replacement (command-line HTTP client) - https://github.com/jkbrzt/httpie
     'httpie',
     // Utility to optimize/compress JPEG files http://www.iki.fi/tjko/projects.html
     //'jpegoptim',
-    // jq is a sort of JSON grep
+    // Lightweight and flexible command-line JSON processor - https://stedolan.github.io/jq/
     'jq',
-    // Mac App Store CLI: https://github.com/mas-cli/mas
+    // Mac App Store CLI - https://github.com/mas-cli/mas
     'mas',
-    // Install some other useful utilities like `sponge`
+    // Install some other useful utilities like `sponge` - https://joeyh.name/code/moreutils/
     'moreutils',
     // Network grep - https://github.com/jpr5/ngrep
     'ngrep',
