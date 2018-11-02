@@ -443,5 +443,7 @@ Please refer to the [Contributor Covenant](https://github.com/atomantic/dotfiles
 
 # ¯\\_(ツ)_/¯ Warning / Liability
 
+![aww yeah](http://i.imgur.com/AmFax.gif)
+
 > Warning:
 > The creator of this repo is not responsible if your machine ends up in a state you are not happy with. If you are concerned, look at the code to review everything this will do to your machine :)
