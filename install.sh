@@ -1209,6 +1209,22 @@ running "Open and save files as UTF-8 in TextEdit"
 defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4;ok
 
+###############################################################################
+bot "Date & Time"
+###############################################################################
+
+# Custom DateFormat
+#defaults write com.apple.menuextra.clock DateFormat "EEE MMM d  H:mm"
+
+running "Show 24 hours a day"
+defaults write com.apple.ical "number of hours displayed" 24;ok
+
+running "Set week start on Monday"
+defaults write com.apple.ical "first day of the week" 1;ok
+
+#running "Day starts at 9AM"
+#defaults write com.apple.ical "first minute of work hours" 540
+
 running "Enable the debug menu in Disk Utility"
 defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 defaults write com.apple.DiskUtility advanced-image-options -bool true;ok
