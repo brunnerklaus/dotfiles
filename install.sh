@@ -584,6 +584,11 @@ defaults write -g AppleICUForce24HourTime -bool true;ok
 running "Set monday: first day of week"
 defaults write -g AppleFirstWeekday -dict gregorian 2;ok
 
+running "Enable dark mode (Mojave only)"
+defaults write "Apple Global Domain" "AppleInterfaceStyle" "Dark";ok
+#revert
+#defaults delete "Apple Global Domain" "AppleInterfaceStyle"
+
 ###############################################################################
 bot "Trackpad, mouse, keyboard, Bluetooth accessories, and input"
 ###############################################################################
@@ -618,8 +623,8 @@ running "Disable press-and-hold for keys in favor of key repeat"
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false;ok
 
 running "Set a blazingly fast keyboard repeat rate"
-defaults write NSGlobalDomain KeyRepeat -int 2
-defaults write NSGlobalDomain InitialKeyRepeat -int 10;ok
+defaults write NSGlobalDomain KeyRepeat -int 2 # normal minimum is 2 (30 ms)
+defaults write NSGlobalDomain InitialKeyRepeat -int 10;ok # normal minimum is 15 (225 ms)
 
 running "Set language and text formats (english/US)"
 # Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
@@ -651,6 +656,7 @@ defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0;ok
 
 running "Save screenshots to the sreenshots folder"
+mkdir -p ${HOME}/Pictures/Screenshots
 defaults write com.apple.screencapture location -string "${HOME}/Pictures/Screenshots";ok
 
 running "Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)"
@@ -663,6 +669,8 @@ running "Disable shadow in screenshots"
 defaults write com.apple.screencapture disable-shadow -bool true;ok
 
 running "Enable subpixel font rendering on non-Apple LCDs"
+# Enable subpixel font rendering on non-Apple LCDs
+# Reference: https://github.com/kevinSuttle/macOS-Defaults/issues/17#issuecomment-266633501
 defaults write NSGlobalDomain AppleFontSmoothing -int 2;ok
 
 running "Enable HiDPI display modes (requires restart)"
@@ -671,8 +679,8 @@ sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutio
 ###############################################################################
 bot "Finder Configuration"
 ###############################################################################
-running "Keep folders on top when sorting by name (Sierra only)"
-defaults write com.apple.finder _FXSortFoldersFirst -bool true;ok
+#running "Keep folders on top when sorting by name (Sierra only)"
+#defaults write com.apple.finder _FXSortFoldersFirst -bool true;ok
 
 running "Allow quitting via ⌘ + Q; doing so will also hide desktop icons"
 defaults write com.apple.finder QuitMenuItem -bool true;ok
