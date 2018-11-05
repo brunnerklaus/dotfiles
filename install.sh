@@ -406,8 +406,36 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 running "Disable local Time Machine snapshots"
 sudo tmutil disablelocal;ok
 
-# running "Disable hibernation (speeds up entering sleep mode)"
-# sudo pmset -a hibernatemode 0;ok
+running "Disable hibernation (speeds up entering sleep mode)"
+# supported sleep modes:"
+#     sleep       --> hibernatemode 0"
+#     safesleep   --> hibernatemode 3"
+#     hibernate   --> hibernatemode 25"
+#     secure      --> destroyfvkeyonstandby 1"
+#     insecure    --> destroyfvkeyonstandby 0"
+#
+# sleep (or old-style sleep) does not back up memory to disk. this is"
+# useful if you are running out of hard drive space, but will eat"
+# more battery and if the system runs out of power, the current state"
+# is lost."
+#
+# safesleep backs up memory to persistent storage, taking as much disk"
+# space as the system has memory. this uses more disk space and more"
+# battery, as memory is powered during sleep. If the battery is"
+# exhausted, the system will hibernate."
+#
+# hibernate writes memory to persistent storage, and powers down the"
+# machine. the sleep image takes up as much space as the system has"
+# memory. While sleeps/wakes are slower, battery life is much improved"
+# as memory is not powered during sleep."
+#
+# secure mode destroys the file vault key on standby, requiring the"
+# password to be entered on wake. insecure mode retains the file "
+# vault key on wake."
+# See https://discussions.apple.com/thread/6090869
+#
+# Get current seeting: pmset -g | grep hibernatemode | awk '{ print $2 ; }'
+sudo pmset -a hibernatemode 3;ok
 
 #running "Remove the sleep image file to save disk space"
 #sudo rm -rf /Private/var/vm/sleepimage;ok
