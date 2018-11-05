@@ -4,6 +4,10 @@ module.exports = {
     'ack',
     // Code-search similar to ack - https://github.com/ggreer/the_silver_searcher
     'ag',
+    // Record and share terminal sessions - https: //asciinema.org
+    //'asciinema',
+    // Binwalk is a fast, easy to use tool for analyzing, reverse engineering-  https: //github.com/ReFirmLabs/binwalk
+    //'binwalk',
     // Programmable completion for Bash 3.2 - https://salsa.debian.org/debian/bash-completion
     //'bash-completion',
     // Install GNU core utilities (those that come with macOS are outdated)
@@ -18,6 +22,8 @@ module.exports = {
     'dos2unix',
     // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed - https://www.gnu.org/software/findutils/
     'findutils',
+    // TCP / IP packet demultiplexer - https: //github.com/simsong/tcpflow
+    'tcpflow',
     // Library for command-line editing - https://tiswww.case.edu/php/chet/readline/rltop.html
     'readline', // ensure gawk gets good readline
     // GNU awk utility - https://www.gnu.org/software/gawk/
@@ -46,6 +52,10 @@ module.exports = {
     'mas',
     // Install some other useful utilities like `sponge` - https://joeyh.name/code/moreutils/
     'moreutils',
+    // Intercept, modify, replay, save HTTP / S traffic - https: //mitmproxy.org
+    'mitmproxy'
+    // traceroute and ping in a single tool - https: //www.bitwizard.nl/mtr/
+    'mtr --with-glib',
     // Network grep - https://github.com/jpr5/ngrep
     'ngrep',
     // Port scanning utility for large networks - https://nmap.org/
@@ -56,6 +66,10 @@ module.exports = {
     // better/more recent version of screen
     'homebrew/dupes/screen',
     //'ssh-copy-id',
+    // Man - in -the - middle attacks against SSL encrypted network connection - https://formulae.brew.sh/formula/sslsplit
+    'sslsplit',
+    // Command - line interface bandwidth tests - https://github.com/sivel/speedtest-cli
+    'speedtest-cli',
     // Terminal multiplexer - https://github.com/tmux/tmux
     'tmux',
     // If you want to get it done, first write it down - http://todotxt.org/
@@ -82,7 +96,7 @@ module.exports = {
     'atom',
     // 'box-sync',
     //'comicbooklover',
-    // Get a list of all active short cuts of the current applicatio - https://mediaatelier.com/CheatSheet/
+    // Get a list of all active short cuts of the current application - https://mediaatelier.com/CheatSheet/
     //'cheatsheet',
     //'diffmerge',
     'docker',
@@ -90,6 +104,7 @@ module.exports = {
     //'evernote',
     // f.lux - https://justgetflux.com
     'flux',
+    'filezilla',
     'firefox',
     //'gitkraken',
     'google-chrome',
@@ -105,7 +120,6 @@ module.exports = {
     'jumpcut',
     'meld',
     'nextcloud',
-    //'micro-snitch',
     'signal',
     //'macvim',
     // Powerful, keyboard-centric window management - http://www.irradiatedsoftware.com/sizeup/
