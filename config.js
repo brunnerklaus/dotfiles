@@ -115,7 +115,7 @@ module.exports = {
     'iterm2',
     //'little-snitch',
     // Your Personal Ergonomic Assistant - http://www.publicspace.net/MacBreakZ/
-    'macbreakz',
+    //'macbreakz',
     //'java',
     'jumpcut',
     'meld',
