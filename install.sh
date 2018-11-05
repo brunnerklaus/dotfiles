@@ -396,8 +396,9 @@ sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMultica
 #sudo perl -p -i -e 's|filesz:2M|filesz:10M|g' /private/etc/security/audit_control
 #sudo perl -p -i -e 's|expire-after:10M|expire-after: 30d |g' /private/etc/security/audit_control
 
-# Disable the “Are you sure you want to open this application?” dialog
-defaults write com.apple.LaunchServices LSQuarantine -bool false
+#Obsolete
+#running "Disable the “Are you sure you want to open this application?” dialog"
+#defaults write com.apple.LaunchServices LSQuarantine -bool false;ok
 
 ###############################################################################
 # SSD-specific tweaks                                                         #
@@ -435,7 +436,7 @@ running "Disable hibernation (speeds up entering sleep mode)"
 # See https://discussions.apple.com/thread/6090869
 #
 # Get current seeting: pmset -g | grep hibernatemode | awk '{ print $2 ; }'
-sudo pmset -a hibernatemode 3;ok
+sudo pmset -a hibernatemode 3
 
 #running "Remove the sleep image file to save disk space"
 #sudo rm -rf /Private/var/vm/sleepimage;ok
@@ -641,11 +642,12 @@ defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int
 running "Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)"
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3;ok
 
-running "Use scroll gesture with the Ctrl (^) modifier key to zoom"
-defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
-defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144;ok
-running "Follow the keyboard focus while zoomed in"
-defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true;ok
+#Deprecated
+#running "Use scroll gesture with the Ctrl (^) modifier key to zoom"
+#defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+#defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144;ok
+#running "Follow the keyboard focus while zoomed in"
+#defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true;ok
 
 running "Disable press-and-hold for keys in favor of key repeat"
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false;ok
@@ -1002,6 +1004,7 @@ running "Set Atom as default editor"
 defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType=public.plain-text;LSHandlerRoleAll=com.github.atom;}';ok
 
 running "Installing Atom Community Packages"
+printf "\n"
 apm install --production --compatible \
   Sublime-Style-Column-Selection \
   ask-stack \
@@ -1024,9 +1027,10 @@ bot "Spotlight"
 # running "Hide Spotlight tray-icon (and subsequent helper)"
 # sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search;ok
 
-running "Disable Spotlight indexing for any volume that gets mounted and has not yet been indexed"
+#Deprecated
+#running "Disable Spotlight indexing for any volume that gets mounted and has not yet been indexed"
 # Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
-sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes";ok
+#sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes";ok
 running "Change indexing order and disable some file types from being indexed"
 # Change indexing order and disable some search results
 # Yosemite-specific search results (remove them if you are using macOS 10.9 or older):
@@ -1075,41 +1079,53 @@ defaults write com.apple.terminal StringEncodings -array 4;ok
 
 # Use a modified version of the Solarized Dark theme by default in Terminal.app
 running "Set Solarized Dark theme by default in Terminal.app"
-osascript <<EOD
+#osascript <<EOD
+#
+#tell application "Terminal"
+#
+#	local allOpenedWindows
+#	local initialOpenedWindows
+#	local windowID
+#	set themeName to "Solarized Dark xterm-256color"
+#
+#	(* Store the IDs of all the open terminal windows. *)
+#	set initialOpenedWindows to id of every window
+#
+#	(* Open the custom theme so that it gets added to the list
+#	   of available terminal themes (note: this will open two
+#	   additional terminal windows). *)
+#	do shell script "open '$HOME/init/" & themeName & ".terminal'"
+#
+#	(* Wait a little bit to ensure that the custom theme is added. *)
+#	delay 1
+#
+#	(* Set the custom theme as the default terminal theme. *)
+#	set default settings to settings set themeName
+#
+#	(* Get the IDs of all the currently opened terminal windows. *)
+#	set allOpenedWindows to id of every window
+#
+#	repeat with windowID in allOpenedWindows
+#
+#		(* Close the additional windows that were opened in order
+#		   to add the custom theme to the list of terminal themes. *)
+#		if initialOpenedWindows does not contain windowID then
+#			close (every window whose id is windowID)
+#
+#		(* Change the theme for the initial opened terminal windows
+#		   to remove the need to close them in order for the custom
+#		   theme to be applied. *)
+#		else
+#			set current settings of tabs of (every window whose id is windowID) to settings set themeName
+#		end if
+#
+#	end repeat
+#
+#end tell
+#
+#EOD;ok
 
-tell application "Terminal"
-	local allOpenedWindows
-	local initialOpenedWindows
-	local windowID
-	set themeName to "Solarized Dark xterm-256color"
-	(* Store the IDs of all the open terminal windows. *)
-	set initialOpenedWindows to id of every window
-	(* Open the custom theme so that it gets added to the list
-	   of available terminal themes (note: this will open two
-	   additional terminal windows). *)
-	do shell script "open '$HOME/init/" & themeName & ".terminal'"
-	(* Wait a little bit to ensure that the custom theme is added. *)
-	delay 1
-	(* Set the custom theme as the default terminal theme. *)
-	set default settings to settings set themeName
-	(* Get the IDs of all the currently opened terminal windows. *)
-	set allOpenedWindows to id of every window
-	repeat with windowID in allOpenedWindows
-		(* Close the additional windows that were opened in order
-		   to add the custom theme to the list of terminal themes. *)
-		if initialOpenedWindows does not contain windowID then
-			close (every window whose id is windowID)
-		(* Change the theme for the initial opened terminal windows
-		   to remove the need to close them in order for the custom
-		   theme to be applied. *)
-		else
-			set current settings of tabs of (every window whose id is windowID) to settings set themeName
-		end if
-	end repeat
-end tell
-EOD;ok
-
-# Enable “focus follows mouse” for Terminal.app and all X11 apps
+# Enable "focus follows mouse" for Terminal.app and all X11 apps
 # i.e. hover over a window and start typing in it without clicking first
 #defaults write com.apple.terminal FocusFollowsMouse -bool true
 #defaults write org.x.X11 wm_ffm -bool true
@@ -1362,7 +1378,7 @@ defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true;ok
 # Sublime Text                                                                #
 ###############################################################################
 
-running "Install Sublime Text settings"
+#running "Install Sublime Text settings"
 #cp -r init/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
 
 ###############################################################################

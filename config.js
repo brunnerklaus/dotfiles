@@ -41,7 +41,7 @@ module.exports = {
     // better, more recent grep
     'homebrew/dupes/grep',
     // Open source programming language - https://golang.org
-    'go'
+    'go',
     // User-friendly cURL replacement (command-line HTTP client) - https://github.com/jkbrzt/httpie
     'httpie',
     // Utility to optimize/compress JPEG files http://www.iki.fi/tjko/projects.html
@@ -53,7 +53,7 @@ module.exports = {
     // Install some other useful utilities like `sponge` - https://joeyh.name/code/moreutils/
     'moreutils',
     // Intercept, modify, replay, save HTTP / S traffic - https: //mitmproxy.org
-    'mitmproxy'
+    'mitmproxy',
     // traceroute and ping in a single tool - https: //www.bitwizard.nl/mtr/
     'mtr --with-glib',
     // Network grep - https://github.com/jpr5/ngrep
