@@ -46,5 +46,5 @@ inquirer.prompt([{
   installPackages('cask')
   installPackages('npm')
   installPackages('gem')
-
+  installPackages('mas')
 })

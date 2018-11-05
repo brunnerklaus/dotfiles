@@ -96,3 +96,14 @@ function require_nvm() {
   fi
   ok
 }
+
+function require_mas() {
+  if [[ $(mas list | grep $1 | head -1 | cut -d' ' -f1) != $1 ]];
+  then
+    action "mas install $1"
+    mas install $1
+  else
+    action "$1 already installed!"
+  fi
+  ok
+}

@@ -153,5 +153,17 @@ module.exports = {
     //'trash',
     'vtop',
     // ,'yo'
-  ]
+  ],
+  mas: [
+    //Keynote
+    '409183694',
+    //iMovie
+    '408981434',
+    //Pages
+    '409201541',
+    //Xcode
+    '497799835',
+    //Numbers
+    '409203825',
+  ],
 };
