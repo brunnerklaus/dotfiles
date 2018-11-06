@@ -38,6 +38,8 @@ module.exports = {
     // so we can do "sed -i 's/foo/bar/' file" instead of "sed -i '' 's/foo/bar/' file"
     // GNU implementation of the famous stream editor - https://www.gnu.org/software/sed/
     'gnu-sed --with-default-names',
+    // Improved top (interactive process viewer) - https://hisham.hm/htop/
+    'htop',
     // better, more recent grep
     'homebrew/dupes/grep',
     // Open source programming language - https://golang.org

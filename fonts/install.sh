@@ -20,8 +20,8 @@ eval $find_command | xargs -0 -I % cp "%" "$font_dir/"
 
 # Reset font cache on Linux
 if command -v fc-cache @>/dev/null ; then
-    echo "Resetting font cache, this may take a moment..."
-    fc-cache -f $font_dir
+  echo "Resetting font cache, this may take a moment..."
+  fc-cache -f $font_dir
 fi
 
 echo "All Powerline fonts installed to $font_dir"

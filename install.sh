@@ -9,41 +9,41 @@
 source ./lib_sh/echos.sh
 source ./lib_sh/requirers.sh
 
-bot "Hi! I'm going to install tooling and tweak your system settings. Here I go..."
+bot "💡 Hi! I'm going to install tooling and tweak your system settings. Here I go..."
 
 # Ask for the administrator password upfront
 if ! sudo grep -q "%wheel		ALL=(ALL) NOPASSWD: ALL #atomantic/dotfiles" "/etc/sudoers"; then
 
   # Ask for the administrator password upfront
-  bot "I need you to enter your sudo password so I can install some things:"
+  bot "🔐 I need you to enter your sudo password so I can install some things:"
   sudo -v
 
   # Keep-alive: update existing sudo time stamp until the script has finished
   while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-  bot "Do you want me to setup this machine to allow you to run sudo without a password?\nPlease read here to see what I am doing:\nhttp://wiki.summercode.com/sudo_without_a_password_in_mac_os_x \n"
-
-  read -r -p "Make sudo passwordless? [y|N] " response
-
-  if [[ $response =~ (yes|y|Y) ]];then
-    sudo cp /etc/sudoers /etc/sudoers.back
-    echo '%wheel		ALL=(ALL) NOPASSWD: ALL #atomantic/dotfiles' | sudo tee -a /etc/sudoers > /dev/null
-    sudo dscl . append /Groups/wheel GroupMembership $(whoami)
-    bot "You can now run sudo commands without password!"
-  fi
+  #bot "🔓 Do you want me to setup this machine to allow you to run sudo without a password?\nPlease #read here to see what I am doing:\nhttp://wiki.summercode.com/sudo_without_a_password_in_mac_os_x #\n"
+  #
+  #read -r -p "Make sudo passwordless? [y|N] " response
+  #
+  #if [[ $response =~ (yes|y|Y) ]];then
+  #  sudo cp /etc/sudoers /etc/sudoers.back
+  #  echo '%wheel		ALL=(ALL) NOPASSWD: ALL #atomantic/dotfiles' | sudo tee -a /etc/sudoers > #/dev/null
+  #  sudo dscl . append /Groups/wheel GroupMembership $(whoami)
+  #  bot "🔓 You can now run sudo commands without password!"
+  #fi
 fi
 
 # /etc/hosts
-read -r -p "Overwrite /etc/hosts with the ad-blocking hosts file from someonewhocares.org? (from ./configs/hosts file) [y|N] " response
-if [[ $response =~ (yes|y|Y) ]];then
-  action "cp /etc/hosts /etc/hosts.backup"
-  sudo cp /etc/hosts /etc/hosts.backup
-  ok
-  action "cp ./configs/hosts /etc/hosts"
-  sudo cp ./configs/hosts /etc/hosts
-  ok
-  bot "Your /etc/hosts file has been updated. Last version is saved in /etc/hosts.backup"
-fi
+#read -r -p "Overwrite /etc/hosts with the ad-blocking hosts file from someonewhocares.org? (from #./configs/hosts file) [y|N] " response
+#if [[ $response =~ (yes|y|Y) ]];then
+#  action "cp /etc/hosts /etc/hosts.backup"
+#  sudo cp /etc/hosts /etc/hosts.backup
+#  ok
+#  action "cp ./configs/hosts /etc/hosts"
+#  sudo cp ./configs/hosts /etc/hosts
+#  ok
+#  bot "💊 Your /etc/hosts file has been updated. Last version is saved in /etc/hosts.backup"
+#fi
 
 # github account
 # disabled bacause config sourced via .extras file -> check README
@@ -117,34 +117,34 @@ fi
 #  fi
 #fi
 
-MD5_NEWWP=$(md5 img/wallpaper.jpg | awk '{print $4}')
-MD5_OLDWP=$(md5 /System/Library/CoreServices/DefaultDesktop.jpg | awk '{print $4}')
-if [[ "$MD5_NEWWP" != "$MD5_OLDWP" ]]; then
-  read -r -p "Do you want to use the project's custom desktop wallpaper? [Y|n] " response
-  if [[ $response =~ ^(no|n|N) ]];then
-    echo "skipping...";
-    ok
-  else
-    running "Set a custom wallpaper image"
-    # `DefaultDesktop.jpg` is already a symlink, and
-    # all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
-    rm -rf ~/Library/Application Support/Dock/desktoppicture.db
-    sudo rm -f /System/Library/CoreServices/DefaultDesktop.jpg > /dev/null 2>&1
-    sudo rm -f /Library/Desktop\ Pictures/El\ Capitan.jpg > /dev/null 2>&1
-    sudo rm -f /Library/Desktop\ Pictures/Sierra.jpg > /dev/null 2>&1
-    sudo rm -f /Library/Desktop\ Pictures/Sierra\ 2.jpg > /dev/null 2>&1
-    sudo cp ./img/wallpaper.jpg /System/Library/CoreServices/DefaultDesktop.jpg;
-    sudo cp ./img/wallpaper.jpg /Library/Desktop\ Pictures/Sierra.jpg;
-    sudo cp ./img/wallpaper.jpg /Library/Desktop\ Pictures/Sierra\ 2.jpg;
-    sudo cp ./img/wallpaper.jpg /Library/Desktop\ Pictures/El\ Capitan.jpg;ok
-  fi
-fi
+#MD5_NEWWP=$(md5 img/wallpaper.jpg | awk '{print $4}')
+#MD5_OLDWP=$(md5 /System/Library/CoreServices/DefaultDesktop.jpg | awk '{print $4}')
+#if [[ "$MD5_NEWWP" != "$MD5_OLDWP" ]]; then
+#  read -r -p "Do you want to use the project's custom desktop wallpaper? [Y|n] " response
+#  if [[ $response =~ ^(no|n|N) ]];then
+#    echo "skipping...";
+#    ok
+#  else
+#    running "Set a custom wallpaper image"
+#    # `DefaultDesktop.jpg` is already a symlink, and
+#    # all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
+#    rm -rf ~/Library/Application Support/Dock/desktoppicture.db
+#    sudo rm -f /System/Library/CoreServices/DefaultDesktop.jpg > /dev/null 2>&1
+#    sudo rm -f /Library/Desktop\ Pictures/El\ Capitan.jpg > /dev/null 2>&1
+#    sudo rm -f /Library/Desktop\ Pictures/Sierra.jpg > /dev/null 2>&1
+#    sudo rm -f /Library/Desktop\ Pictures/Sierra\ 2.jpg > /dev/null 2>&1
+#    sudo cp ./img/wallpaper.jpg /System/Library/CoreServices/DefaultDesktop.jpg;
+#    sudo cp ./img/wallpaper.jpg /Library/Desktop\ Pictures/Sierra.jpg;
+#    sudo cp ./img/wallpaper.jpg /Library/Desktop\ Pictures/Sierra\ 2.jpg;
+#    sudo cp ./img/wallpaper.jpg /Library/Desktop\ Pictures/El\ Capitan.jpg;ok
+#  fi
+#fi
 
 #####
 # install homebrew (CLI Packages)
 #####
 
-running "checking homebrew install"
+running "Checking homebrew install"
 brew_bin=$(which brew) 2>&1 > /dev/null
 if [[ $? != 0 ]]; then
   action "installing homebrew"
@@ -156,18 +156,18 @@ if [[ $? != 0 ]]; then
 else
   ok
   # Make sure we’re using the latest Homebrew
-  running "updating homebrew"
+  running "Updating homebrew"
   brew update
   ok
-  bot "before installing brew packages, we can upgrade any outdated packages."
+  bot "💡 Before installing brew packages, we can upgrade any outdated packages."
   read -r -p "run brew upgrade? [y|N] " response
   if [[ $response =~ ^(y|yes|Y) ]];then
     # Upgrade any already-installed formulae
-    action "upgrade brew packages..."
+    action "Upgrade brew packages..."
     brew upgrade
     ok "brews updated..."
   else
-    ok "skipped brew package upgrades.";
+    ok "Skipped brew package upgrades.";
   fi
 fi
 
@@ -226,7 +226,7 @@ for file in .*; do
   unlink ~/$file > /dev/null 2>&1
   # create the link
   ln -s ~/.dotfiles/homedir/$file ~/$file
-  echo -en '\tlinked';ok
+  echo -en '\tlinked ';ok
 done
 
 popd > /dev/null 2>&1
@@ -237,8 +237,10 @@ bot "Installing vim plugins"
 # require_brew cmake
 vim +PluginInstall +qall > /dev/null 2>&1
 
-bot "installing fonts"
+bot "Installing fonts"
 ./fonts/install.sh
+
+bot "Installing cask fonts"
 brew tap caskroom/fonts
 require_cask font-fontawesome
 require_cask font-awesome-terminal-fonts
@@ -273,20 +275,26 @@ npm config set save-exact true
 # JSON files and inquirer prompts
 #####################################
 
+###############################################################################
 bot "installing npm tools needed to run this project..."
+###############################################################################
 npm install
 ok
 
+###############################################################################
 bot "installing packages from config.js..."
+###############################################################################
 node index.js
 ok
 
+###############################################################################
 running "cleanup homebrew"
 brew cleanup > /dev/null 2>&1
+###############################################################################
 ok
 
 ###############################################################################
-bot "Configuring General System UI/UX..."
+bot "💻 Configuring General System UI/UX..."
 ###############################################################################
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
@@ -308,11 +316,13 @@ ok
 #   0 = off
 #   1 = on for specific sevices
 #   2 = on for essential services
+running "Enable firewall"
 sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
 
 # Enable firewall stealth mode (no response to ICMP / ping requests)
 # Source: https://support.apple.com/kb/PH18642
 #sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -int 1
+running "Enable firewall stealth mode"
 sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -int 1
 
 # Enable firewall logging
@@ -343,17 +353,17 @@ sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -int 1
 # Disable wifi captive portal
 #sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.control Active -bool false
 
-# Disable remote apple events
-sudo systemsetup -setremoteappleevents off
+running "Disable remote apple events"
+sudo systemsetup -setremoteappleevents off;ok
 
-# Disable remote login
-sudo systemsetup -setremotelogin off
+running "Disable remote login"
+sudo systemsetup -setremotelogin off;ok
 
-# Disable wake-on modem
-sudo systemsetup -setwakeonmodem off
+running "Disable wake-on modem"
+sudo systemsetup -setwakeonmodem off;ok
 
-# Disable wake-on LAN
-sudo systemsetup -setwakeonnetworkaccess off
+running "Disable wake-on LAN"
+sudo systemsetup -setwakeonnetworkaccess off;ok
 
 # Disable file-sharing via AFP or SMB
 # sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.AppleFileServer.plist
@@ -365,28 +375,28 @@ sudo systemsetup -setwakeonnetworkaccess off
 # Do not show password hints
 #sudo defaults write /Library/Preferences/com.apple.loginwindow RetriesUntilHint -int 0
 
-# Disable guest account login
-sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false
+running "Disable guest account login"
+sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false;ok
 
-# Automatically lock the login keychain for inactivity after 6 hours
-#security set-keychain-settings -t 21600 -l ~/Library/Keychains/login.keychain
+running "Automatically lock the login keychain for inactivity after 6 hours"
+security set-keychain-settings -t 21600 -l ~/Library/Keychains/login.keychain;ok
 
 # Destroy FileVault key when going into standby mode, forcing a re-auth.
 # Source: https://web.archive.org/web/20160114141929/http://training.apple.com/pdf/WP_FileVault2.pdf
 #sudo pmset destroyfvkeyonstandby 1
 
-bot "Disable Bonjour multicast advertisements"
+running "Disable Bonjour multicast advertisements"
 #https://www.trustwave.com/Resources/SpiderLabs-Blog/mDNS---Telling-the-world-about-you-(and-your-device)/
-sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMulticastAdvertisements -bool true
+sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMulticastAdvertisements -bool true;ok
 
-# Disable diagnostic reports
-#sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.SubmitDiagInfo.plist
+running "Disable diagnostic reports"
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.SubmitDiagInfo.plist;ok
 
-# Log authentication events for 90 days
-#sudo perl -p -i -e 's/rotate=seq file_max=5M all_max=20M/rotate=utc file_max=5M ttl=90/g' "/etc/asl/com.apple.authd"
+running "Log authentication events for 90 days"
+sudo perl -p -i -e 's/rotate=seq file_max=5M all_max=20M/rotate=utc file_max=5M ttl=90/g' "/etc/asl/com.apple.authd";ok
 
-# Log installation events for a year
-#sudo perl -p -i -e 's/format=bsd/format=bsd mode=0640 rotate=utc compress file_max=5M ttl=365/g' "/etc/asl/com.apple.install"
+running "Log installation events for a year"
+sudo perl -p -i -e 's/format=bsd/format=bsd mode=0640 rotate=utc compress file_max=5M ttl=365/g' "/etc/asl/com.apple.install";ok
 
 # Increase the retention time for system.log and secure.log
 #sudo perl -p -i -e 's/\/var\/log\/wtmp.*$/\/var\/log\/wtmp   \t\t\t640\ \ 31\    *\t\@hh24\ \J/g' "/etc/newsyslog.conf"
@@ -401,11 +411,11 @@ sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMultica
 #defaults write com.apple.LaunchServices LSQuarantine -bool false;ok
 
 ###############################################################################
-# SSD-specific tweaks                                                         #
+bot "💾 SSD-specific tweaks"
 ###############################################################################
 
-running "Disable local Time Machine snapshots"
-sudo tmutil disablelocal;ok
+#running "Disable local Time Machine snapshots"
+#sudo tmutil disablelocal;ok
 
 running "Disable hibernation (speeds up entering sleep mode)"
 # supported sleep modes:"
@@ -435,7 +445,7 @@ running "Disable hibernation (speeds up entering sleep mode)"
 # vault key on wake."
 # See https://discussions.apple.com/thread/6090869
 #
-# Get current seeting: pmset -g | grep hibernatemode | awk '{ print $2 ; }'
+running "Get current seeting: pmset -g | grep hibernatemode | awk '{ print $2 ; }'"
 sudo pmset -a hibernatemode 3
 
 #running "Remove the sleep image file to save disk space"
@@ -445,11 +455,11 @@ sudo pmset -a hibernatemode 3
 #running "…and make sure it can’t be rewritten"
 #sudo chflags uchg /Private/var/vm/sleepimage;ok
 
-#running "Disable the sudden motion sensor as it’s not useful for SSDs"
+running "Disable the sudden motion sensor as it’s not useful for SSDs"
 sudo pmset -a sms 0;ok
 
 ################################################
-# Optional / Experimental                      #
+bot "🎚️  Optional / Experimental"
 ################################################
 
 # running "Set computer name (as done via System Preferences → Sharing)"
@@ -506,7 +516,7 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true;ok
 
 
 ################################################
-bot "Standard System Changes"
+bot "🎛  Standard System Changes"
 ################################################
 running "Always boot in verbose mode (not MacOS GUI mode)"
 sudo nvram boot-args="-v";ok
@@ -547,8 +557,8 @@ running "Set sidebar icon size to medium"
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2;ok
 
 running "Always show scrollbars"
-defaults write NSGlobalDomain AppleShowScrollBars -string "Always";ok
 # Possible values: `WhenScrolling`, `Automatic` and `Always`
+defaults write NSGlobalDomain AppleShowScrollBars -string "Always";ok
 
 running "Increase window resize speed for Cocoa applications"
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001;ok
@@ -589,8 +599,8 @@ defaults write com.apple.helpviewer DevMode -bool true;ok
 running "Reveal IP, hostname, OS, etc. when clicking clock in login window"
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName;ok
 
-#running "Restart automatically if the computer freezes"
-#sudo systemsetup -setrestartfreeze on;ok
+running "Restart automatically if the computer freezes"
+sudo systemsetup -setrestartfreeze on;ok
 
 running "Never go into computer sleep mode"
 sudo systemsetup -setcomputersleep Off > /dev/null;ok
@@ -619,19 +629,27 @@ defaults write "Apple Global Domain" "AppleInterfaceStyle" "Dark";ok
 #defaults delete "Apple Global Domain" "AppleInterfaceStyle"
 
 ###############################################################################
-bot "Trackpad, mouse, keyboard, Bluetooth accessories, and input"
+bot "💻 Trackpad"
 ###############################################################################
-
 running "Trackpad: enable tap to click for this user and for the login screen"
+#(Don't have to press down on the trackpad -- just tap it.)
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1;ok
+defaults write com.apple.AppleMultitouchTrackpad Clicking -int 1
 
 running "Trackpad: map bottom right corner to right-click"
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true;ok
+
+running "Tracking Speed: from 0 to 3"
+defaults write -g com.apple.trackpad.scaling -float 3;ok
+
+###############################################################################
+bot "⌨️  Keyboard, Bluetooth accessories, and input"
+###############################################################################
 
 running "Enable 'natural' (Lion-style) scrolling"
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true;ok
@@ -678,7 +696,20 @@ defaults write "Apple Global Domain" "com.apple.keyboard.fnState" "1";ok ## F1 F
 #defaults write "Apple Global Domain" "com.apple.keyboard.fnState" "0" ## Brightness/Media
 
 ###############################################################################
-bot "Configuring the Screen"
+bot "🖱️  Configuring the Mouse"
+###############################################################################
+
+running "Disable mouse acceleration "
+defaults write -g com.apple.mouse.scaling -1;ok
+
+running "Enable secondary button on click"
+defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode TwoButton;ok
+
+runnign "Enable swipe with one single finger gesture to go back while browsing"
+defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseOneFingerDoubleTapGesture 1;ok
+
+###############################################################################
+bot "📺 Configuring the Screen"
 ###############################################################################
 
 running "Require password immediately after sleep or screen saver begins"
@@ -707,7 +738,7 @@ running "Enable HiDPI display modes (requires restart)"
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true;ok
 
 ###############################################################################
-bot "Finder Configuration"
+bot "📂 Finder Configuration"
 ###############################################################################
 #running "Keep folders on top when sorting by name (Sierra only)"
 #defaults write com.apple.finder _FXSortFoldersFirst -bool true;ok
@@ -789,7 +820,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
   Privileges -bool true;ok
 
 ###############################################################################
-bot "Dock & Dashboard and hot corners"
+bot "📱 Dock & Dashboard and hot corners"
 ###############################################################################
 
 running "Enable highlight hover effect for the grid view of a stack (Dock)"
@@ -861,7 +892,7 @@ find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -dele
 #defaults delete com.apple.dock autohide-delay
 #defaults delete com.apple.dock autohide-time-modifier
 
-bot "Configuring Hot Corners"
+bot "🔦 Configuring Hot Corners"
 # Possible values:
 #  0: no-op
 #  2: Mission Control
@@ -884,7 +915,7 @@ defaults write com.apple.dock wvous-br-corner -int 5
 defaults write com.apple.dock wvous-br-modifier -int 0;ok
 
 ###############################################################################
-bot "Configuring Safari & WebKit"
+bot "🌍 Configuring Safari & WebKit"
 ###############################################################################
 
 running "Privacy: don’t send search queries to Apple"
@@ -893,7 +924,9 @@ defaults write com.apple.Safari SuppressSearchSuggestions -bool true;ok
 
 running "Press Tab to highlight each item on a web page"
 defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true;ok
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
+
+running "Allow hitting the Backspace key to go to the previous page in history"
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true;ok
 
 running "Show the full URL in the address bar (note: this still hides the scheme)"
 defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true;ok
@@ -973,7 +1006,7 @@ defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true;ok
 #defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true;ok
 
 ###############################################################################
-bot "Configuring Mail"
+bot "✉️  Configuring Mail"
 ###############################################################################
 
 running "Disable send and reply animations in Mail.app"
@@ -998,7 +1031,7 @@ running "Disable automatic spell checking"
 defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled";ok
 
 ###############################################################################
-bot "Configure Atom editor"
+bot "📋 Configure Atom editor"
 #########################it######################################################
 running "Set Atom as default editor"
 defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType=public.plain-text;LSHandlerRoleAll=com.github.atom;}';ok
@@ -1016,12 +1049,25 @@ apm install --production --compatible \
   language-docker \
   language-liquid \
   minimap \
+  minimap-pigments \
+  minimap-find-and-replace \
+  minimap-git-diff \
+  minimap-highlight-selected \
+  sort-lines \
+  git-log \
+  git-blame \
+  tree-view-git-status \
+  merge-conflicts \
+  linter-jshint \
+  linter \
+  unity-ui \
+  trailing-spaces \
   pigments \
   zenburn-syntax \
   atom-gpg
 
 ###############################################################################
-bot "Spotlight"
+bot "🔍 Spotlight"
 ###############################################################################
 
 # running "Hide Spotlight tray-icon (and subsequent helper)"
@@ -1040,6 +1086,7 @@ running "Change indexing order and disable some file types from being indexed"
 # 	MENU_SPOTLIGHT_SUGGESTIONS (send search queries to Apple)
 # 	MENU_WEBSEARCH             (send search queries to Apple)
 # 	MENU_OTHER
+# Limit number of things to index
 defaults write com.apple.spotlight orderedItems -array \
   '{"enabled" = 1;"name" = "APPLICATIONS";}' \
   '{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
@@ -1063,15 +1110,20 @@ defaults write com.apple.spotlight orderedItems -array \
   '{"enabled" = 0;"name" = "MENU_EXPRESSION";}' \
   '{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
   '{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}';ok
+
 running "Load new settings before rebuilding the index"
 killall mds > /dev/null 2>&1;ok
+
 running "Make sure indexing is enabled for the main volume"
 sudo mdutil -i on / > /dev/null;ok
-#running "Rebuild the index from scratch"
-#sudo mdutil -E / > /dev/null;ok
+
+running "Rebuild the index from scratch"
+sudo mdutil -E / > /dev/null;ok
+
+# Do not search inside external drives (WIP)
 
 ###############################################################################
-bot "Terminal & iTerm2"
+bot "📟 Terminal & iTerm2"
 ###############################################################################
 
 running "Only use UTF-8 in Terminal.app"
@@ -1187,7 +1239,7 @@ defaults read -app iTerm > /dev/null 2>&1;
 ok
 
 ###############################################################################
-bot "Time Machine"
+bot "⌛️ Time Machine"
 ###############################################################################
 
 running "Prevent Time Machine from prompting to use new hard drives as backup volume"
@@ -1197,7 +1249,7 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true;ok
 #hash tmutil &> /dev/null && sudo tmutil disablelocal;ok
 
 ###############################################################################
-bot "Activity Monitor"
+bot "📈 Activity Monitor"
 ###############################################################################
 
 running "Show the main window when launching Activity Monitor"
@@ -1213,13 +1265,13 @@ running "Sort Activity Monitor results by CPU usage"
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0;ok
 
-running "Sets columns for all tabs"
-defaults read com.apple.ActivityMonitor "UserColumnsPerTab v5.0" -dict \
-  '0' '( Command, CPUUsage, CPUTime, Threads, PID, UID, Ports )' \
-  '1' '( Command, ResidentSize, Threads, Ports, PID, UID,  )' \
-  '2' '( Command, PowerScore, 12HRPower, AppSleep, UID, powerAssertion )' \
-  '3' '( Command, bytesWritten, bytesRead, Architecture, PID, UID, CPUUsage )' \
-  '4' '( Command, txBytes, rxBytes, PID, UID, txPackets, rxPackets, CPUUsage )';ok
+#running "Sets columns for all tabs"
+#defaults read com.apple.ActivityMonitor "UserColumnsPerTab v5.0" -dict \
+  #  '0' '( Command, CPUUsage, CPUTime, Threads, PID, UID, Ports )' \
+  #  '1' '( Command, ResidentSize, Threads, Ports, PID, UID,  )' \
+  #  '2' '( Command, PowerScore, 12HRPower, AppSleep, UID, powerAssertion )' \
+  #  '3' '( Command, bytesWritten, bytesRead, Architecture, PID, UID, CPUUsage )' \
+  #  '4' '( Command, txBytes, rxBytes, PID, UID, txPackets, rxPackets, CPUUsage )';ok
 
 running "Set sort column"
 defaults write com.apple.ActivityMonitor UserColumnSortPerTab -dict \
@@ -1237,7 +1289,7 @@ running "Show Data in the Network graph (instead of packets)"
 defaults write com.apple.ActivityMonitor NetworkGraphType -int 1;ok
 
 ###############################################################################
-bot "Address Book, Dashboard, iCal, TextEdit, and Disk Utility"
+bot "📘 Address Book, Dashboard, iCal, TextEdit, and Disk Utility"
 ###############################################################################
 
 running "Enable the debug menu in Address Book"
@@ -1254,7 +1306,7 @@ defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4;ok
 
 ###############################################################################
-bot "Date & Time"
+bot "📅 Date & Time"
 ###############################################################################
 
 # Custom DateFormat
@@ -1277,7 +1329,7 @@ running "Auto-play videos when opened with QuickTime Player"
 defaults write com.apple.QuickTimePlayerX MGPlayMovieOnOpen -bool true;ok
 
 ###############################################################################
-bot "Mac App Store"
+bot "🍎 Mac App Store"
 ###############################################################################
 
 running "Enable the WebKit Developer Tools in the Mac App Store"
@@ -1308,14 +1360,14 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1;ok
 #defaults write com.apple.commerce AutoUpdateRestartRequired -bool true;ok
 
 ###############################################################################
-bot "Configuring Photos"
+bot "📷 Configuring Photos"
 ###############################################################################
 
 running "Prevent Photos from opening automatically when devices are plugged in"
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true;ok
 
 ###############################################################################
-bot "Messages"
+bot "✉️  Messages"
 ###############################################################################
 
 #running "Disable automatic emoji substitution (i.e. use plain text smileys)"
@@ -1328,7 +1380,7 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 #defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false;ok
 
 ###############################################################################
-bot "Configuring Google Chrome" #& Google Chrome Canary
+bot "🌐 Configuring Google Chrome" #& Google Chrome Canary
 ###############################################################################
 
 running "Disable the all too sensitive backswipe on trackpads"
@@ -1382,7 +1434,7 @@ defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true;ok
 #cp -r init/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
 
 ###############################################################################
-bot "Set Dock items"
+bot "🔧 Set Dock items"
 ###############################################################################
 OLDIFS=$IFS
 IFS=''
@@ -1419,7 +1471,7 @@ IFS=$OLDIFS
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
-bot "OK. Note that some of these changes require a logout/restart to take effect. Killing affected applications (so they can reboot)...."
+bot "📣 OK. Note that some of these changes require a logout/restart to take effect. Killing affected applications (so they can reboot)...."
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
   "Dock" "Finder" "Mail" "Messages" "Safari" "SizeUp" "SystemUIServer" \
   "iCal" "Terminal"; do
@@ -1427,4 +1479,4 @@ for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 done
 
 
-bot "Woot! All done. Kill this terminal and launch iTerm"
+bot "🎉 Woot! All done. Kill this terminal and launch iTerm"

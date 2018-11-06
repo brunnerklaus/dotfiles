@@ -17,6 +17,7 @@
     disabledPackages: [
       "metrics"
       "exception-reporting"
+      "linter"
     ]
     telemetryConsent: "no"
     themes: [
@@ -27,7 +28,16 @@
     softWrap: true
   "file-icons":
     coloured: false
-  minimap: {}
+  minimap:
+    plugins:
+      "find-and-replace": true
+      "find-and-replaceDecorationsZIndex": 0
+      "git-diff": true
+      "git-diffDecorationsZIndex": 0
+      "highlight-selected": true
+      "highlight-selectedDecorationsZIndex": 0
+      pigments: true
+      pigmentsDecorationsZIndex: 0
   "tree-view":
     hideVcsIgnoredFiles: true
   welcome:
