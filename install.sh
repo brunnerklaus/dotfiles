@@ -9,6 +9,13 @@
 source ./lib_sh/echos.sh
 source ./lib_sh/requirers.sh
 
+abort() { echo "‼️‼️ $@" >&2; exit 1; }
+
+### Check that OS X version is compatible with script
+sw_vers -productVersion | grep $Q -E "^10.(11|12|13|14)" || {
+  abort "Only macOS 10.11/12/13/14 versions supported!....Aborted!"
+}
+
 bot "💡 Hi! I'm going to install tooling and tweak your system settings. Here I go..."
 
 # Ask for the administrator password upfront
