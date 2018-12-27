@@ -96,6 +96,8 @@ module.exports = {
     //'adium',
     //'amazon-cloud-drive',
     'atom',
+    // Padbury Clock
+    //'padbury-clock',
     // 'box-sync',
     //'comicbooklover',
     // Get a list of all active short cuts of the current application - https://mediaatelier.com/CheatSheet/

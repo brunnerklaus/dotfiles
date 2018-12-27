@@ -652,7 +652,7 @@ defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClic
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true;ok
 
 running "Tracking Speed: from 0 to 3"
-defaults write -g com.apple.trackpad.scaling -float 3;ok
+defaults write -g com.apple.trackpad.scaling -float 0;ok
 
 ###############################################################################
 bot "⌨️  Keyboard, Bluetooth accessories, and input"
@@ -808,8 +808,8 @@ running "Use list view in all Finder windows by default"
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv";ok
 
-#running "Disable the warning before emptying the Trash"
-#defaults write com.apple.finder WarnOnEmptyTrash -bool false;ok
+running "Disable the warning before emptying the Trash"
+defaults write com.apple.finder WarnOnEmptyTrash -bool true;ok
 
 running "Empty Trash securely by default"
 defaults write com.apple.finder EmptyTrashSecurely -bool true;ok
