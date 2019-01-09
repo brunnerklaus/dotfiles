@@ -1374,7 +1374,7 @@ running "Prevent Photos from opening automatically when devices are plugged in"
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true;ok
 
 ###############################################################################
-bot "✉️  Messages"
+bot "✉️   Messages"
 ###############################################################################
 
 #running "Disable automatic emoji substitution (i.e. use plain text smileys)"
