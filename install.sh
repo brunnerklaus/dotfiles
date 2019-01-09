@@ -466,7 +466,7 @@ running "Disable the sudden motion sensor as it’s not useful for SSDs"
 sudo pmset -a sms 0;ok
 
 ################################################
-bot "🎚️  Optional / Experimental"
+bot "🎚️   Optional / Experimental"
 ################################################
 
 # running "Set computer name (as done via System Preferences → Sharing)"
@@ -523,7 +523,7 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true;ok
 
 
 ################################################
-bot "🎛  Standard System Changes"
+bot "🎛   Standard System Changes"
 ################################################
 running "Always boot in verbose mode (not MacOS GUI mode)"
 sudo nvram boot-args="-v";ok
@@ -655,7 +655,7 @@ running "Tracking Speed: from 0 to 3"
 defaults write -g com.apple.trackpad.scaling -float 0;ok
 
 ###############################################################################
-bot "⌨️  Keyboard, Bluetooth accessories, and input"
+bot "⌨️   Keyboard, Bluetooth accessories, and input"
 ###############################################################################
 
 running "Enable 'natural' (Lion-style) scrolling"
@@ -1013,7 +1013,7 @@ defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true;ok
 #defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true;ok
 
 ###############################################################################
-bot "✉️  Configuring Mail"
+bot "✉️   Configuring Mail"
 ###############################################################################
 
 running "Disable send and reply animations in Mail.app"
