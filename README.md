@@ -447,3 +447,9 @@ Please refer to the [Contributor Covenant](https://github.com/atomantic/dotfiles
 
 > Warning:
 > The creator of this repo is not responsible if your machine ends up in a state you are not happy with. If you are concerned, look at the code to review everything this will do to your machine :)
+
+# Other Awesome Lists
+
+List of shell tools and apps can be found here [awesome-shell](https://github.com/alebcay/awesome-shell) and [git-addons](https://github.com/stevemao/awesome-git-addons)
+
+Other amazingly awesome lists can be found in [awesome-awesome](https://github.com/emijrp/awesome-awesome) and [awesome-awesomeness](https://github.com/bayandin/awesome-awesomeness).

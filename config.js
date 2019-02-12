@@ -14,6 +14,8 @@ module.exports = {
     // Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
     // GNU File, Shell, and Text utilities - https://www.gnu.org/software/coreutils/coreutils.html
     'coreutils',
+    // ccat is the colorizing cat. It works similar to cat but displays content with syntax highlighting.
+    'ccat',
     // Curl - Get a file from an HTTP, HTTPS or FTP server - https://curl.haxx.se/
     'curl --with-openssl',
     // Utility for managing Mac OS X dock items - https://github.com/kcrawford/dockutil
@@ -28,6 +30,8 @@ module.exports = {
     'readline', // ensure gawk gets good readline
     // GNU awk utility - https://www.gnu.org/software/gawk/
     'gawk',
+    // Glances an Eye on your system. A top/htop alternative
+    'glances',
     // http://www.lcdf.org/gifsicle/ (because I'm a gif junky)
     'gifsicle',
     // Good-lookin' diffs for git - https://github.com/so-fancy/diff-so-fancy
@@ -52,6 +56,8 @@ module.exports = {
     'jq',
     // Mac App Store CLI - https://github.com/mas-cli/mas
     'mas',
+    // lsp is like ls command but more human-friendly
+    'lsp',
     // Install some other useful utilities like `sponge` - https://joeyh.name/code/moreutils/
     'moreutils',
     // Intercept, modify, replay, save HTTP / S traffic - https: //mitmproxy.org
@@ -63,6 +69,10 @@ module.exports = {
     // Port scanning utility for large networks - https://nmap.org/
     'nmap',
     // 'openconnect',
+    // Tiny date, time diff calculator with timers
+    'pdd',
+    //Linux tool to show progress for cp, rm, dd, and more...
+    'progress',
     // Reattach process (e.g., tmux) to background - https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
     'reattach-to-user-namespace',
     // better/more recent version of screen
@@ -121,6 +131,7 @@ module.exports = {
     // Your Personal Ergonomic Assistant - http://www.publicspace.net/MacBreakZ/
     //'macbreakz',
     //'java',
+    'kitematic'
     'jumpcut',
     'meld',
     'nextcloud',

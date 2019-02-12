@@ -1063,6 +1063,7 @@ apm install --production --compatible \
   sort-lines \
   git-log \
   git-blame \
+  git-time-machine \
   tree-view-git-status \
   merge-conflicts \
   linter-jshint \
