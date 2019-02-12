@@ -111,7 +111,7 @@ module.exports = {
     // 'box-sync',
     //'comicbooklover',
     // Get a list of all active short cuts of the current application - https://mediaatelier.com/CheatSheet/
-    //'cheatsheet',
+    'cheatsheet',
     //'diffmerge',
     'docker',
     //'dropbox',
@@ -131,8 +131,10 @@ module.exports = {
     // Your Personal Ergonomic Assistant - http://www.publicspace.net/MacBreakZ/
     //'macbreakz',
     //'java',
-    'kitematic'
+    //'kitematic',
     'jumpcut',
+    // A native OS X KeePass client https://macpassapp.org
+    'macpass',
     'meld',
     'nextcloud',
     'signal',
@@ -140,7 +142,7 @@ module.exports = {
     // Powerful, keyboard-centric window management - http://www.irradiatedsoftware.com/sizeup/
     //'sizeup',
     //'sketchup',
-    'slack',
+    //'slack',
     // A sophisticated text editor for code, markup and prose - https://www.sublimetext.com
     //'sublime',
     // Free Unarchiving Software for macOS - https://theunarchiver.com/
@@ -151,7 +153,7 @@ module.exports = {
     //'transmission',
     //'visual-studio-code',
     'vlc',
-    //'virtualbox'
+    //'virtualbox',
     //'xquartz'
   ],
   gem: [],

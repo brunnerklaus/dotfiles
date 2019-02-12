@@ -452,4 +452,6 @@ Please refer to the [Contributor Covenant](https://github.com/atomantic/dotfiles
 
 List of shell tools and apps can be found here [awesome-shell](https://github.com/alebcay/awesome-shell) and [git-addons](https://github.com/stevemao/awesome-git-addons)
 
+Use your macOS terminal shell to do awesome things [awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line)
+
 Other amazingly awesome lists can be found in [awesome-awesome](https://github.com/emijrp/awesome-awesome) and [awesome-awesomeness](https://github.com/bayandin/awesome-awesomeness).
