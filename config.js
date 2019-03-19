@@ -4,6 +4,8 @@ module.exports = {
     'ack',
     // Code-search similar to ack - https://github.com/ggreer/the_silver_searcher
     'ag',
+    // alternative to `cat`: https://github.com/sharkdp/bat
+    'bat',
     // Record and share terminal sessions - https: //asciinema.org
     //'asciinema',
     // Binwalk is a fast, easy to use tool for analyzing, reverse engineering-  https: //github.com/ReFirmLabs/binwalk
@@ -24,6 +26,8 @@ module.exports = {
     'dos2unix',
     // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed - https://www.gnu.org/software/findutils/
     'findutils',
+    // fuzzy find
+    'fzf',
     // TCP / IP packet demultiplexer - https: //github.com/simsong/tcpflow
     'tcpflow',
     // Library for command-line editing - https://tiswww.case.edu/php/chet/readline/rltop.html
@@ -42,6 +46,8 @@ module.exports = {
     // so we can do "sed -i 's/foo/bar/' file" instead of "sed -i '' 's/foo/bar/' file"
     // GNU implementation of the famous stream editor - https://www.gnu.org/software/sed/
     'gnu-sed --with-default-names',
+    // upgrade grep so we can get things like inverted match (-v)
+    'grep --with-default-names',
     // Improved top (interactive process viewer) - https://hisham.hm/htop/
     'htop',
     // better, more recent grep
@@ -91,7 +97,7 @@ module.exports = {
     // Terminal interaction recorder and player - http://0xcc.net/ttyrec/
     'ttyrec',
     // better, more recent vim
-    'vim --with-override-system-vi',
+    'vim --with-client-server --with-override-system-vi',
     // Command line and full screen utilities for browsing procfs - https://gitlab.com/procps-ng/procps
     'watch',
     // Install wget with IRI support (enable internationalized URI)
