@@ -110,11 +110,13 @@ module.exports = {
     //'padbury-clock',
     // 'box-sync',
     //'comicbooklover',
+    // https://github.com/borgbackup/borgbackup.github.io
+    'borgbackup',
     // Get a list of all active short cuts of the current application - https://mediaatelier.com/CheatSheet/
     'cheatsheet',
     //'diffmerge',
     'docker',
-    //'dropbox',
+    'dropbox',
     //'evernote',
     // f.lux - https://justgetflux.com
     'flux',
