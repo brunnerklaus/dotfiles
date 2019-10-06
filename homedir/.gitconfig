@@ -1,9 +1,9 @@
 #[user]
-#  name = GITHUBFULLNAME
-#  email = GITHUBEMAIL
+#  name = Klaus Brunner
+#  email = bruklaus@gmail.com
 #[github]
 #  # https://github.com/blog/180-local-github-config
-#  user = GITHUBUSER
+#  user = brunnerklaus
 
 # User and email settings
 # Generated via .extras in .profile
