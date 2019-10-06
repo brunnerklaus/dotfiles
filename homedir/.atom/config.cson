@@ -18,6 +18,7 @@
       "metrics"
       "exception-reporting"
       "linter"
+      "atom-beautify"
     ]
     telemetryConsent: "no"
     themes: [
