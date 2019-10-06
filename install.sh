@@ -248,7 +248,7 @@ bot "Installing fonts"
 ./fonts/install.sh
 
 bot "Installing cask fonts"
-brew tap caskroom/fonts
+#brew tap caskroom/fonts
 require_cask font-fontawesome
 require_cask font-awesome-terminal-fonts
 require_cask font-hack
@@ -1455,9 +1455,9 @@ apps=(
   Safari
   Calendar
   Notes
-  GitKraken
+  Firefox
+  Thunderbird
   'Google Chrome'
-  Slack
   KeePassX
   'Keychain Access'
 )
