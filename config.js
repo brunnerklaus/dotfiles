@@ -123,7 +123,7 @@ module.exports = {
     // Get a list of all active short cuts of the current application - https://mediaatelier.com/CheatSheet/
     'cheatsheet',
     //'diffmerge',
-    'docker',
+    'docker', // docker for mac
     'dropbox',
     //'evernote',
     // f.lux - https://justgetflux.com
@@ -144,7 +144,7 @@ module.exports = {
     //'kitematic',
     'jumpcut',
     // A native OS X KeePass client https://macpassapp.org
-    'macpass',
+    //'macpass',
     'meld',
     'nextcloud',
     'signal',
@@ -174,9 +174,9 @@ module.exports = {
     // Instantly preview finnicky markdown files - https://github.com/suan/vim-instant-markdown
     'instant-markdown-d',
     // 'generator-dockerize',
-    //'gulp',
-    //'npm-check-updates',
-    //'prettyjson',
+    // 'gulp',
+    'npm-check-updates',
+    'prettyjson',
     //'trash',
     'vtop',
     // ,'yo'
@@ -188,9 +188,9 @@ module.exports = {
     '408981434',
     //Pages
     '409201541',
-    //Xcode
-    '497799835',
     //Numbers
     '409203825',
+    //com.apple.dt.Xcode
+    '497799835'
   ],
 };

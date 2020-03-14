@@ -22,7 +22,7 @@ if [ $? -ne 0 ]; then
   # Keep-alive: update existing sudo time stamp until the script has finished
   while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-  echo "Do you want me to setup this machine to allow you to run sudo without a password?\nPlease read here to see what I am doing:\nhttps://summercode.com/wiki/sudo-without-a-password-in-mac-os-x \n"
+  bot "Do you want me to setup this machine to allow you to run sudo without a password?\nPlease read here to see what I am doing:\nhttp://wiki.summercode.com/sudo_without_a_password_in_mac_os_x \n"
 
   read -r -p "Make sudo passwordless? [y|N] " response
 
@@ -194,6 +194,7 @@ if [[ $? != 0 ]]; then
     error "unable to install homebrew, script $0 abort!"
     exit 2
   fi
+  brew analytics off
 else
   ok
   bot "Homebrew"
@@ -1557,8 +1558,8 @@ apps=(
   Notes
   Firefox
   Thunderbird
-  'Google Chrome'
   KeePassX
+  Signal
   'Keychain Access'
 )
 
@@ -1581,29 +1582,11 @@ IFS=$OLDIFS
 ###############################################################################
 bot "📣 OK. Note that some of these changes require a logout/restart to take effect. Killing affected applications (so they can reboot)...."
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
-  "Dock" "Finder" "Mail" "Messages" "Safari" "SizeUp" "SystemUIServer" \
+  "Dock" "Finder" "Mail" "Messages" "Safari" "SystemUIServer" \
   "iCal" "Terminal"; do
   killall "${app}" > /dev/null 2>&1
 done
 
-################################################################################
-#bot "🔑  FileVault / Experimental"
-################################################################################
-#running "Check and enable full-disk encryption"
-#if fdesetup status | grep $Q -E "FileVault is (On|Off, but will be enabled after the next #restart)."; then
-#  ok
-#elif [ true ]; then
-#  read -r -p "Are your sure you wanna enable FileVault encrytionn? [y|N] " response
-#  if [[ $response =~ (yes|y|Y) ]];then
-#    running "Enabling full-disk encryption on next reboot"
-#    sudo fdesetup enable -user "$USER" \
-  #      | tee ~/Desktop/"FileVault_Recovery_Key.txt"; ok
-#  else
-#    echo "Nothing changed!"
-#  fi
-#else
-#  echo "Run 'sudo fdesetup enable -user \"$USER\"' to enable full-disk encryption."
-#fi
-
+brew update && brew upgrade && brew cleanup
 
 bot "🎉 Woot! All done. Kill this terminal and launch iTerm"

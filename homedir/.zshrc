@@ -35,7 +35,7 @@ plugins=(colorize compleat dirpersist autojump git gulp history cp)
 
 source $ZSH/oh-my-zsh.sh
 
-#source /usr/local/opt/nvm/nvm.sh
+source /usr/local/opt/nvm/nvm.sh --no-use
 
 autoload -U add-zsh-hook
 #load-nvmrc() {
