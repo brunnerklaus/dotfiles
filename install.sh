@@ -1587,6 +1587,10 @@ for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
   killall "${app}" > /dev/null 2>&1
 done
 
+###############################################################################
+# Cleanup                                                #
+###############################################################################
+bot "📣 Cleanup homebrew."
 brew update && brew upgrade && brew cleanup
 
 bot "🎉 Woot! All done. Kill this terminal and launch iTerm"
