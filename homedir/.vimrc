@@ -1,25 +1,7 @@
-"
-"                    ██▒   █▓ ██▓ ███▄ ▄███▓ ██▀███   ▄████▄
-"                   ▓██░   █▒▓██▒▓██▒▀█▀ ██▒▓██ ▒ ██▒▒██▀ ▀█
-"                    ▓██  █▒░▒██▒▓██    ▓██░▓██ ░▄█ ▒▒▓█    ▄
-"                     ▒██ █░░░██░▒██    ▒██ ▒██▀▀█▄  ▒▓▓▄ ▄██▒
-"                      ▒▀█░  ░██░▒██▒   ░██▒░██▓ ▒██▒▒ ▓███▀ ░
-"                      ░ ▐░  ░▓  ░ ▒░   ░  ░░ ▒▓ ░▒▓░░ ░▒ ▒  ░
-"                      ░ ░░   ▒ ░░  ░      ░  ░▒ ░ ▒░  ░  ▒
-"                        ░░   ▒ ░░      ░     ░░   ░ ░
-"                         ░   ░         ░      ░     ░ ░
-"                        ░                           ░
-
-"python3 issue fix https://github.com/vim/vim/issues/3117
-if has('python3')
-  silent! python3 1
-endif
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Must Have
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"colorscheme solarized
-colorscheme zenburn
+colorscheme solarized
 " syntax on " syntax highlighting on
 syntax enable
 let g:solarized_termtrans = 1
@@ -56,9 +38,6 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-surround'
 Plugin 'dkprice/vim-easygrep'
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'tmux-plugins/vim-tmux'
-Plugin 'whatyouhide/vim-gotham'
 " visual undo list
 Plugin 'sjl/gundo.vim'
 " Plugin 'majutsushi/tagbar'
@@ -107,24 +86,36 @@ filetype plugin indent on    " required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" global enable spell check
+"set spell spelllang=en_us   " spell check go to highlighted word and "z=" to see list to turn off set nospell
+setlocal spell spelllang=en_us
+setlocal spellfile=$HOME/.vim-spell-en.utf-8.add
+autocmd BufRead,BufNewFile *.md,*.txt setlocal spell  " enable spell check for certain files
 " set UTF-8 encoding
-set enc=utf-8 "output encoding that is shown in the terminal
-set fenc=utf-8 "output encoding of the file that is written
+set enc=utf-8
+set fenc=utf-8
 set termencoding=utf-8
 set history=1000 " How many lines of history to remember
 set cf " enable error files and error jumping
-" set clipboard+=unnamed " turns out I do like sharing windows clipboard
 set ffs=unix,dos,mac " support all three, in this order
 set viminfo+=! " make sure it can save viminfo
 set isk+=_,$,@,%,# " none of these should be word dividers, so make them not be
 set nosol " leave my cursor where it was
+" yank to clipboard
+if has("clipboard")
+  set clipboard=unnamed " copy to the system clipboard
+
+  if has("unnamedplus") " X11 support
+    set clipboard+=unnamedplus
+  endif
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files/Backups/Sessions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nobackup "no backup files
-set nowb "only in case you don't want a backup file while editing
-set noswapfile "no swap files
+set nobackup
+set nowb
+set noswapfile
 set directory=~/.vim/temp " directory for temp files
 set makeef=error.err " When using make, where should it dump the file
 set sessionoptions+=globals " What should be saved during sessions being saved
@@ -141,12 +132,12 @@ set wildmode=list:longest " turn on wild menu in special format (long format)
 set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,*.swp,*.jpg,*.gif,*.png " ignore formats
 set ruler " Always show current positions along the bottom
 set cmdheight=1 " the command bar is 1 high
-set nonumber " turn on line numbers
+set number " turn on line numbers
 set lz " do not redraw while running macros (much faster) (LazyRedraw)
 set hid " you can change buffer without saving
 set backspace=2 " make backspace work normal
 set whichwrap+=<,>,h,l  " backspace and cursor keys wrap to
-set mouse-=a " don't use mouse everywhere
+set mouse=a " use mouse everywhere
 set shortmess=atI " shortens messages to avoid 'press a key' prompt
 set report=0 " tell us when anything is changed via :...
 set noerrorbells " don't make noise
@@ -158,7 +149,7 @@ set listchars=tab:>-,trail:- " show tabs and trailing whitespace
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set showmatch " show matching brackets
 set mat=5 " how many tenths of a second to blink matching brackets for
-set hlsearch " do highlight searched for phrases
+set nohlsearch " do not highlight searched for phrases
 set incsearch " BUT do highlight as you type you search phrase
 set so=5 " Keep 5 lines (top/bottom) for scope
 set novisualbell " don't blink
@@ -254,21 +245,6 @@ endfunction
 " map <F2> <ESC>ggVG:call SuperRetab()<left>
 " map <F12> ggVGg? " apply rot13 for people snooping over shoulder, good fun
 
-"F3 will open NERDTree panel and highlight current file. And when you're in the NERDTree panel, F3 will open file under cursor. So, I can use one button to jump between buffer and NERDTree. (And F4 for preview because it's next to F3) - via https://stackoverflow.com/questions/10303557/map-f2-to-neerdtreetoggle
-
-" Ctrl-P to Display the file browser tree
-silent! nmap <C-p> :NERDTreeToggle<CR>
-" Toogle between file browser tree and buffer"
-silent! map <F3> :NERDTreeFind<CR>
-
-let g:NERDTreeMapActivateNode="<F3>"
-let g:NERDTreeMapPreview="<F4>"
-
-" nerdcommenter
-" ,/ to invert comment on the current line/selection
-nmap <leader>/ :call NERDComment(0, "invert")<cr>
-vmap <leader>/ :call NERDComment(0, "invert")<cr>
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Useful abbrevs
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -327,16 +303,16 @@ vnoremap <silent> <leader>es :EsformatterVisual<CR>
 " netrw (default installed alt for NERDTree)
 " more info: https://shapeshed.com/vim-netrw/
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 2 " open files in new vertical split
+"let g:netrw_banner = 0
+"let g:netrw_liststyle = 3 " tre style directory listing
+""let g:netrw_browse_split = 2 " open files in new vertical split
 "let g:netrw_browse_split = 4 " open file in previous window
-let g:netrw_altv = 1
-let g:netrw_winsize = 25 " width of dir explorer
-augroup ProjectDrawer
-  autocmd!
-  autocmd VimEnter * :Vexplore
-augroup END
+"let g:netrw_altv = 1
+"let g:netrw_winsize = 25 " width of dir explorer
+"augroup ProjectDrawer
+"  autocmd!
+"  autocmd VimEnter * :Vexplore
+"augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
