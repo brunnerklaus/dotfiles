@@ -526,13 +526,14 @@ bot "🎚️   Optional / Experimental"
 # sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "antic"
 
 #setting up the computer label & name
-read -p "What is this machine's label (Example: Klaus’s MacBook Pro ) ? " mac_os_label
+read -p "What is this machine's label (Example: Klaus’s MacBook Pro) ? " mac_os_label
 if [[ -z "$mac_os_label" ]]; then
   echo "ERROR: Invalid MacOS label."
   exit 1
 fi
 
-read -p "What is this machine's name (Example: Klauss-MacBook-Pro ) ? " mac_os_name
+sudo scutil --get ComputerName
+read -p "What is this machine's name (Example: Klauss-MacBook-Pro) ? " mac_os_name
 if [[ -z "$mac_os_name" ]]; then
   echo "ERROR: Invalid MacOS name."
   exit 1
@@ -1161,7 +1162,8 @@ apm install --production --compatible \
   trailing-spaces \
   pigments \
   zenburn-syntax \
-  atom-gpg
+  atom-gpg \
+  atom-latex
 
 ###############################################################################
 bot "🔍 Spotlight"
