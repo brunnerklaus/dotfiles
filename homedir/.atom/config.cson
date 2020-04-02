@@ -21,10 +21,6 @@
       "atom-beautify"
     ]
     telemetryConsent: "no"
-    themes: [
-      "atom-dark-ui"
-      "zenburn-syntax"
-    ]
   editor:
     softWrap: true
   "file-icons":
@@ -41,5 +37,7 @@
       pigmentsDecorationsZIndex: 0
   "tree-view":
     hideVcsIgnoredFiles: true
+  "unity-ui":
+    showIcons: true
   welcome:
     showOnStartup: false
