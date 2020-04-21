@@ -134,6 +134,7 @@ module.exports = {
     'google-chrome',
     // Manage your GPG Keychain - https://gpgtools.org/
     'gpg-suite',
+    'intel-power-gadget',
     //'ireadfast',
     // Replacement for Terminal and the successor to iTerm - https://www.iterm2.com/
     'iterm2',
@@ -146,6 +147,8 @@ module.exports = {
     // A native OS X KeePass client https://macpassapp.org
     //'macpass',
     'meld',
+    //OS X player for The Hype Machine
+    //'plug',
     'nextcloud',
     'signal',
     //'macvim',
@@ -191,6 +194,10 @@ module.exports = {
     //Numbers
     '409203825',
     //com.apple.dt.Xcode
-    '497799835'
+    '497799835',
+    //Encrypto https://macpaw.com/encrypto
+    '935235287',
+    //Helium https://heliumfloats.com/
+    '1054607607'
   ],
 };
