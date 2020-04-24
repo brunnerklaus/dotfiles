@@ -122,6 +122,7 @@ module.exports = {
     'borgbackup',
     // Get a list of all active short cuts of the current application - https://mediaatelier.com/CheatSheet/
     'cheatsheet',
+    //'coconutbattery',
     //'diffmerge',
     'docker', // docker for mac
     'dropbox',
@@ -134,6 +135,8 @@ module.exports = {
     'google-chrome',
     // Manage your GPG Keychain - https://gpgtools.org/
     'gpg-suite',
+    // The modern media player for macOS - https://iina.io/
+    'iina',
     'intel-power-gadget',
     //'ireadfast',
     // Replacement for Terminal and the successor to iTerm - https://www.iterm2.com/
@@ -144,13 +147,17 @@ module.exports = {
     //'java',
     //'kitematic',
     'jumpcut',
+    // the macOS file archiver - https://www.keka.io/en/
+    'keka',
     // A native OS X KeePass client https://macpassapp.org
     //'macpass',
     'meld',
     //OS X player for The Hype Machine
     //'plug',
     'nextcloud',
+    'rectangle',
     'signal',
+    'spotify',
     //'macvim',
     // Powerful, keyboard-centric window management - http://www.irradiatedsoftware.com/sizeup/
     //'sizeup',
@@ -159,13 +166,13 @@ module.exports = {
     // A sophisticated text editor for code, markup and prose - https://www.sublimetext.com
     //'sublime',
     // Free Unarchiving Software for macOS - https://theunarchiver.com/
-    'the-unarchiver',
+    //'the-unarchiver', replaced with keka
     'thunderbird',
     'tunnelblick',
     'torbrowser',
     //'transmission',
     //'visual-studio-code',
-    'vlc',
+    //'vlc',
     //'virtualbox',
     //'xquartz'
   ],
