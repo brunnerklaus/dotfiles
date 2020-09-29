@@ -276,12 +276,12 @@ if [[ $response =~ (y|yes|Y) ]];then
   vim +PluginInstall +qall > /dev/null 2>&1
   ok
 else
-  ok "skipped. Install by running :PluginInstall within vim"
+  ok "Skipped. Install by running :PluginInstall within vim"
 fi
 
 read -r -p "Install fonts? [y|N] " response
 if [[ $response =~ (y|yes|Y) ]];then
-  bot "installing fonts"
+  bot "Installing fonts"
   # need fontconfig to install/build fonts
   require_brew fontconfig
   ./fonts/install.sh
@@ -296,6 +296,8 @@ if [[ $response =~ (y|yes|Y) ]];then
   require_cask font-roboto-mono-for-powerline
   require_cask font-source-code-pro
   ok
+else
+  ok "Skipped font install"
 fi
 
 
@@ -322,19 +324,19 @@ npm config set save-exact true
 #####################################
 
 ###############################################################################
-bot "installing npm tools needed to run this project..."
+#bot "Installing npm tools needed to run this project..."
 ###############################################################################
-npm install
-ok
+#npm install
+#ok
 
 ###############################################################################
-bot "installing packages from config.js..."
+bot "Installing packages from config.js..."
 ###############################################################################
 node index.js
 ok
 
 ###############################################################################
-running "cleanup homebrew"
+running "Cleanup homebrew"
 ###############################################################################
 brew cleanup --force > /dev/null 2>&1
 rm -f -r /Library/Caches/Homebrew/* > /dev/null 2>&1
@@ -1592,7 +1594,7 @@ done
 ###############################################################################
 # Cleanup                                                #
 ###############################################################################
-bot "📣 Cleanup homebrew."
+bot "📣 Cleanup homebrew"
 brew update && brew upgrade && brew cleanup
 
 bot "🎉 Woot! All done. Kill this terminal and launch iTerm"

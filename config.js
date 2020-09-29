@@ -149,6 +149,7 @@ module.exports = {
     'jumpcut',
     // the macOS file archiver - https://www.keka.io/en/
     'keka',
+    'p7zip', //dependencies for keka
     // A native OS X KeePass client https://macpassapp.org
     //'macpass',
     'meld',
