@@ -16,7 +16,7 @@ bot "💡 Hi! I'm going to install tooling and tweak your system settings. Here 
 # Do we need to ask for sudo password or is it already passwordless?
 grep -q 'NOPASSWD:     ALL' /etc/sudoers.d/$LOGNAME > /dev/null 2>&1
 if [ $? -ne 0 ]; then
-  echo "no suder file"
+  echo "no sudoers file"
   sudo -v
 
   # Keep-alive: update existing sudo time stamp until the script has finished
