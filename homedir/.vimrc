@@ -132,15 +132,16 @@ set wildmode=list:longest " turn on wild menu in special format (long format)
 set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,*.swp,*.jpg,*.gif,*.png " ignore formats
 set ruler " Always show current positions along the bottom
 set cmdheight=1 " the command bar is 1 high
-set number " turn on line numbers
+"set number " turn on line numbers
 set lz " do not redraw while running macros (much faster) (LazyRedraw)
 set hid " you can change buffer without saving
 set backspace=2 " make backspace work normal
 set whichwrap+=<,>,h,l  " backspace and cursor keys wrap to
-set mouse=a " use mouse everywhere
+set mouse-=a " use mouse everywhere
 set shortmess=atI " shortens messages to avoid 'press a key' prompt
 set report=0 " tell us when anything is changed via :...
 set noerrorbells " don't make noise
+set belloff=all " don't make noise
 set list " we do what to show tabs, to ensure we get them out of my files
 set listchars=tab:>-,trail:- " show tabs and trailing whitespace
 
