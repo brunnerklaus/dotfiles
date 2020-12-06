@@ -22,34 +22,34 @@ if [ $? -ne 0 ]; then
   # Keep-alive: update existing sudo time stamp until the script has finished
   while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-  bot "Do you want me to setup this machine to allow you to run sudo without a password?\nPlease read here to see what I am doing:\nhttp://wiki.summercode.com/sudo_without_a_password_in_mac_os_x \n"
-
-  read -r -p "Make sudo passwordless? [y|N] " response
-
-  if [[ $response =~ (yes|y|Y) ]];then
-      if ! grep -q "#includedir /private/etc/sudoers.d" /etc/sudoers; then
-        echo '#includedir /private/etc/sudoers.d' | sudo tee -a /etc/sudoers > /dev/null
-      fi
-      echo -e "Defaults:$LOGNAME    !requiretty\n$LOGNAME ALL=(ALL) NOPASSWD:     ALL" | sudo tee /etc/sudoers.d/$LOGNAME
-      echo "You can now run sudo commands without password!"
-  fi
+  # bot "Do you want me to setup this machine to allow you to run sudo without a password?\nPlease read here to see what I am doing:\nhttp://wiki.summercode.com/sudo_without_a_password_in_mac_os_x \n"
+  #
+  # read -r -p "Make sudo passwordless? [y|N] " response
+  #
+  # if [[ $response =~ (yes|y|Y) ]];then
+  #     if ! grep -q "#includedir /private/etc/sudoers.d" /etc/sudoers; then
+  #       echo '#includedir /private/etc/sudoers.d' | sudo tee -a /etc/sudoers > /dev/null
+  #     fi
+  #     echo -e "Defaults:$LOGNAME    !requiretty\n$LOGNAME ALL=(ALL) NOPASSWD:     ALL" | sudo tee /etc/sudoers.d/$LOGNAME
+  #     echo "You can now run sudo commands without password!"
+  # fi
 fi
 
 # ###########################################################
 # /etc/hosts -- spyware/ad blocking
 # ###########################################################
-read -r -p "Overwrite /etc/hosts with the ad-blocking hosts file from someonewhocares.org? (from ./configs/hosts file) [y|N] " response
-if [[ $response =~ (yes|y|Y) ]];then
-    action "cp /etc/hosts /etc/hosts.backup"
-    sudo cp /etc/hosts /etc/hosts.backup
-    ok
-    action "cp ./configs/hosts /etc/hosts"
-    sudo cp ./configs/hosts /etc/hosts
-    ok
-    bot "Your /etc/hosts file has been updated. Last version is saved in /etc/hosts.backup"
-else
-    ok "skipped";
-fi
+# read -r -p "Overwrite /etc/hosts with the ad-blocking hosts file from someonewhocares.org? (from ./configs/hosts file) [y|N] " response
+# if [[ $response =~ (yes|y|Y) ]];then
+#     action "cp /etc/hosts /etc/hosts.backup"
+#     sudo cp /etc/hosts /etc/hosts.backup
+#     ok
+#     action "cp ./configs/hosts /etc/hosts"
+#     sudo cp ./configs/hosts /etc/hosts
+#     ok
+#     bot "Your /etc/hosts file has been updated. Last version is saved in /etc/hosts.backup"
+# else
+#     ok "skipped";
+# fi
 
 # ###########################################################
 # Git Config
@@ -128,30 +128,30 @@ fi
 # ###########################################################
 # Wallpaper
 # ###########################################################
-MD5_NEWWP=$(md5 img/wallpaper.jpg | awk '{print $4}')
-MD5_OLDWP=$(md5 /System/Library/CoreServices/DefaultBackground.jpg | awk '{print $4}')
-if [[ "$MD5_NEWWP" != "$MD5_OLDWP" ]]; then
-  read -r -p "Do you want to use the project's custom desktop wallpaper? [y|N] " response
-  if [[ $response =~ (yes|y|Y) ]]; then
-    running "Set a custom wallpaper image"
-    # rm -rf ~/Library/Application Support/Dock/desktoppicture.db
-    bot "I will backup system wallpapers in ~/.dotfiles/img/"
-    sudo cp /System/Library/CoreServices/DefaultDesktop.jpg img/DefaultDesktop.jpg > /dev/null 2>&1
-    sudo cp /Library/Desktop\ Pictures/El\ Capitan.jpg img/El\ Capitan.jpg > /dev/null 2>&1
-    sudo cp /Library/Desktop\ Pictures/Sierra.jpg img/Sierra.jpg > /dev/null 2>&1
-    sudo cp /Library/Desktop\ Pictures/Sierra\ 2.jpg img/Sierra\ 2.jpg > /dev/null 2>&1
-    sudo rm -f /System/Library/CoreServices/DefaultDesktop.jpg > /dev/null 2>&1
-    sudo rm -f /Library/Desktop\ Pictures/El\ Capitan.jpg > /dev/null 2>&1
-    sudo rm -f /Library/Desktop\ Pictures/Sierra.jpg > /dev/null 2>&1
-    sudo rm -f /Library/Desktop\ Pictures/Sierra\ 2.jpg > /dev/null 2>&1
-    sudo cp ./img/wallpaper.jpg /System/Library/CoreServices/DefaultDesktop.jpg;
-    sudo cp ./img/wallpaper.jpg /Library/Desktop\ Pictures/Sierra.jpg;
-    sudo cp ./img/wallpaper.jpg /Library/Desktop\ Pictures/Sierra\ 2.jpg;
-    sudo cp ./img/wallpaper.jpg /Library/Desktop\ Pictures/El\ Capitan.jpg;ok
-  else
-    ok "skipped"
-  fi
-fi
+# MD5_NEWWP=$(md5 img/wallpaper.jpg | awk '{print $4}')
+# MD5_OLDWP=$(md5 /System/Library/CoreServices/DefaultBackground.jpg | awk '{print $4}')
+# if [[ "$MD5_NEWWP" != "$MD5_OLDWP" ]]; then
+#   read -r -p "Do you want to use the project's custom desktop wallpaper? [y|N] " response
+#   if [[ $response =~ (yes|y|Y) ]]; then
+#     running "Set a custom wallpaper image"
+#     # rm -rf ~/Library/Application Support/Dock/desktoppicture.db
+#     bot "I will backup system wallpapers in ~/.dotfiles/img/"
+#     sudo cp /System/Library/CoreServices/DefaultDesktop.jpg img/DefaultDesktop.jpg > /dev/null 2>&1
+#     sudo cp /Library/Desktop\ Pictures/El\ Capitan.jpg img/El\ Capitan.jpg > /dev/null 2>&1
+#     sudo cp /Library/Desktop\ Pictures/Sierra.jpg img/Sierra.jpg > /dev/null 2>&1
+#     sudo cp /Library/Desktop\ Pictures/Sierra\ 2.jpg img/Sierra\ 2.jpg > /dev/null 2>&1
+#     sudo rm -f /System/Library/CoreServices/DefaultDesktop.jpg > /dev/null 2>&1
+#     sudo rm -f /Library/Desktop\ Pictures/El\ Capitan.jpg > /dev/null 2>&1
+#     sudo rm -f /Library/Desktop\ Pictures/Sierra.jpg > /dev/null 2>&1
+#     sudo rm -f /Library/Desktop\ Pictures/Sierra\ 2.jpg > /dev/null 2>&1
+#     sudo cp ./img/wallpaper.jpg /System/Library/CoreServices/DefaultDesktop.jpg;
+#     sudo cp ./img/wallpaper.jpg /Library/Desktop\ Pictures/Sierra.jpg;
+#     sudo cp ./img/wallpaper.jpg /Library/Desktop\ Pictures/Sierra\ 2.jpg;
+#     sudo cp ./img/wallpaper.jpg /Library/Desktop\ Pictures/El\ Capitan.jpg;ok
+#   else
+#     ok "skipped"
+#   fi
+# fi
 
 
 # ###########################################################
@@ -334,6 +334,42 @@ bot "Installing packages from config.js..."
 ###############################################################################
 node index.js
 ok
+
+###############################################################################
+bot "📋 Configure Atom editor packages"
+###############################################################################
+
+running "Installing Atom Community Packages"
+printf "\n"
+apm install --production --compatible \
+  Sublime-Style-Column-Selection \
+  ask-stack \
+  atom-beautify \
+  atom-ide-ui \
+  atom-yamljson \
+  file-icons \
+  highlight-selected \
+  language-docker \
+  language-liquid \
+  minimap \
+  minimap-pigments \
+  minimap-find-and-replace \
+  minimap-git-diff \
+  minimap-highlight-selected \
+  sort-lines \
+  git-log \
+  git-blame \
+  git-time-machine \
+  tree-view-git-status \
+  merge-conflicts \
+  linter-jshint \
+  linter \
+  unity-ui \
+  trailing-spaces \
+  pigments \
+  zenburn-syntax \
+  atom-gpg \
+  atom-latex
 
 ###############################################################################
 running "Cleanup homebrew"
@@ -597,8 +633,8 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true;ok
 ################################################
 bot "🎛   Standard System Changes"
 ################################################
-running "Always boot in verbose mode (not MacOS GUI mode)"
-sudo nvram boot-args="-v";ok
+# running "Always boot in verbose mode (not MacOS GUI mode)"
+# sudo nvram boot-args="-v";ok
 
 running "Allow 'locate' command"
 sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist > /dev/null 2>&1;ok
@@ -606,8 +642,8 @@ sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist > /d
 running "Set standby delay to 24 hours (default is 1 hour)"
 sudo pmset -a standbydelay 86400;ok
 
-running "Disable the sound effects on boot"
-sudo nvram SystemAudioVolume=" ";ok
+# running "Disable the sound effects on boot"
+# sudo nvram SystemAudioVolume=" ";ok
 
 running "Menu bar: disable transparency"
 defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false;ok
@@ -685,8 +721,8 @@ sudo systemsetup -setrestartfreeze on;ok
 running "Never go into computer sleep mode"
 sudo systemsetup -setcomputersleep Off > /dev/null;ok
 
-running "Check for software updates daily, not just once per week"
-defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1;ok
+# running "Check for software updates daily, not just once per week"
+# defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1;ok
 
 # running "Disable Notification Center and remove the menu bar icon"
 # launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist > /dev/null 2>&1;ok
@@ -843,8 +879,8 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true;ok
 running "Show status bar"
 defaults write com.apple.finder ShowStatusBar -bool true;ok
 
-running "Hide path bar"
-defaults write com.apple.finder ShowPathbar -bool false;ok
+running "Show path bar"
+defaults write com.apple.finder ShowPathbar -bool true;ok
 
 running "Allow text selection in Quick Look"
 defaults write com.apple.finder QLEnableTextSelection -bool true;ok
@@ -881,8 +917,8 @@ running "Use list view in all Finder windows by default"
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv";ok
 
-running "Disable the warning before emptying the Trash"
-defaults write com.apple.finder WarnOnEmptyTrash -bool true;ok
+running "Enable the warning before emptying the Trash"
+defaults write com.apple.finder WarnOnEmptyTrash -bool false;ok
 
 running "Empty Trash securely by default"
 defaults write com.apple.finder EmptyTrashSecurely -bool true;ok
@@ -1131,41 +1167,9 @@ defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnab
 
 ###############################################################################
 bot "📋 Configure Atom editor"
-#########################it######################################################
+###############################################################################
 running "Set Atom as default editor"
 defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType=public.plain-text;LSHandlerRoleAll=com.github.atom;}';ok
-
-running "Installing Atom Community Packages"
-printf "\n"
-apm install --production --compatible \
-  Sublime-Style-Column-Selection \
-  ask-stack \
-  atom-beautify \
-  atom-ide-ui \
-  atom-yamljson \
-  file-icons \
-  highlight-selected \
-  language-docker \
-  language-liquid \
-  minimap \
-  minimap-pigments \
-  minimap-find-and-replace \
-  minimap-git-diff \
-  minimap-highlight-selected \
-  sort-lines \
-  git-log \
-  git-blame \
-  git-time-machine \
-  tree-view-git-status \
-  merge-conflicts \
-  linter-jshint \
-  linter \
-  unity-ui \
-  trailing-spaces \
-  pigments \
-  zenburn-syntax \
-  atom-gpg \
-  atom-latex
 
 ###############################################################################
 bot "🔍 Spotlight"

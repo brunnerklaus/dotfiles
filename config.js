@@ -93,11 +93,11 @@ module.exports = {
     // Terminal multiplexer - https://github.com/tmux/tmux
     'tmux',
     // If you want to get it done, first write it down - http://todotxt.org/
-    'todo-txt',
+    //'todo-txt',
     // Recursive directory listing command - http://mama.indstate.edu/users/ice/tree/
     'tree',
     // Terminal interaction recorder and player - http://0xcc.net/ttyrec/
-    'ttyrec',
+    //'ttyrec',
     // better, more recent vim
     'vim --with-client-server --with-override-system-vi',
     // Command line and full screen utilities for browsing procfs - https://gitlab.com/procps-ng/procps
@@ -114,12 +114,13 @@ module.exports = {
     //'adium',
     //'amazon-cloud-drive',
     'atom',
+    'aws-vault',
     // Padbury Clock
     //'padbury-clock',
     // 'box-sync',
     //'comicbooklover',
     // https://github.com/borgbackup/borgbackup.github.io
-    'borgbackup',
+    //'borgbackup',
     // Get a list of all active short cuts of the current application - https://mediaatelier.com/CheatSheet/
     'cheatsheet',
     //'coconutbattery',
@@ -128,8 +129,8 @@ module.exports = {
     'dropbox',
     //'evernote',
     // f.lux - https://justgetflux.com
-    'flux',
-    'filezilla',
+    //'flux',
+    //'filezilla',
     'firefox',
     //'gitkraken',
     'google-chrome',
@@ -137,7 +138,7 @@ module.exports = {
     'gpg-suite',
     // The modern media player for macOS - https://iina.io/
     'iina',
-    'intel-power-gadget',
+    //'intel-power-gadget',
     //'ireadfast',
     // Replacement for Terminal and the successor to iTerm - https://www.iterm2.com/
     'iterm2',
@@ -170,7 +171,7 @@ module.exports = {
     //'the-unarchiver', replaced with keka
     'thunderbird',
     'tunnelblick',
-    'torbrowser',
+    //'torbrowser',
     //'transmission',
     //'visual-studio-code',
     //'vlc',

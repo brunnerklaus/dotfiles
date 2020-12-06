@@ -33,6 +33,9 @@ export DISABLE_AUTO_TITLE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(colorize compleat dirpersist autojump git gulp history cp)
 
+#Ignore permissions and load teh completion normallly
+ZSH_DISABLE_COMPFIX=true
+
 source $ZSH/oh-my-zsh.sh
 
 source /usr/local/opt/nvm/nvm.sh --no-use
