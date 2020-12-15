@@ -54,7 +54,7 @@ fi
 # ###########################################################
 # Git Config
 # ###########################################################
-bot "OK, now I am going to update the .gitconfig for your user info:"
+bot "📣OK, now I am going to update the .gitconfig for your user info:"
 grep 'user = GITHUBUSER' ./homedir/.gitconfig > /dev/null 2>&1
 if [[ $? = 0 ]]; then
     read -r -p "What is your git username? " githubuser
@@ -87,7 +87,7 @@ if [[ $? = 0 ]]; then
   fi
   fullname="$firstname $lastname"
 
-  bot "Great $fullname, "
+  bot "📣Great $fullname, "
 
   if [[ ! $email ]]; then
     response='n'
@@ -119,7 +119,7 @@ if [[ $? = 0 ]]; then
     ok
   else
     echo
-    bot "looks like you are already using gnu-sed. woot!"
+    bot "📣looks like you are already using gnu-sed. woot!"
     sed -i 's/GITHUBEMAIL/'$email'/' ./homedir/.gitconfig
     sed -i 's/GITHUBUSER/'$githubuser'/' ./homedir/.gitconfig
   fi
@@ -158,7 +158,7 @@ fi
 # Install non-brew various tools (PRE-BREW Installs)
 # ###########################################################
 
-bot "ensuring build/install tools are available"
+bot "📣ensuring build/install tools are available"
 if ! xcode-select --print-path &> /dev/null; then
 
     # Prompt user to install the XCode Command Line Tools
@@ -244,7 +244,7 @@ else
 fi
 
 
-bot "Dotfiles Setup"
+bot "🗜 Dotfiles Setup"
 read -r -p "symlink ./homedir/* files in ~/ (these are the dotfiles)? [y|N] " response
 if [[ $response =~ (y|yes|Y) ]]; then
   bot "creating symlinks for project dotfiles..."
@@ -273,7 +273,7 @@ if [[ $response =~ (y|yes|Y) ]]; then
 fi
 
 
-bot "VIM Setup"
+bot "🎺 VIM Setup"
 read -r -p "Do you want to install vim plugins now? [y|N] " response
 if [[ $response =~ (y|yes|Y) ]];then
   bot "Installing vim plugins"
@@ -287,7 +287,7 @@ fi
 
 read -r -p "Install fonts? [y|N] " response
 if [[ $response =~ (y|yes|Y) ]];then
-  bot "Installing fonts"
+  bot "🎹 Installing fonts"
   # need fontconfig to install/build fonts
   require_brew fontconfig
   ./fonts/install.sh
@@ -336,7 +336,7 @@ npm config set save-exact true
 #ok
 
 ###############################################################################
-bot "Installing packages from config.js..."
+bot "🎬 Installing packages from config.js..."
 ###############################################################################
 node index.js
 ok
@@ -357,11 +357,13 @@ apm install --production --compatible \
   highlight-selected \
   language-docker \
   language-liquid \
+  language-terraform \
   minimap \
   minimap-pigments \
   minimap-find-and-replace \
   minimap-git-diff \
   minimap-highlight-selected \
+  open-this \
   sort-lines \
   git-log \
   git-blame \
@@ -560,7 +562,7 @@ running "Disable the sudden motion sensor as it’s not useful for SSDs"
 sudo pmset -a sms 0;ok
 
 ################################################
-bot "🎚️   Optional / Experimental"
+bot "🎚️ Optional / Experimental"
 ################################################
 
 # running "Set computer name (as done via System Preferences → Sharing)"
@@ -637,7 +639,7 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true;ok
 
 
 ################################################
-bot "🎛   Standard System Changes"
+bot "🎛 Standard System Changes"
 ################################################
 # running "Always boot in verbose mode (not MacOS GUI mode)"
 # sudo nvram boot-args="-v";ok
@@ -770,7 +772,7 @@ running "Tracking Speed: from 0 to 3"
 defaults write -g com.apple.trackpad.scaling -float 0;ok
 
 ###############################################################################
-bot "⌨️   Keyboard, Bluetooth accessories, and input"
+bot "🕹 Keyboard, Bluetooth accessories, and input"
 ###############################################################################
 
 running "Enable 'natural' (Lion-style) scrolling"
@@ -818,7 +820,7 @@ defaults write "Apple Global Domain" "com.apple.keyboard.fnState" "1";ok ## F1 F
 #defaults write "Apple Global Domain" "com.apple.keyboard.fnState" "0" ## Brightness/Media
 
 ###############################################################################
-bot "🖱️  Configuring the Mouse"
+bot "🖱️ Configuring the Mouse"
 ###############################################################################
 
 running "Disable mouse acceleration "
@@ -831,7 +833,7 @@ runnign "Enable swipe with one single finger gesture to go back while browsing"
 defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseOneFingerDoubleTapGesture 1;ok
 
 ###############################################################################
-bot "📺 Configuring the Screen"
+bot "🖥 Configuring the Screen"
 ###############################################################################
 
 running "Require password immediately after sleep or screen saver begins"
@@ -1147,7 +1149,7 @@ defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true;ok
 #defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true;ok
 
 ###############################################################################
-bot "✉️   Configuring Mail"
+bot "📧 Configuring Mail"
 ###############################################################################
 
 running "Disable send and reply animations in Mail.app"
@@ -1289,9 +1291,6 @@ defaults write com.apple.terminal SecureKeyboardEntry -bool true;ok
 running "Disable the annoying line marks"
 defaults write com.apple.Terminal ShowLineMarks -int 0;ok
 
-running "Install the Solarized Dark theme for iTerm"
-open "${HOME}/init/Solarized Dark.itermcolors";ok
-
 running "Don’t display the annoying prompt when quitting iTerm"
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false;ok
 
@@ -1304,6 +1303,9 @@ running "Installing the Solarized Light theme for iTerm (opening file)"
 open "./configs/Solarized Light.itermcolors";ok
 
 running "Installing the Patched Solarized Dark theme for iTerm (opening file)"
+open "./configs/Solarized Dark.itermcolors";ok
+
+running "Installing the Patched Solarized Dark Patch theme for iTerm (opening file)"
 open "./configs/Solarized Dark Patch.itermcolors";ok
 
 running "Don’t display the annoying prompt when quitting iTerm"
@@ -1490,7 +1492,7 @@ running "Prevent Photos from opening automatically when devices are plugged in"
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true;ok
 
 ###############################################################################
-bot "✉️   Messages"
+bot "📨 Messages"
 ###############################################################################
 
 #running "Disable automatic emoji substitution (i.e. use plain text smileys)"
@@ -1556,40 +1558,40 @@ defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true;ok
 #running "Install Sublime Text settings"
 #cp -r init/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
 
-###############################################################################
-bot "🔧 Set Dock items"
-###############################################################################
-OLDIFS=$IFS
-IFS=''
-
-apps=(
-  Launchpad
-  'System Preferences'
-  iTerm
-  Atom
-  Safari
-  Calendar
-  Notes
-  Firefox
-  Thunderbird
-  KeePassX
-  Signal
-  'Keychain Access'
-)
-
-running "Removing all dock icons"
-dockutil --no-restart --remove all $HOME;ok
-for app in "${apps[@]}"
-do
-  echo "Keeping $app in Dock"
-  dockutil --no-restart --add /Applications/$app.app $HOME;ok
-done
-
-running "Restarting Dock"
-killall Dock
-
-# restore $IFS
-IFS=$OLDIFS
+# ###############################################################################
+# bot "🔧 Set Dock items"
+# ###############################################################################
+# OLDIFS=$IFS
+# IFS=''
+#
+# apps=(
+#   Launchpad
+#   'System Preferences'
+#   iTerm
+#   Atom
+#   Safari
+#   Calendar
+#   Notes
+#   Firefox
+#   Thunderbird
+#   KeePassX
+#   Signal
+#   'Keychain Access'
+# )
+#
+# running "Removing all dock icons"
+# dockutil --no-restart --remove all $HOME;ok
+# for app in "${apps[@]}"
+# do
+#   echo "Keeping $app in Dock"
+#   dockutil --no-restart --add /Applications/$app.app $HOME;ok
+# done
+#
+# running "Restarting Dock"
+# killall Dock
+#
+# # restore $IFS
+# IFS=$OLDIFS
 
 ###############################################################################
 # Kill affected applications                                                  #

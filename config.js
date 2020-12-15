@@ -157,6 +157,7 @@ module.exports = {
     //OS X player for The Hype Machine
     //'plug',
     'nextcloud',
+    //'phpstorm',
     'rectangle',
     'signal',
     'spotify',
