@@ -24,7 +24,7 @@ export TZ=Africa/Nairobi
 export XDG_CONFIG_HOME="$HOME/.config"
 
 #source virtualenvwrapper.sh
-source ~/.git-prompt.sh
+#source ~/.git-prompt.sh
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return

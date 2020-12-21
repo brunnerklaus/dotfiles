@@ -54,7 +54,7 @@ fi
 # ###########################################################
 # Git Config
 # ###########################################################
-bot "📣OK, now I am going to update the .gitconfig for your user info:"
+bot "📣 OK, now I am going to update the .gitconfig for your user info:"
 grep 'user = GITHUBUSER' ./homedir/.gitconfig > /dev/null 2>&1
 if [[ $? = 0 ]]; then
     read -r -p "What is your git username? " githubuser
@@ -87,7 +87,7 @@ if [[ $? = 0 ]]; then
   fi
   fullname="$firstname $lastname"
 
-  bot "📣Great $fullname, "
+  bot "📣 Great $fullname, "
 
   if [[ ! $email ]]; then
     response='n'
@@ -105,21 +105,21 @@ if [[ $? = 0 ]]; then
   fi
 
 
-  running "replacing items in .gitconfig with your info ($COL_YELLOW$fullname, $email, $githubuser$COL_RESET)"
+  running "Replacing items in .gitconfig with your info ($COL_YELLOW$fullname, $email, $githubuser$COL_RESET)"
 
   # test if gnu-sed or MacOS sed
 
   sed -i "s/GITHUBFULLNAME/$firstname $lastname/" ./homedir/.gitconfig > /dev/null 2>&1 | true
   if [[ ${PIPESTATUS[0]} != 0 ]]; then
     echo
-    running "looks like you are using MacOS sed rather than gnu-sed, accommodating"
+    running "Looks like you are using MacOS sed rather than gnu-sed, accommodating"
     sed -i '' "s/GITHUBFULLNAME/$firstname $lastname/" ./homedir/.gitconfig
     sed -i '' 's/GITHUBEMAIL/'$email'/' ./homedir/.gitconfig
     sed -i '' 's/GITHUBUSER/'$githubuser'/' ./homedir/.gitconfig
     ok
   else
     echo
-    bot "📣looks like you are already using gnu-sed. woot!"
+    bot "📣 Looks like you are already using gnu-sed. woot!"
     sed -i 's/GITHUBEMAIL/'$email'/' ./homedir/.gitconfig
     sed -i 's/GITHUBUSER/'$githubuser'/' ./homedir/.gitconfig
   fi
@@ -158,7 +158,7 @@ fi
 # Install non-brew various tools (PRE-BREW Installs)
 # ###########################################################
 
-bot "📣ensuring build/install tools are available"
+bot "📣 Ensuring build/install tools are available"
 if ! xcode-select --print-path &> /dev/null; then
 
     # Prompt user to install the XCode Command Line Tools
@@ -171,7 +171,7 @@ if ! xcode-select --print-path &> /dev/null; then
         sleep 5
     done
 
-    print_result $? ' XCode Command Line Tools Installed'
+    print_result $? 'XCode Command Line Tools Installed'
 
     # Prompt user to agree to the terms of the Xcode license
     # https://github.com/alrra/dotfiles/issues/10
@@ -185,46 +185,58 @@ fi
 # ###########################################################
 # install homebrew (CLI Packages)
 # ###########################################################
-running "checking homebrew..."
+running "Checking homebrew..."
 brew_bin=$(which brew) 2>&1 > /dev/null
 if [[ $? != 0 ]]; then
-  action "installing homebrew"
+  action "Installing homebrew"
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   if [[ $? != 0 ]]; then
-    error "unable to install homebrew, script $0 abort!"
+    error "Unable to install homebrew, script $0 abort!"
     exit 2
   fi
   brew analytics off
 else
   ok
   bot "Homebrew"
-  read -r -p "run brew update && upgrade? [y|N] " response
+  read -r -p "Run brew update && upgrade? [y|N] " response
   if [[ $response =~ (y|yes|Y) ]]; then
-    action "updating homebrew..."
+    action "Updating homebrew..."
     brew update
-    ok "homebrew updated"
-    action "upgrading brew packages..."
+    ok "Homebrew updated"
+    action "Upgrading brew packages..."
     brew upgrade
-    ok "brews upgraded"
+    ok "Brews upgraded"
   else
-    ok "skipped brew package upgrades."
+    ok "Skipped brew package upgrades."
   fi
 fi
 
+bot "Brew doctor"
 # Just to avoid a potential bug
 mkdir -p ~/Library/Caches/Homebrew/Formula
 brew doctor
 
+# bot "Brew cleanup"
+# brew cleanup
+
+bot "Install ZSH dependencies"
 # skip those GUI clients, git command-line all the way
 require_brew git
-# update zsh to latest
+# update zsh to latest and install plugins
 require_brew zsh
+require_brew zsh-completions
+require_brew zsh-history-substring-search
+require_brew zsh-navigation-tools
+require_brew zsh-autosuggestions
+require_brew zsh-git-prompt
+require_brew zsh-lovers
+
 # update ruby to latest
 # use versions of packages installed with homebrew
 RUBY_CONFIGURE_OPTS="--with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline` --with-libyaml-dir=`brew --prefix libyaml`"
 require_brew ruby
 
-bot "🎺 ZSH Setup"
+bot "ZSH Setup"
 # set zsh as the user login shell
 CURRENTSHELL=$(dscl . -read /Users/$USER UserShell | awk '{print $2}')
 if [[ "$CURRENTSHELL" != "/usr/local/bin/zsh" ]]; then
@@ -235,16 +247,29 @@ if [[ "$CURRENTSHELL" != "/usr/local/bin/zsh" ]]; then
   ok
 fi
 
-bot "🎺 Powerlevel10k Setup"
-## via https://github.com/romkatv/powerlevel10k
-if [[ ! -d "./oh-my-zsh/custom/themes/powerlevel10k" ]]; then
-  git clone https://github.com/romkatv/powerlevel10k.git oh-my-zsh/custom/themes/powerlevel10k
-else
-  git pull oh-my-zsh/custom/themes/powerlevel10k
+# bot "ZSH Powerlevel10k Setup"
+# # via https://github.com/romkatv/powerlevel10k
+# if [[ ! -d "$ZSH_CUSTOM/custom/themes/powerlevel10k" ]]; then
+#   git clone https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/custom/themes/powerlevel10k"
+# else
+#   git pull "$ZSH_CUSTOM/custom/themes/powerlevel10k"
+# fi
+
+bot "ZSH Spaceship theme"
+if [[ ! -d "oh-my-zsh/custom/themes/spaceship-prompt" ]]; then
+git clone https://github.com/denysdovhan/spaceship-prompt.git "oh-my-zsh/custom/themes/spaceship-prompt"
+ln -s "oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" "oh-my-zsh/custom/themes/spaceship.zsh-theme"
 fi
 
+# bot "ZSH autosuggestions"
+# # https://github.com/zsh-users/zsh-autosuggestions
+# if [[ ! -d "$ZSH_CUSTOM/themes/spaceship-prompt" ]]; then
+# git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+# else
+#   git pull "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+# fi
 
-bot "🗜 Dotfiles Setup"
+bot "🗜  Dotfiles Setup"
 read -r -p "symlink ./homedir/* files in ~/ (these are the dotfiles)? [y|N] " response
 if [[ $response =~ (y|yes|Y) ]]; then
   bot "creating symlinks for project dotfiles..."
@@ -301,11 +326,11 @@ if [[ $response =~ (y|yes|Y) ]];then
   require_cask font-roboto-mono
   require_cask font-roboto-mono-for-powerline
   require_cask font-source-code-pro
+  require_cask font-hack-nerd-font
   ok
 else
   ok "Skipped font install"
 fi
-
 
 # if [[ -d "/Library/Ruby/Gems/2.0.0" ]]; then
 #   running "Fixing Ruby Gems Directory Permissions"
@@ -332,8 +357,8 @@ npm config set save-exact true
 ###############################################################################
 #bot "Installing npm tools needed to run this project..."
 ###############################################################################
-#npm install
-#ok
+npm install
+ok
 
 ###############################################################################
 bot "🎬 Installing packages from config.js..."
@@ -345,39 +370,44 @@ ok
 bot "📋 Configure Atom editor packages"
 ###############################################################################
 
-running "Installing Atom Community Packages"
-printf "\n"
-apm install --production --compatible \
-  Sublime-Style-Column-Selection \
-  ask-stack \
-  atom-beautify \
-  atom-ide-ui \
-  atom-yamljson \
-  file-icons \
-  highlight-selected \
-  language-docker \
-  language-liquid \
-  language-terraform \
-  minimap \
-  minimap-pigments \
-  minimap-find-and-replace \
-  minimap-git-diff \
-  minimap-highlight-selected \
-  open-this \
-  sort-lines \
-  git-log \
-  git-blame \
-  git-time-machine \
-  tree-view-git-status \
-  merge-conflicts \
-  linter-jshint \
-  linter \
-  unity-ui \
-  trailing-spaces \
-  pigments \
-  zenburn-syntax \
-  atom-gpg \
-  atom-latex
+bot "Install Atom Community Packages?"
+read -r -p "Do you want to install Atom Community Packages now? [y|N] " response
+if [[ $response =~ (y|yes|Y) ]]; then
+  printf "\n"
+  apm install --production --compatible \
+    Sublime-Style-Column-Selection \
+    ask-stack \
+    atom-beautify \
+    atom-ide-ui \
+    atom-yamljson \
+    file-icons \
+    highlight-selected \
+    language-docker \
+    language-liquid \
+    language-terraform \
+    minimap \
+    minimap-pigments \
+    minimap-find-and-replace \
+    minimap-git-diff \
+    minimap-highlight-selected \
+    open-this \
+    sort-lines \
+    git-log \
+    git-blame \
+    git-time-machine \
+    tree-view-git-status \
+    merge-conflicts \
+    linter-jshint \
+    linter \
+    unity-ui \
+    trailing-spaces \
+    pigments \
+    zenburn-syntax \
+    atom-gpg \
+    atom-latex
+else
+  ok "Skipped install Atom Community Packages"
+fi
 
 ###############################################################################
 running "Cleanup homebrew"
@@ -700,7 +730,7 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false;ok
 running "Automatically quit printer app once the print jobs complete"
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true;ok
 
-running "Disable the “Are you sure you want to open this application?” dialog"
+running "Disable the 'Are you sure you want to open this application?' dialog"
 defaults write com.apple.LaunchServices LSQuarantine -bool false;ok
 
 # https://github.com/atomantic/dotfiles/issues/30#issuecomment-514589462
@@ -936,8 +966,8 @@ defaults write com.apple.finder EmptyTrashSecurely -bool true;ok
 
 # Issue on macOS Mojave, for more info
 # check https://github.com/mathiasbynens/dotfiles/issues/865
-# running "Show the ~/Library folder"
-# chflags nohidden ~/Library;ok
+running "Show the ~/Library folder"
+chflags nohidden ~/Library;ok
 
 running "Expand the following File Info panes: “General”, “Open with”, and “Sharing & Permissions”"
 defaults write com.apple.finder FXInfoPanesExpanded -dict \

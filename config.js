@@ -4,8 +4,16 @@ module.exports = {
     'ack',
     // Code-search similar to ack - https://github.com/ggreer/the_silver_searcher
     'ag',
+    'ansible',
+    'ansible-lint',
     // https://github.com/wting/autojump
     'autojump',
+    // command line interface to Amazon Web Services
+    'awscli',
+    'awslogs',
+    'aws-shell',
+    'awsume',
+    'aws-sam-cli',
     // alternative to `cat`: https://github.com/sharkdp/bat
     'bat',
     // Record and share terminal sessions - https: //asciinema.org
@@ -28,7 +36,7 @@ module.exports = {
     'dos2unix',
     // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed - https://www.gnu.org/software/findutils/
     'findutils',
-    // fuzzy find
+    // command-line fuzzy finder
     'fzf',
     // TCP / IP packet demultiplexer - https: //github.com/simsong/tcpflow
     'tcpflow',
@@ -62,6 +70,7 @@ module.exports = {
     //'jpegoptim',
     // Lightweight and flexible command-line JSON processor - https://stedolan.github.io/jq/
     'jq',
+    'kubernetes-cli',
     // Mac App Store CLI - https://github.com/mas-cli/mas
     'mas',
     // lsp is like ls command but more human-friendly
@@ -83,6 +92,7 @@ module.exports = {
     'progress',
     // Reattach process (e.g., tmux) to background - https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
     'reattach-to-user-namespace',
+    'helm',
     // better/more recent version of screen
     'homebrew/dupes/screen',
     //'ssh-copy-id',
@@ -90,6 +100,16 @@ module.exports = {
     'sslsplit',
     // Command - line interface bandwidth tests - https://github.com/sivel/speedtest-cli
     'speedtest-cli',
+    // starship ZSH theme
+    'starship',
+    'terraform',
+    'terraformer',
+    'terragrunt',
+    'terraform-docs',
+    'terraform_landscape',
+    'iam-policy-json-to-terraform',
+    'tf-lint',
+    'packer',
     // Terminal multiplexer - https://github.com/tmux/tmux
     'tmux',
     // If you want to get it done, first write it down - http://todotxt.org/
