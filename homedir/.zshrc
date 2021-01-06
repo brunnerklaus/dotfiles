@@ -10,13 +10,13 @@ export TERM="xterm-256color"
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.dotfiles/oh-my-zsh
 
-# source $HOME/.dotfiles/oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
+source $HOME/.dotfiles/oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 # export ZSH_THEME="powerlevel10k/powerlevel9k"
 POWERLEVEL10K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
 POWERLEVEL10K_RIGHT_PROMPT_ELEMENTS=(root_indicator background_jobs)
 
-source $HOME/.dotfiles/oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme
-export ZSH_THEME="spaceship"
+# source $HOME/.dotfiles/oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme
+# export ZSH_THEME="spaceship"
 
 # Set to this to use case-sensitive completion
 export CASE_SENSITIVE="true"

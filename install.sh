@@ -247,19 +247,19 @@ if [[ "$CURRENTSHELL" != "/usr/local/bin/zsh" ]]; then
   ok
 fi
 
-# bot "ZSH Powerlevel10k Setup"
-# # via https://github.com/romkatv/powerlevel10k
-# if [[ ! -d "$ZSH_CUSTOM/custom/themes/powerlevel10k" ]]; then
-#   git clone https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/custom/themes/powerlevel10k"
-# else
-#   git pull "$ZSH_CUSTOM/custom/themes/powerlevel10k"
-# fi
-
-bot "ZSH Spaceship theme"
-if [[ ! -d "oh-my-zsh/custom/themes/spaceship-prompt" ]]; then
-git clone https://github.com/denysdovhan/spaceship-prompt.git "oh-my-zsh/custom/themes/spaceship-prompt"
-ln -s "oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" "oh-my-zsh/custom/themes/spaceship.zsh-theme"
+bot "ZSH Powerlevel10k Setup"
+# via https://github.com/romkatv/powerlevel10k
+if [[ ! -d "$ZSH_CUSTOM/custom/themes/powerlevel10k" ]]; then
+  git clone https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/custom/themes/powerlevel10k"
+else
+  git pull "$ZSH_CUSTOM/custom/themes/powerlevel10k"
 fi
+
+# bot "ZSH Spaceship theme"
+# if [[ ! -d "oh-my-zsh/custom/themes/spaceship-prompt" ]]; then
+# git clone https://github.com/denysdovhan/spaceship-prompt.git "oh-my-zsh/custom/themes/spaceship-prompt"
+# ln -s "oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" "oh-my-zsh/custom/themes/spaceship.zsh-theme"
+# fi
 
 # bot "ZSH autosuggestions"
 # # https://github.com/zsh-users/zsh-autosuggestions
