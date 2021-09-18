@@ -397,12 +397,25 @@
   enabled = 1
 
 [difftool]
-  # Difftool will not prompt for every file.
-  # Use --prompt to override.
   prompt = false
 
 [diff]
   tool = vimdiff
+
+[init]
+  templatedir = ~/.dotfiles/.git_template
+
+[merge]
+    tool = vscode
+
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
+
+[diff]
+    tool = vscode
+
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
 
 [diff "asciidiff"]
   textconv = ~/bin/img-ascii-diff
@@ -434,22 +447,11 @@
 [init]
   templatedir = ~/.dotfiles/.git_template
 
-[mergetool]
-  # No *.orig files left when using mergetool.
-  keepBackup = false
-
-  # Mergetool will not prompt for every file.
-  # Use --prompt to override.
-  prompt = false
-
-[mergetool.fac]
-    cmd = fac
-
 [merge]
-  tool = vimdiff
-  # Always show a diffstat at the end of a merge
-  stat = true
-  conflictstyle = diff3
+  tool = vscode
+
+[mergetool "vscode"]
+  cmd = code --wait $MERGED
 
 [pager]
   # Use colors when paging regardless of default color setting.

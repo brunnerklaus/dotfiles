@@ -344,9 +344,6 @@ require_brew nvm
 # nvm
 require_nvm stable
 
-# always pin versions (no surprises, consistent dev/build machines)
-npm config set save-exact true
-
 #####################################
 # Now we can switch to node.js mode
 # for better maintainability and
@@ -504,7 +501,7 @@ running "Enable firewall"
 sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
 
 # Enable firewall stealth mode (no response to ICMP / ping requests)
-# Source: https://support.apple.com/kb/PH18642
+# Source: https://support.apple.com/guide/mac-help/use-stealth-mode-to-keep-your-mac-more-secure-mh17133/mac
 #sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -int 1
 running "Enable firewall stealth mode"
 sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -int 1
@@ -573,8 +570,8 @@ running "Disable Bonjour multicast advertisements"
 #https://www.trustwave.com/Resources/SpiderLabs-Blog/mDNS---Telling-the-world-about-you-(and-your-device)/
 sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMulticastAdvertisements -bool true;ok
 
-running "Disable diagnostic reports"
-sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.SubmitDiagInfo.plist;ok
+# running "Disable diagnostic reports"
+# sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.SubmitDiagInfo.plist;ok
 
 running "Log authentication events for 90 days"
 sudo perl -p -i -e 's/rotate=seq file_max=5M all_max=20M/rotate=utc file_max=5M ttl=90/g' "/etc/asl/com.apple.authd";ok
@@ -602,6 +599,7 @@ bot "💾 SSD-specific tweaks"
 #sudo tmutil disablelocal;ok
 
 running "Disable hibernation (speeds up entering sleep mode)"
+sudo pmset -a hibernatemode 3
 # supported sleep modes:"
 #     sleep       --> hibernatemode 0"
 #     safesleep   --> hibernatemode 3"
@@ -629,8 +627,8 @@ running "Disable hibernation (speeds up entering sleep mode)"
 # vault key on wake."
 # See https://discussions.apple.com/thread/6090869
 #
-running "Get current seeting: pmset -g | grep hibernatemode | awk '{ print $2 ; }'"
-sudo pmset -a hibernatemode 3
+#running "Get current seeting: pmset -g | grep hibernatemode | awk '{ print $2 ; }'"
+#sudo pmset -a hibernatemode 3
 
 #running "Remove the sleep image file to save disk space"
 #sudo rm -rf /Private/var/vm/sleepimage;ok
@@ -646,31 +644,32 @@ sudo pmset -a sms 0;ok
 bot "🎚️ Optional / Experimental"
 ################################################
 
-# running "Set computer name (as done via System Preferences → Sharing)"
-# sudo scutil --set ComputerName "antic"
-# sudo scutil --set HostName "antic"
-# sudo scutil --set LocalHostName "antic"
-# sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "antic"
+running "Set computer name (as done via System Preferences → Sharing)"
+sudo scutil --set ComputerName "Klaus’s MacBook Pro"
+sudo scutil --set HostName "Klauss-MacBook-Pro"
+sudo scutil --set LocalHostName "Klauss-MacBook-Pro"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "Klauss-MacBook-Pro"
 
 #setting up the computer label & name
-read -p "What is this machine's label (Example: Klaus’s MacBook Pro) ? " mac_os_label
-if [[ -z "$mac_os_label" ]]; then
-  echo "ERROR: Invalid MacOS label."
-  exit 1
-fi
-
-sudo scutil --get ComputerName
-read -p "What is this machine's name (Example: Klauss-MacBook-Pro) ? " mac_os_name
-if [[ -z "$mac_os_name" ]]; then
-  echo "ERROR: Invalid MacOS name."
-  exit 1
-fi
-
-echo "Setting system Label and Name..."
-sudo scutil --set ComputerName "$mac_os_label"
-sudo scutil --set HostName "$mac_os_name"
-sudo scutil --set LocalHostName "$mac_os_name"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$mac_os_name"
+# sudo scutil --get ComputerName
+# read -p "What is this machine's label (Example: Klaus’s MacBook Pro) ? " mac_os_label
+# if [[ -z "$mac_os_label" ]]; then
+#   echo "ERROR: Invalid MacOS label."
+#   exit 1
+# fi
+#
+# sudo scutil --get HostName
+# read -p "What is this machine's name (Example: Klauss-MacBook-Pro) ? " mac_os_name
+# if [[ -z "$mac_os_name" ]]; then
+#   echo "ERROR: Invalid MacOS name."
+#   exit 1
+# fi
+#
+# echo "Setting system Label and Name..."
+# sudo scutil --set ComputerName "$mac_os_label"
+# sudo scutil --set HostName "$mac_os_name"
+# sudo scutil --set LocalHostName "$mac_os_name"
+# sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$mac_os_name"
 
 # running "Disable smooth scrolling"
 # (Uncomment if you’re on an older Mac that messes up the animation)
@@ -792,8 +791,8 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false;ok
 ### Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
 ##defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true;ok
 
-running "Disable automatic termination of inactive apps"
-defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true;ok
+# running "Disable automatic termination of inactive apps"
+# defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true;ok
 
 running "Disable the crash reporter"
 defaults write com.apple.CrashReporter DialogType -string "none";ok
@@ -804,8 +803,8 @@ defaults write com.apple.helpviewer DevMode -bool true;ok
 running "Reveal IP, hostname, OS, etc. when clicking clock in login window"
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName;ok
 
-running "Restart automatically if the computer freezes"
-sudo systemsetup -setrestartfreeze on;ok
+# running "Restart automatically if the computer freezes"
+# sudo systemsetup -setrestartfreeze on;ok
 
 running "Never go into computer sleep mode"
 sudo systemsetup -setcomputersleep Off > /dev/null;ok
@@ -1254,11 +1253,11 @@ defaults write com.apple.mail DisableInlineAttachmentViewing -bool true;ok
 running "Disable automatic spell checking"
 defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled";ok
 
-###############################################################################
-bot "📋 Configure Atom editor"
-###############################################################################
-running "Set Atom as default editor"
-defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType=public.plain-text;LSHandlerRoleAll=com.github.atom;}';ok
+# ###############################################################################
+# bot "📋 Configure Atom editor"
+# ###############################################################################
+# running "Set Atom as default editor"
+# defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType=public.plain-text;LSHandlerRoleAll=com.github.atom;}';ok
 
 ###############################################################################
 bot "🔍 Spotlight"

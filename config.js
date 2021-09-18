@@ -4,6 +4,8 @@ module.exports = {
     'ack',
     // Code-search similar to ack - https://github.com/ggreer/the_silver_searcher
     'ag',
+    // Application launcher and productivity software - https://www.alfredapp.com/
+    'alfred',
     'ansible',
     'ansible-lint',
     // https://github.com/wting/autojump
@@ -133,7 +135,7 @@ module.exports = {
     //'adobe-creative-cloud',
     //'adium',
     //'amazon-cloud-drive',
-    'atom',
+    // 'atom',
     'aws-vault',
     // Padbury Clock
     //'padbury-clock',
@@ -145,7 +147,8 @@ module.exports = {
     'cheatsheet',
     //'coconutbattery',
     //'diffmerge',
-    'docker', // docker for mac
+    // docker for mac
+    'docker',
     'dropbox',
     //'evernote',
     // f.lux - https://justgetflux.com
@@ -174,9 +177,11 @@ module.exports = {
     // A native OS X KeePass client https://macpassapp.org
     //'macpass',
     'meld',
+    // App to write, plan, collaborate, and get organized - https://www.notion.so/
+    'notion',
     //OS X player for The Hype Machine
     //'plug',
-    'nextcloud',
+    //'nextcloud',
     //'phpstorm',
     'rectangle',
     'signal',
@@ -194,7 +199,7 @@ module.exports = {
     'tunnelblick',
     //'torbrowser',
     //'transmission',
-    //'visual-studio-code',
+    'visual-studio-code',
     //'vlc',
     //'virtualbox',
     //'xquartz'
