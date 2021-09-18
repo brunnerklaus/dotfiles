@@ -249,10 +249,10 @@ fi
 
 bot "ZSH Powerlevel10k Setup"
 # via https://github.com/romkatv/powerlevel10k
-if [[ ! -d "$ZSH_CUSTOM/custom/themes/powerlevel10k" ]]; then
-  git clone https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/custom/themes/powerlevel10k"
+if [[ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]]; then
+  git clone https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
 else
-  git pull "$ZSH_CUSTOM/custom/themes/powerlevel10k"
+  git pull "$ZSH_CUSTOM/themes/powerlevel10k"
 fi
 
 # bot "ZSH Spaceship theme"
