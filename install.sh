@@ -367,47 +367,98 @@ node index.js
 ok
 
 ###############################################################################
-bot "📋 Configure Atom editor packages"
+bot "📋 Configure Visual Studio Code"
 ###############################################################################
+# Visual Studio Code :: Package list
+pkglist=(
+donjayamanne.githistory
+eamodio.gitlens
+file-icons.file-icons
+hashicorp.terraform
+HookyQR.beautify
+huizhou.githd
+jaspernorth.vscode-pigments
+jvalecillos.gpg
+mhutchie.git-graph
+ms-azuretools.vscode-docker
+ms-python.python
+ms-python.vscode-pylance
+ms-toolsai.jupyter
+ms-toolsai.jupyter-keymap
+nicola-granata.zenburn-dark-matter
+ryanolsonx.zenburn
+shardulm94.trailing-spaces
+torn4dom4n.latex-support
+Tyriar.sort-lines
+wayou.file-icons-mac
+vscodevim.vim
+coenraads.bracket-pair-colorizer-2
+equinusocio.vsc-material-theme-icons
+yzane.markdown-pdf
+oderwat.indent-rainbow
+christian-kohler.path-intellisense
+Gruntfuggly.todo-tree
+hediet.vscode-drawio
+github.vscode-pull-request-github
+shd101wyy.markdown-preview-enhanced
+shuworks.vscode-table-formatter
+esbenp.prettier-vscode
+davidanson.vscode-markdownlint
+ms-python.vscode-pylance
+)
 
-bot "Install Atom Community Packages?"
-read -r -p "Do you want to install Atom Community Packages now? [y|N] " response
+read -r -p "Do you want to install Visual Studio Code extensions now? [y|N] " response
 if [[ $response =~ (y|yes|Y) ]]; then
   printf "\n"
-  apm install --production --compatible \
-    Sublime-Style-Column-Selection \
-    ask-stack \
-    atom-beautify \
-    atom-ide-ui \
-    atom-yamljson \
-    file-icons \
-    highlight-selected \
-    language-docker \
-    language-liquid \
-    language-terraform \
-    minimap \
-    minimap-pigments \
-    minimap-find-and-replace \
-    minimap-git-diff \
-    minimap-highlight-selected \
-    open-this \
-    sort-lines \
-    git-log \
-    git-blame \
-    git-time-machine \
-    tree-view-git-status \
-    merge-conflicts \
-    linter-jshint \
-    linter \
-    unity-ui \
-    trailing-spaces \
-    pigments \
-    zenburn-syntax \
-    atom-gpg \
-    atom-latex
+for i in ${pkglist[@]}; do
+  code --install-extension $i
+done
 else
-  ok "Skipped install Atom Community Packages"
+  ok "Skipped install Visual Studio Code extensions"
 fi
+
+# ###############################################################################
+# bot "📋 Configure Atom editor packages"
+# ###############################################################################
+
+# bot "Install Atom Community Packages?"
+# read -r -p "Do you want to install Atom Community Packages now? [y|N] " response
+# if [[ $response =~ (y|yes|Y) ]]; then
+#   printf "\n"
+#   apm install --production --compatible \
+#     Sublime-Style-Column-Selection \
+#     ask-stack \
+#     atom-beautify \
+#     atom-ide-ui \
+#     atom-yamljson \
+#     file-icons \
+#     highlight-selected \
+#     language-docker \
+#     language-liquid \
+#     language-terraform \
+#     minimap \
+#     minimap-pigments \
+#     minimap-find-and-replace \
+#     minimap-git-diff \
+#     minimap-highlight-selected \
+#     open-this \
+#     sort-lines \
+#     git-log \
+#     git-blame \
+#     git-time-machine \
+#     tree-view-git-status \
+#     merge-conflicts \
+#     linter-jshint \
+#     linter \
+#     unity-ui \
+#     trailing-spaces \
+#     pigments \
+#     zenburn-syntax \
+#     atom-gpg \
+#     atom-latex
+# else
+#   ok "Skipped install Atom Community Packages"
+# fi
 
 ###############################################################################
 running "Cleanup homebrew"
