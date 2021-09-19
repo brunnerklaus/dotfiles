@@ -70,8 +70,11 @@ module.exports = {
     'httpie',
     // Utility to optimize/compress JPEG files http://www.iki.fi/tjko/projects.html
     //'jpegoptim',
+    // HTTP and GraphQL Client - https://insomnia.rest/
+    'insomnia',
     // Lightweight and flexible command-line JSON processor - https://stedolan.github.io/jq/
     'jq',
+    // Kubernetes command-line interface - https://kubernetes.io/
     'kubernetes-cli',
     // Mac App Store CLI - https://github.com/mas-cli/mas
     'mas',
@@ -174,9 +177,11 @@ module.exports = {
     // the macOS file archiver - https://www.keka.io/en/
     'keka',
     'p7zip', //dependencies for keka
+    // Host-based application firewall - https://www.obdev.at/products/littlesnitch/index.html
+    'little-snitch',
     // A native OS X KeePass client https://macpassapp.org
     //'macpass',
-    'meld',
+    // 'meld',
     // App to write, plan, collaborate, and get organized - https://www.notion.so/
     'notion',
     //OS X player for The Hype Machine
@@ -190,7 +195,7 @@ module.exports = {
     // Powerful, keyboard-centric window management - http://www.irradiatedsoftware.com/sizeup/
     //'sizeup',
     //'sketchup',
-    //'slack',
+    'slack',
     // A sophisticated text editor for code, markup and prose - https://www.sublimetext.com
     //'sublime',
     // Free Unarchiving Software for macOS - https://theunarchiver.com/
@@ -231,7 +236,7 @@ module.exports = {
     //com.apple.dt.Xcode
     '497799835',
     //Encrypto https://macpaw.com/encrypto
-    '935235287',
+    // '935235287',
     //Helium https://heliumfloats.com/
     '1054607607'
   ],
