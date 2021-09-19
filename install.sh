@@ -369,12 +369,23 @@ bot "📋 Configure Visual Studio Code"
 ###############################################################################
 # Visual Studio Code :: Package list
 pkglist=(
+alefragnani.project-manager
+christian-kohler.path-intellisense
+CoenraadS.bracket-pair-colorizer-2
+DavidAnson.vscode-markdownlint
 donjayamanne.githistory
 eamodio.gitlens
+equinusocio.vsc-material-theme-icons
+esbenp.prettier-vscode
 file-icons.file-icons
+GitHub.github-vscode-theme
+GitHub.vscode-pull-request-github
+Gruntfuggly.todo-tree
 hashicorp.terraform
+hediet.vscode-drawio
 HookyQR.beautify
 huizhou.githd
+igolskyi.vscode-zenburn-plus-theme
 jaspernorth.vscode-pigments
 jvalecillos.gpg
 mhutchie.git-graph
@@ -384,25 +395,16 @@ ms-python.vscode-pylance
 ms-toolsai.jupyter
 ms-toolsai.jupyter-keymap
 nicola-granata.zenburn-dark-matter
+oderwat.indent-rainbow
 ryanolsonx.zenburn
 shardulm94.trailing-spaces
-torn4dom4n.latex-support
-Tyriar.sort-lines
-wayou.file-icons-mac
-vscodevim.vim
-coenraads.bracket-pair-colorizer-2
-equinusocio.vsc-material-theme-icons
-yzane.markdown-pdf
-oderwat.indent-rainbow
-christian-kohler.path-intellisense
-Gruntfuggly.todo-tree
-hediet.vscode-drawio
-github.vscode-pull-request-github
 shd101wyy.markdown-preview-enhanced
 shuworks.vscode-table-formatter
-esbenp.prettier-vscode
-davidanson.vscode-markdownlint
-ms-python.vscode-pylance
+torn4dom4n.latex-support
+Tyriar.sort-lines
+vscodevim.vim
+wayou.file-icons-mac
+yzane.markdown-pdf
 )
 
 read -r -p "Do you want to install Visual Studio Code extensions now? [y|N] " response
