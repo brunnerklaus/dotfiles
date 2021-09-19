@@ -100,8 +100,8 @@ load-nvmrc() {
     nvm use stable
   fi
 }
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+# add-zsh-hook chpwd load-nvmrc
+# load-nvmrc
 
 # Customize to your needs...
 unsetopt correct

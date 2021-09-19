@@ -230,6 +230,7 @@ require_brew zsh-navigation-tools
 require_brew zsh-autosuggestions
 require_brew zsh-git-prompt
 require_brew zsh-lovers
+require_brew sh-syntax-highlighting
 
 # update ruby to latest
 # use versions of packages installed with homebrew
