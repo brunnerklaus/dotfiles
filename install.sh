@@ -1399,6 +1399,9 @@ open "./configs/Solarized Dark.itermcolors";ok
 running "Installing the Patched Solarized Dark Patch theme for iTerm (opening file)"
 open "./configs/Solarized Dark Patch.itermcolors";ok
 
+running "Installing the Zenburn theme for iTerm (opening file)"
+open "./configs/Zenburn.itermcolors";ok
+
 running "Don’t display the annoying prompt when quitting iTerm"
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false;ok
 
