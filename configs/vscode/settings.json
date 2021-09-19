@@ -1,0 +1,114 @@
+{
+  "editor.fontSize": 12,
+  "editor.tabSize": 2,
+  "editor.tabCompletion": "on",
+  "explorer.openEditors.visible": 0,
+  "editor.minimap.enabled": false,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.renderWhitespace": "all",
+  "terminal.integrated.profiles.osx": {
+    "zsh": {
+      "path": "zsh",
+      "args": ["-l"]
+    }
+  },
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "diffEditor.renderSideBySide": false,
+  "git.confirmSync": false,
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "explorer.confirmDelete": false,
+  "prettier.printWidth": 120,
+  "explorer.confirmDragAndDrop": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  // Formatting
+  "editor.formatOnSave": false,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[handlebars]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  // Extension settings
+  "debug.javascript.usePreview": true,
+  "extensions.ignoreRecommendations": false,
+  "cSpell.userWords": [
+    "Configurer",
+    "DOCKERHUB",
+    "Denormalization",
+    "Emberize",
+    "Evented",
+    "FTUE",
+    "IYNAB",
+    "Milli",
+    "Overfunded",
+    "POSTGRESQL",
+    "Portation",
+    "Recategorization",
+    "Renamer",
+    "SIDEKIQ",
+    "Timeframe",
+    "Tombstoned",
+    "Typecheck",
+    "USAA",
+    "Uncategorized",
+    "YBOT",
+    "YNABID",
+    "babyparse",
+    "checkmark",
+    "codegen",
+    "crontogo",
+    "dyno",
+    "dynos",
+    "endregion",
+    "helpscout",
+    "jbash",
+    "maintenancemode",
+    "milliunits",
+    "nocache",
+    "paydown",
+    "postgres",
+    "precompiled",
+    "psql",
+    "psqlformat",
+    "rainforest",
+    "recategorized",
+    "recategorizing",
+    "rollbar",
+    "rspec",
+    "runloop",
+    "sqljs",
+    "subtransactions",
+    "unformat",
+    "unhide",
+    "untar",
+    "untarred",
+    "victorops",
+    "websql",
+    "workdir",
+    "ynab",
+    "ynabbuild",
+    "ynabdev",
+    "youneedabudget",
+    "zxvf"
+  ],
+  "workbench.iconTheme": "file-icons",
+  "workbench.colorTheme": "Zenburn+ Dark",
+  "workbench.preferredDarkColorTheme": "Zenburn",
+  "terminal.integrated.fontFamily": "MesloLGS NF"
+}

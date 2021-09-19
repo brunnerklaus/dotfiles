@@ -415,6 +415,14 @@ else
   ok "Skipped install Visual Studio Code extensions"
 fi
 
+read -r -p "Do you want to install Visual Studio Code settings now? [y|N] " response
+if [[ $response =~ (y|yes|Y) ]]; then
+  cp ./configs/vscode/settings.json $HOME/Library/Application\ Support/Code/User/settings.json
+done
+else
+  ok "Skipped installing Visual Studio Code settings"
+fi
+
 # ###############################################################################
 # bot "📋 Configure Atom editor packages"
 # ###############################################################################
