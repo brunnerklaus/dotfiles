@@ -212,32 +212,41 @@ else
 fi
 
 bot "Brew doctor"
-# Just to avoid a potential bug
-mkdir -p ~/Library/Caches/Homebrew/Formula
-brew doctor
+read -r -p "Do you want to run brew doctor now? [y|N] " response
+if [[ $response =~ (y|yes|Y) ]];then
+  # Just to avoid a potential bug
+  mkdir -p ~/Library/Caches/Homebrew/Formula
+  brew doctor
+fi
 
 # bot "Brew cleanup"
 # brew cleanup
 
 bot "Install ZSH dependencies"
-# skip those GUI clients, git command-line all the way
-require_brew git
-# update zsh to latest and install plugins
-require_brew zsh
-require_brew zsh-completions
-require_brew zsh-history-substring-search
-require_brew zsh-navigation-tools
-require_brew zsh-autosuggestions
-require_brew zsh-git-prompt
-require_brew zsh-lovers
-require_brew zsh-syntax-highlighting
+read -r -p "Do you want to run brew doctor now? [y|N] " response
+if [[ $response =~ (y|yes|Y) ]];then
+  # skip those GUI clients, git command-line all the way
+  require_brew git
+  # update zsh to latest and install plugins
+  require_brew zsh
+  require_brew zsh-completions
+  require_brew zsh-history-substring-search
+  require_brew zsh-navigation-tools
+  require_brew zsh-autosuggestions
+  require_brew zsh-git-prompt
+  require_brew zsh-lovers
+  require_brew zsh-syntax-highlighting
+fi
 
-# update ruby to latest
-# use versions of packages installed with homebrew
-RUBY_CONFIGURE_OPTS="--with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline` --with-libyaml-dir=`brew --prefix libyaml`"
-require_brew ruby
+bot "Update ruby to latest"
+read -r -p "Do you want to update ruby? [y|N] " response
+if [[ $response =~ (y|yes|Y) ]];then
+  # use versions of packages installed with homebrew
+  RUBY_CONFIGURE_OPTS="--with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline` --with-libyaml-dir=`brew --prefix libyaml`"
+  require_brew ruby
+fi
 
-bot "ZSH Setup"
+bot "Set ZSH as the user login shell"
 # set zsh as the user login shell
 CURRENTSHELL=$(dscl . -read /Users/$USER UserShell | awk '{print $2}')
 if [[ "$CURRENTSHELL" != "/usr/local/bin/zsh" ]]; then
@@ -246,14 +255,8 @@ if [[ "$CURRENTSHELL" != "/usr/local/bin/zsh" ]]; then
   # chsh -s /usr/local/bin/zsh
   sudo dscl . -change /Users/$USER UserShell $SHELL /usr/local/bin/zsh > /dev/null 2>&1
   ok
-fi
-
-bot "ZSH Powerlevel10k Setup"
-# via https://github.com/romkatv/powerlevel10k
-if [[ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]]; then
-  git clone https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
 else
-  git pull "$ZSH_CUSTOM/themes/powerlevel10k"
+  bot "Nothing todo, ZSH already set as login shell"
 fi
 
 # bot "ZSH Spaceship theme"
@@ -341,6 +344,7 @@ fi
 # fi
 
 # node version manager
+bot "🎺 Installing NPM"
 require_brew nvm
 
 # nvm
@@ -469,7 +473,7 @@ fi
 # fi
 
 ###############################################################################
-running "Cleanup homebrew"
+bot "Cleanup homebrew"
 ###############################################################################
 brew cleanup --force > /dev/null 2>&1
 rm -f -r /Library/Caches/Homebrew/* > /dev/null 2>&1
