@@ -230,7 +230,7 @@ require_brew zsh-navigation-tools
 require_brew zsh-autosuggestions
 require_brew zsh-git-prompt
 require_brew zsh-lovers
-require_brew sh-syntax-highlighting
+require_brew zsh-syntax-highlighting
 
 # update ruby to latest
 # use versions of packages installed with homebrew
@@ -412,7 +412,6 @@ if [[ $response =~ (y|yes|Y) ]]; then
   printf "\n"
 for i in ${pkglist[@]}; do
   code --install-extension $i
-done
 else
   ok "Skipped install Visual Studio Code extensions"
 fi
@@ -420,7 +419,6 @@ fi
 read -r -p "Do you want to install Visual Studio Code settings now? [y|N] " response
 if [[ $response =~ (y|yes|Y) ]]; then
   cp ./configs/vscode/settings.json $HOME/Library/Application\ Support/Code/User/settings.json
-done
 else
   ok "Skipped installing Visual Studio Code settings"
 fi
