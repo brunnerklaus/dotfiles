@@ -311,6 +311,7 @@ else
   ok "Skipped. Install by running :PluginInstall within vim"
 fi
 
+bot "🎺 Fonts Setup"
 read -r -p "Install fonts? [y|N] " response
 if [[ $response =~ (y|yes|Y) ]];then
   bot "🎹 Installing fonts"
@@ -412,6 +413,7 @@ if [[ $response =~ (y|yes|Y) ]]; then
   printf "\n"
 for i in ${pkglist[@]}; do
   code --install-extension $i
+done
 else
   ok "Skipped install Visual Studio Code extensions"
 fi
