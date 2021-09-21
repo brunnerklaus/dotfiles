@@ -250,13 +250,13 @@ bot "Set ZSH as the user login shell"
 # set zsh as the user login shell
 CURRENTSHELL=$(dscl . -read /Users/$USER UserShell | awk '{print $2}')
 if [[ "$CURRENTSHELL" != "/usr/local/bin/zsh" ]]; then
-  bot "setting newer homebrew zsh (/usr/local/bin/zsh) as your shell (password required)"
+  ok "setting newer homebrew zsh (/usr/local/bin/zsh) as your shell (password required)"
   # sudo bash -c 'echo "/usr/local/bin/zsh" >> /etc/shells'
   # chsh -s /usr/local/bin/zsh
   sudo dscl . -change /Users/$USER UserShell $SHELL /usr/local/bin/zsh > /dev/null 2>&1
   ok
 else
-  bot "Nothing todo, ZSH already set as login shell"
+  ok "Nothing todo, ZSH already set as login shell"
 fi
 
 # bot "ZSH Spaceship theme"
@@ -345,10 +345,22 @@ fi
 
 # node version manager
 bot "🎺 Installing NPM"
-require_brew nvm
+read -r -p "Install NPM? [y|N] " response
+if [[ $response =~ (y|yes|Y) ]];then
+  require_brew nvm
+else
+  ok "Skipped NPM install"
+fi
 
 # nvm
-require_nvm stable
+bot "🎺 Installing NVM"
+read -r -p "Install NVM? [y|N] " response
+if [[ $response =~ (y|yes|Y) ]];then
+  require_nvm stable
+  npm install
+else
+  ok "Skipped NVM install"
+fi
 
 #####################################
 # Now we can switch to node.js mode
@@ -360,8 +372,8 @@ require_nvm stable
 ###############################################################################
 #bot "Installing npm tools needed to run this project..."
 ###############################################################################
-npm install
-ok
+# npm install
+# ok
 
 ###############################################################################
 bot "🎬 Installing packages from config.js..."
