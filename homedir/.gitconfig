@@ -1,9 +1,5 @@
-#[user]
-#  name = Klaus Brunner
-#  email = bruklaus@gmail.com
-#[github]
-#  # https://github.com/blog/180-local-github-config
-#  user = brunnerklaus
+[include]
+  path = ~/bin/.gitconfig
 
 # User and email settings
 # Generated via .extras in .profile
