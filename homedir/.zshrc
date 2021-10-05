@@ -18,6 +18,18 @@ POWERLEVEL10K_RIGHT_PROMPT_ELEMENTS=(root_indicator background_jobs)
 # source $HOME/.dotfiles/oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme
 # export ZSH_THEME="spaceship"
 
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+# https://github.com/bhilburn/powerlevel9k#customizing-prompt-segments
+# https://github.com/bhilburn/powerlevel9k/wiki/Stylizing-Your-Prompt
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir nvm vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
+# colorcode test
+# for code ({000..255}) print -P -- "$code: %F{$code}This is how your text would look like%f"
+POWERLEVEL9K_NVM_FOREGROUND='000'
+POWERLEVEL9K_NVM_BACKGROUND='072'
+POWERLEVEL9K_SHOW_CHANGESET=true
+#export ZSH_THEME="random"
+
 # Set to this to use case-sensitive completion
 export CASE_SENSITIVE="true"
 
@@ -46,44 +58,7 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(aws colorize compleat dirhistory docker docker-compose dirpersist autojump git gulp helm history cp npm nvm terraform)
-
-SPACESHIP_PROMPT_ORDER=(
-  time          # Time stamps section
-  user          # Username section
-  dir           # Current directory section
-  host          # Hostname section
-  git           # Git section (git_branch + git_status)
-  hg            # Mercurial section (hg_branch  + hg_status)
-  package       # Package version
-  node          # Node.js section
-  ruby          # Ruby section
-  elixir        # Elixir section
-  xcode         # Xcode section
-  swift         # Swift section
-  golang        # Go section
-  php           # PHP section
-  rust          # Rust section
-  haskell       # Haskell Stack section
-  julia         # Julia section
-  docker        # Docker section
-  aws           # Amazon Web Services section
-  gcloud        # Google Cloud Platform section
-  venv          # virtualenv section
-  conda         # conda virtualenv section
-  pyenv         # Pyenv section
-  dotnet        # .NET section
-  ember         # Ember.js section
-  kubectl       # Kubectl context section
-  terraform     # Terraform workspace section
-  exec_time     # Execution time
-  line_sep      # Line break
-  battery       # Battery level and status
-  vi_mode       # Vi-mode indicator
-  jobs          # Background jobs indicator
-  exit_code     # Exit code section
-  char          # Prompt character
-)
+plugins=(aws colorize compleat dirhistory docker docker-compose dirpersist autojump git gulp helm history cp npm nvm terraform kubectl)
 
 #Ignore permissions and load teh completion normallly
 ZSH_DISABLE_COMPFIX=true
