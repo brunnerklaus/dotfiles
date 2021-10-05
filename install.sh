@@ -288,7 +288,7 @@ if [[ $response =~ (y|yes|Y) ]]; then
     # if the file exists:
     if [[ -e ~/$file ]]; then
         mkdir -p ~/.dotfiles_backup/$now
-        mv ~/$file ~/.dotfiles_backup/$now/$file
+        cp $(readlink ~/$file) ~/.dotfiles_backup/$now/$file
         echo "backup saved as ~/.dotfiles_backup/$now/$file"
     fi
     # symlink might still exist
