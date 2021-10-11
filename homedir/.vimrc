@@ -319,7 +319,7 @@ vnoremap <silent> <leader>es :EsformatterVisual<CR>
 " Syntastic
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_html_tidy_quiet_messages = { "level": "warnings" }
