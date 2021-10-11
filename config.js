@@ -34,8 +34,12 @@ module.exports = {
     'curl --with-openssl',
     // Utility for managing Mac OS X dock items - https://github.com/kcrawford/dockutil
     'dockutil',
+    // Command-line DNS client
+    'dog',
     // Convert text between DOS, UNIX, and Mac formats - https://waterlan.home.xs4all.nl/dos2unix.html
     'dos2unix',
+    //Modern replacement for 'ls'
+    'exa',
     // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed - https://www.gnu.org/software/findutils/
     'findutils',
     // command-line fuzzy finder
@@ -76,6 +80,8 @@ module.exports = {
     'jq',
     // Kubernetes command-line interface - https://kubernetes.io/
     'kubernetes-cli',
+    // Kubernetes CLI To Manage Your Clusters In Style!
+    'k9s',
     // Mac App Store CLI - https://github.com/mas-cli/mas
     'mas',
     // lsp is like ls command but more human-friendly
