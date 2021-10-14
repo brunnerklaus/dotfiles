@@ -50,6 +50,8 @@ module.exports = {
     'readline', // ensure gawk gets good readline
     // GNU awk utility - https://www.gnu.org/software/gawk/
     'gawk',
+    // Interactive command-line tool for using emoji in commit messages
+    'gitmoji',
     // Glances an Eye on your system. A top/htop alternative
     'glances',
     // http://www.lcdf.org/gifsicle/ (because I'm a gif junky)
