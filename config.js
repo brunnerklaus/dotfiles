@@ -52,6 +52,8 @@ module.exports = {
     'gawk',
     // Interactive command-line tool for using emoji in commit messages
     'gitmoji',
+    // A viewer for git and diff output
+    'git-delta',
     // Glances an Eye on your system. A top/htop alternative
     'glances',
     // http://www.lcdf.org/gifsicle/ (because I'm a gif junky)

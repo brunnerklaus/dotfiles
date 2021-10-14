@@ -449,12 +449,39 @@
 [mergetool "vscode"]
   cmd = code --wait $MERGED
 
-[pager]
-  # Use colors when paging regardless of default color setting.
-  color = true
+; [pager]
+;   # Use colors when paging regardless of default color setting.
+;   color = true
 
-  diff = diff-so-fancy | less --tabs=4 --RAW-CONTROL-CHARS --quit-if-one-screen --no-init --tilde --status-column --HILITE-UNREAD
-  show = diff-so-fancy | less --tabs=4 --RAW-CONTROL-CHARS --quit-if-one-screen --no-init --tilde --status-column --HILITE-UNREAD
+;   diff = diff-so-fancy | less --tabs=4 --RAW-CONTROL-CHARS --quit-if-one-screen --no-init --tilde --status-column --HILITE-UNREAD
+;   show = diff-so-fancy | less --tabs=4 --RAW-CONTROL-CHARS --quit-if-one-screen --no-init --tilde --status-column --HILITE-UNREAD
+
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+
+[delta]
+    features = decorations
+    side-by-side = true
+    line-numbers = true
+    syntax-theme = Solarized (dark)
+
+[delta "interactive"]
+    keep-plus-minus-markers = false
+
+[delta "decorations"]
+    commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = omit
+    hunk-header-decoration-style = blue box
+    hunk-header-file-style = red
+    hunk-header-line-number-style = "#067a00"
+    hunk-header-style = file line-number syntax
 
 [pretty]
   colourful = "format:%Cred%<(8)%h%Creset %<(75,trunc)%s %Cgreen%<(11)%cr%Creset%Cblue%<(17)% aN%Creset%C(yellow)% D%Creset %gN"
