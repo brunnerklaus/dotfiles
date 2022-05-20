@@ -7,37 +7,10 @@ const series = require('async.series')
 
 inquirer.prompt([{
   type: 'confirm',
-  name: 'gitshots',
-  message: 'Do you want to use gitshots?',
-  default: false
-}, {
-  type: 'confirm',
   name: 'packages',
   message: 'Do you want to install packages from config.js?',
   default: false
 }]).then(function(answers) {
-  if (answers.gitshots) {
-
-    // additional brew packages needed to support gitshots
-    config.brew.push('imagemagick', 'imagesnap')
-    // ensure ~/.gitshots exists
-    command('mkdir -p ~/.gitshots', __dirname, function(err, out) {
-      if (err) throw err
-    })
-    // add post-commit hook
-    command('cp ./.git_template/hooks/gitshot-pc ./.git_template/hooks/post-commit', __dirname, function(err, out) {
-      if (err) throw err
-    })
-  } else {
-    if (fs.existsSync('./.git_template/hooks/post-commit')) {
-      // disable post-commit (in case we are undoing the git-shots enable)
-      // TODO: examine and remove/comment out the file content with the git shots bit
-      command('mv ./.git_template/hooks/post-commit ./.git_template/hooks/disabled-pc', __dirname, function(err, out) {
-        if (err) throw err
-      })
-    }
-  }
-
   if (!answers.packages) {
     return console.log('skipping package installs')
   }

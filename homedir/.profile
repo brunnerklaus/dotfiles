@@ -19,4 +19,4 @@ test -e "$HOME/.extra" && bash $HOME/.extra
 
 # Enable Shell integration for iTerm2
 # http://iterm2.com/shell_integration.html
-source ~/.iterm2_shell_integration.`basename $SHELL`
+# source ~/.iterm2_shell_integration.`basename $SHELL`

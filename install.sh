@@ -189,7 +189,7 @@ running "Checking homebrew..."
 brew_bin=$(which brew) 2>&1 > /dev/null
 if [[ $? != 0 ]]; then
   action "Installing homebrew"
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   if [[ $? != 0 ]]; then
     error "Unable to install homebrew, script $0 abort!"
     exit 2
@@ -238,22 +238,22 @@ if [[ $response =~ (y|yes|Y) ]];then
   require_brew zsh-syntax-highlighting
 fi
 
-bot "Update ruby to latest"
-read -r -p "Do you want to update ruby? [y|N] " response
-if [[ $response =~ (y|yes|Y) ]];then
-  # use versions of packages installed with homebrew
-  RUBY_CONFIGURE_OPTS="--with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline` --with-libyaml-dir=`brew --prefix libyaml`"
-  require_brew ruby
-fi
+# bot "Update ruby to latest"
+# read -r -p "Do you want to update ruby? [y|N] " response
+# if [[ $response =~ (y|yes|Y) ]];then
+#   # use versions of packages installed with homebrew
+#   RUBY_CONFIGURE_OPTS="--with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline` --with-libyaml-dir=`brew --prefix libyaml`"
+#   require_brew ruby
+# fi
 
 bot "Set ZSH as the user login shell"
 # set zsh as the user login shell
 CURRENTSHELL=$(dscl . -read /Users/$USER UserShell | awk '{print $2}')
-if [[ "$CURRENTSHELL" != "/usr/local/bin/zsh" ]]; then
-  ok "setting newer homebrew zsh (/usr/local/bin/zsh) as your shell (password required)"
-  # sudo bash -c 'echo "/usr/local/bin/zsh" >> /etc/shells'
-  # chsh -s /usr/local/bin/zsh
-  sudo dscl . -change /Users/$USER UserShell $SHELL /usr/local/bin/zsh > /dev/null 2>&1
+if [[ "$CURRENTSHELL" != "/bin/zsh" ]]; then
+  ok "setting newer homebrew zsh (/bin/zsh) as your shell (password required)"
+  # sudo bash -c 'echo "/bin/zsh" >> /etc/shells'
+  # chsh -s /bin/zsh
+  sudo dscl . -change /Users/$USER UserShell $SHELL /bin/zsh > /dev/null 2>&1
   ok
 else
   ok "Nothing todo, ZSH already set as login shell"
@@ -276,7 +276,7 @@ fi
 bot "🗜  Dotfiles Setup"
 read -r -p "symlink ./homedir/* files in ~/ (these are the dotfiles)? [y|N] " response
 if [[ $response =~ (y|yes|Y) ]]; then
-  bot "creating symlinks for project dotfiles..."
+  bot "Creating symlinks for project dotfiles..."
   pushd homedir > /dev/null 2>&1
   now=$(date +"%Y.%m.%d.%H.%M.%S")
 
@@ -289,7 +289,7 @@ if [[ $response =~ (y|yes|Y) ]]; then
     if [[ -e ~/$file ]]; then
         mkdir -p ~/.dotfiles_backup/$now
         cp $(readlink ~/$file) ~/.dotfiles_backup/$now/$file
-        echo "backup saved as ~/.dotfiles_backup/$now/$file"
+        echo "Backup saved as ~/.dotfiles_backup/$now/$file"
     fi
     # symlink might still exist
     unlink ~/$file > /dev/null 2>&1
@@ -299,19 +299,6 @@ if [[ $response =~ (y|yes|Y) ]]; then
   done
 
   popd > /dev/null 2>&1
-fi
-
-
-bot "🎺 VIM Setup"
-read -r -p "Do you want to install vim plugins now? [y|N] " response
-if [[ $response =~ (y|yes|Y) ]];then
-  bot "Installing vim plugins"
-  # cmake is required to compile vim bundle YouCompleteMe
-  # require_brew cmake
-  vim +PluginInstall +qall > /dev/null 2>&1
-  ok
-else
-  ok "Skipped. Install by running :PluginInstall within vim"
 fi
 
 bot "🎺 Fonts Setup"
@@ -375,6 +362,7 @@ fi
 # npm install
 # ok
 
+
 ###############################################################################
 bot "🎬 Installing packages from config.js..."
 ###############################################################################
@@ -382,13 +370,49 @@ node index.js
 ok
 
 ###############################################################################
+bot "🎺 VIM config"
+###############################################################################
+read -r -p "Do you want to install neovim vimrc? [y|N] " response
+if [[ $response =~ (y|yes|Y) ]]; then
+  bot "Installing vim config"
+  mkdir -p $HOME/.config/nvim/
+
+  # https://github.com/junegunn/vim-plug
+  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+  simlink? () {
+    test "$(readlink "${1}")";
+  }
+
+  FILE=$HOME/.config/nvim/init.vim
+
+  if simlink? "${FILE}"; then
+    echo "Symlink does not exists"
+    ln -s ~/.dotfiles/configs/nvim/init.vim $HOME/.config/nvim/init.vim
+  else
+    echo "Symlink to config already exists"
+  fi
+fi
+
+###############################################################################
+bot "🎺 VIM Setup"
+###############################################################################
+read -r -p "Do you want to install vim plugins now? [y|N] " response
+if [[ $response =~ (y|yes|Y) ]];then
+  bot "Installing vim plugins"
+  vim +PlugInstall +qall > /dev/null 2>&1
+  ok
+else
+  ok "Skipped. Install by running :PlugInstall within vim"
+fi
+
+###############################################################################
 bot "📋 Configure Visual Studio Code"
 ###############################################################################
 # Visual Studio Code :: Package list
 pkglist=(
 alefragnani.project-manager
-christian-kohler.path-intellisense
-CoenraadS.bracket-pair-colorizer-2
 DavidAnson.vscode-markdownlint
 donjayamanne.githistory
 eamodio.gitlens
@@ -419,9 +443,9 @@ shd101wyy.markdown-preview-enhanced
 shuworks.vscode-table-formatter
 torn4dom4n.latex-support
 Tyriar.sort-lines
-vscodevim.vim
 wayou.file-icons-mac
 yzane.markdown-pdf
+vscode-viml-syntax
 )
 
 read -r -p "Do you want to install Visual Studio Code extensions now? [y|N] " response
@@ -572,17 +596,17 @@ sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -int 1
 # Disable wifi captive portal
 #sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.control Active -bool false
 
-running "Disable remote apple events"
-sudo systemsetup -setremoteappleevents off;ok
+# running "Disable remote apple events"
+# sudo systemsetup -setremoteappleevents off;ok
 
-running "Disable remote login"
-sudo systemsetup -setremotelogin off;ok
+# running "Disable remote login"
+# sudo systemsetup -setremotelogin off;ok
 
-running "Disable wake-on modem"
-sudo systemsetup -setwakeonmodem off;ok
+# running "Disable wake-on modem"
+# sudo systemsetup -setwakeonmodem off;ok
 
-running "Disable wake-on LAN"
-sudo systemsetup -setwakeonnetworkaccess off;ok
+# running "Disable wake-on LAN"
+# sudo systemsetup -setwakeonnetworkaccess off;ok
 
 # Disable file-sharing via AFP or SMB
 # sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.AppleFileServer.plist
@@ -594,8 +618,8 @@ sudo systemsetup -setwakeonnetworkaccess off;ok
 # Do not show password hints
 #sudo defaults write /Library/Preferences/com.apple.loginwindow RetriesUntilHint -int 0
 
-running "Disable guest account login"
-sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false;ok
+# running "Disable guest account login"
+# sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false;ok
 
 running "Automatically lock the login keychain for inactivity after 6 hours"
 security set-keychain-settings -t 21600 -l ~/Library/Keychains/login.keychain;ok
@@ -611,11 +635,11 @@ sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMultica
 # running "Disable diagnostic reports"
 # sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.SubmitDiagInfo.plist;ok
 
-running "Log authentication events for 90 days"
-sudo perl -p -i -e 's/rotate=seq file_max=5M all_max=20M/rotate=utc file_max=5M ttl=90/g' "/etc/asl/com.apple.authd";ok
+# running "Log authentication events for 90 days"
+# sudo perl -p -i -e 's/rotate=seq file_max=5M all_max=20M/rotate=utc file_max=5M ttl=90/g' "/etc/asl/com.apple.authd";ok
 
-running "Log installation events for a year"
-sudo perl -p -i -e 's/format=bsd/format=bsd mode=0640 rotate=utc compress file_max=5M ttl=365/g' "/etc/asl/com.apple.install";ok
+# running "Log installation events for a year"
+# sudo perl -p -i -e 's/format=bsd/format=bsd mode=0640 rotate=utc compress file_max=5M ttl=365/g' "/etc/asl/com.apple.install";ok
 
 # Increase the retention time for system.log and secure.log
 #sudo perl -p -i -e 's/\/var\/log\/wtmp.*$/\/var\/log\/wtmp   \t\t\t640\ \ 31\    *\t\@hh24\ \J/g' "/etc/newsyslog.conf"
@@ -630,14 +654,14 @@ sudo perl -p -i -e 's/format=bsd/format=bsd mode=0640 rotate=utc compress file_m
 #defaults write com.apple.LaunchServices LSQuarantine -bool false;ok
 
 ###############################################################################
-bot "💾 SSD-specific tweaks"
+# bot "💾 SSD-specific tweaks"
 ###############################################################################
 
 #running "Disable local Time Machine snapshots"
 #sudo tmutil disablelocal;ok
 
-running "Disable hibernation (speeds up entering sleep mode)"
-sudo pmset -a hibernatemode 3
+# running "Disable hibernation (speeds up entering sleep mode)"
+# sudo pmset -a hibernatemode 3
 # supported sleep modes:"
 #     sleep       --> hibernatemode 0"
 #     safesleep   --> hibernatemode 3"
@@ -675,8 +699,8 @@ sudo pmset -a hibernatemode 3
 #running "…and make sure it can’t be rewritten"
 #sudo chflags uchg /Private/var/vm/sleepimage;ok
 
-running "Disable the sudden motion sensor as it’s not useful for SSDs"
-sudo pmset -a sms 0;ok
+# running "Disable the sudden motion sensor as it’s not useful for SSDs"
+# sudo pmset -a sms 0;ok
 
 ################################################
 bot "🎚️ Optional / Experimental"
@@ -765,8 +789,8 @@ bot "🎛 Standard System Changes"
 running "Allow 'locate' command"
 sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist > /dev/null 2>&1;ok
 
-running "Set standby delay to 24 hours (default is 1 hour)"
-sudo pmset -a standbydelay 86400;ok
+# running "Set standby delay to 24 hours (default is 1 hour)"
+# sudo pmset -a standbydelay 86400;ok
 
 # running "Disable the sound effects on boot"
 # sudo nvram SystemAudioVolume=" ";ok
@@ -832,8 +856,8 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false;ok
 # running "Disable automatic termination of inactive apps"
 # defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true;ok
 
-running "Disable the crash reporter"
-defaults write com.apple.CrashReporter DialogType -string "none";ok
+# running "Disable the crash reporter"
+# defaults write com.apple.CrashReporter DialogType -string "none";ok
 
 running "Set Help Viewer windows to non-floating mode"
 defaults write com.apple.helpviewer DevMode -bool true;ok
@@ -844,8 +868,8 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo Hos
 # running "Restart automatically if the computer freezes"
 # sudo systemsetup -setrestartfreeze on;ok
 
-running "Never go into computer sleep mode"
-sudo systemsetup -setcomputersleep Off > /dev/null;ok
+# running "Never go into computer sleep mode"
+# sudo systemsetup -setcomputersleep Off > /dev/null;ok
 
 # running "Check for software updates daily, not just once per week"
 # defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1;ok
@@ -873,18 +897,18 @@ defaults write "Apple Global Domain" "AppleInterfaceStyle" "Dark";ok
 ###############################################################################
 bot "💻 Trackpad"
 ###############################################################################
-running "Trackpad: enable tap to click for this user and for the login screen"
-#(Don't have to press down on the trackpad -- just tap it.)
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1;ok
-defaults write com.apple.AppleMultitouchTrackpad Clicking -int 1
+# running "Trackpad: enable tap to click for this user and for the login screen"
+# #(Don't have to press down on the trackpad -- just tap it.)
+# defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+# defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+# defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1;ok
+# defaults write com.apple.AppleMultitouchTrackpad Clicking -int 1
 
-running "Trackpad: map bottom right corner to right-click"
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true;ok
+# running "Trackpad: map bottom right corner to right-click"
+# defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+# defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+# defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
+# defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true;ok
 
 running "Tracking Speed: from 0 to 3"
 defaults write -g com.apple.trackpad.scaling -float 0;ok
@@ -893,14 +917,14 @@ defaults write -g com.apple.trackpad.scaling -float 0;ok
 bot "🕹 Keyboard, Bluetooth accessories, and input"
 ###############################################################################
 
-running "Enable 'natural' (Lion-style) scrolling"
-defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true;ok
+# running "Enable 'natural' (Lion-style) scrolling"
+# defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true;ok
 
-running "Increase sound quality for Bluetooth headphones/headsets"
-defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40;ok
+# running "Increase sound quality for Bluetooth headphones/headsets"
+# defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40;ok
 
-running "Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)"
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3;ok
+# running "Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)"
+# defaults write NSGlobalDomain AppleKeyboardUIMode -int 3;ok
 
 #Deprecated
 #running "Use scroll gesture with the Ctrl (^) modifier key to zoom"
@@ -933,30 +957,30 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bo
 # Read the current state with the following. (1 for F-keys, 0 for media/brightness etc)
 #defaults read "Apple Global Domain" "com.apple.keyboard.fnState"
 
-running "Use all F1, F2 as standard keys"
-defaults write "Apple Global Domain" "com.apple.keyboard.fnState" "1";ok ## F1 F2 etc
+# running "Use all F1, F2 as standard keys"
+# defaults write "Apple Global Domain" "com.apple.keyboard.fnState" "1";ok ## F1 F2 etc
 #defaults write "Apple Global Domain" "com.apple.keyboard.fnState" "0" ## Brightness/Media
 
 ###############################################################################
-bot "🖱️ Configuring the Mouse"
+# bot "🖱️ Configuring the Mouse"
 ###############################################################################
 
-running "Disable mouse acceleration "
-defaults write -g com.apple.mouse.scaling -1;ok
+# running "Disable mouse acceleration "
+# defaults write -g com.apple.mouse.scaling -1;ok
 
-running "Enable secondary button on click"
-defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode TwoButton;ok
+# running "Enable secondary button on click"
+# defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode TwoButton;ok
 
-runnign "Enable swipe with one single finger gesture to go back while browsing"
-defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseOneFingerDoubleTapGesture 1;ok
+# runnign "Enable swipe with one single finger gesture to go back while browsing"
+# defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseOneFingerDoubleTapGesture 1;ok
 
 ###############################################################################
 bot "🖥 Configuring the Screen"
 ###############################################################################
 
-running "Require password immediately after sleep or screen saver begins"
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0;ok
+# running "Require password immediately after sleep or screen saver begins"
+# defaults write com.apple.screensaver askForPassword -int 1
+# defaults write com.apple.screensaver askForPasswordDelay -int 0;ok
 
 running "Save screenshots to the sreenshots folder"
 mkdir -p ${HOME}/Pictures/Screenshots
@@ -976,8 +1000,8 @@ running "Enable subpixel font rendering on non-Apple LCDs"
 # Reference: https://github.com/kevinSuttle/macOS-Defaults/issues/17#issuecomment-266633501
 defaults write NSGlobalDomain AppleFontSmoothing -int 2;ok
 
-running "Enable HiDPI display modes (requires restart)"
-sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true;ok
+# running "Enable HiDPI display modes (requires restart)"
+# sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true;ok
 
 ###############################################################################
 bot "📂 Finder Configuration"
@@ -1163,12 +1187,12 @@ bot "🔦 Configuring Hot Corners"
 # 10: Put display to sleep
 # 11: Launchpad
 # 12: Notification Center
-running "Top left screen corner → Mission Control"
-defaults write com.apple.dock wvous-tl-corner -int 2
-defaults write com.apple.dock wvous-tl-modifier -int 0;ok
-running "Top right screen corner → Desktop"
-defaults write com.apple.dock wvous-tr-corner -int 4
-defaults write com.apple.dock wvous-tr-modifier -int 0;ok
+# running "Top left screen corner → Mission Control"
+# defaults write com.apple.dock wvous-tl-corner -int 2
+# defaults write com.apple.dock wvous-tl-modifier -int 0;ok
+# running "Top right screen corner → Desktop"
+# defaults write com.apple.dock wvous-tr-corner -int 4
+# defaults write com.apple.dock wvous-tr-modifier -int 0;ok
 running "Bottom right screen corner → Start screen saver"
 defaults write com.apple.dock wvous-br-corner -int 5
 defaults write com.apple.dock wvous-br-modifier -int 0;ok
@@ -1311,24 +1335,24 @@ bot "🔍 Spotlight"
 # running "Disable Spotlight indexing for any volume that gets mounted and has not yet been indexed"
 # Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
 # sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes";ok
-running "Change indexing order and disable some file types from being indexed"
-defaults write com.apple.spotlight orderedItems -array \
-  '{"enabled" = 1;"name" = "APPLICATIONS";}' \
-  '{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
-  '{"enabled" = 1;"name" = "DIRECTORIES";}' \
-  '{"enabled" = 1;"name" = "PDF";}' \
-  '{"enabled" = 1;"name" = "FONTS";}' \
-  '{"enabled" = 0;"name" = "DOCUMENTS";}' \
-  '{"enabled" = 0;"name" = "MESSAGES";}' \
-  '{"enabled" = 0;"name" = "CONTACT";}' \
-  '{"enabled" = 0;"name" = "EVENT_TODO";}' \
-  '{"enabled" = 0;"name" = "IMAGES";}' \
-  '{"enabled" = 0;"name" = "BOOKMARKS";}' \
-  '{"enabled" = 0;"name" = "MUSIC";}' \
-  '{"enabled" = 0;"name" = "MOVIES";}' \
-  '{"enabled" = 0;"name" = "PRESENTATIONS";}' \
-  '{"enabled" = 0;"name" = "SPREADSHEETS";}' \
-  '{"enabled" = 0;"name" = "SOURCE";}';ok
+# running "Change indexing order and disable some file types from being indexed"
+# defaults write com.apple.spotlight orderedItems -array \
+#   '{"enabled" = 1;"name" = "APPLICATIONS";}' \
+#   '{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
+#   '{"enabled" = 1;"name" = "DIRECTORIES";}' \
+#   '{"enabled" = 1;"name" = "PDF";}' \
+#   '{"enabled" = 1;"name" = "FONTS";}' \
+#   '{"enabled" = 0;"name" = "DOCUMENTS";}' \
+#   '{"enabled" = 0;"name" = "MESSAGES";}' \
+#   '{"enabled" = 0;"name" = "CONTACT";}' \
+#   '{"enabled" = 0;"name" = "EVENT_TODO";}' \
+#   '{"enabled" = 0;"name" = "IMAGES";}' \
+#   '{"enabled" = 0;"name" = "BOOKMARKS";}' \
+#   '{"enabled" = 0;"name" = "MUSIC";}' \
+#   '{"enabled" = 0;"name" = "MOVIES";}' \
+#   '{"enabled" = 0;"name" = "PRESENTATIONS";}' \
+#   '{"enabled" = 0;"name" = "SPREADSHEETS";}' \
+#   '{"enabled" = 0;"name" = "SOURCE";}';ok
 
 running "Load new settings before rebuilding the index"
 killall mds > /dev/null 2>&1;ok
@@ -1498,21 +1522,21 @@ running "Sort Activity Monitor results by CPU usage"
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0;ok
 
-running "Set columns for each tab"
-defaults write com.apple.ActivityMonitor "UserColumnsPerTab v5.0" -dict \
-    '0' '( Command, CPUUsage, CPUTime, Threads, PID, UID, Ports )' \
-    '1' '( Command, ResidentSize, Threads, Ports, PID, UID,  )' \
-    '2' '( Command, PowerScore, 12HRPower, AppSleep, UID, powerAssertion )' \
-    '3' '( Command, bytesWritten, bytesRead, Architecture, PID, UID, CPUUsage )' \
-    '4' '( Command, txBytes, rxBytes, PID, UID, txPackets, rxPackets, CPUUsage )';ok
+# running "Set columns for each tab"
+# defaults write com.apple.ActivityMonitor "UserColumnsPerTab v5.0" -dict \
+#     '0' '( Command, CPUUsage, CPUTime, Threads, PID, UID, Ports )' \
+#     '1' '( Command, ResidentSize, Threads, Ports, PID, UID,  )' \
+#     '2' '( Command, PowerScore, 12HRPower, AppSleep, UID, powerAssertion )' \
+#     '3' '( Command, bytesWritten, bytesRead, Architecture, PID, UID, CPUUsage )' \
+#     '4' '( Command, txBytes, rxBytes, PID, UID, txPackets, rxPackets, CPUUsage )';ok
 
-running "Sort columns in each tab"
-defaults write com.apple.ActivityMonitor UserColumnSortPerTab -dict \
-    '0' '{ direction = 0; sort = CPUUsage; }' \
-    '1' '{ direction = 0; sort = ResidentSize; }' \
-    '2' '{ direction = 0; sort = 12HRPower; }' \
-    '3' '{ direction = 0; sort = bytesWritten; }' \
-    '4' '{ direction = 0; sort = txBytes; }';ok
+# running "Sort columns in each tab"
+# defaults write com.apple.ActivityMonitor UserColumnSortPerTab -dict \
+#     '0' '{ direction = 0; sort = CPUUsage; }' \
+#     '1' '{ direction = 0; sort = ResidentSize; }' \
+#     '2' '{ direction = 0; sort = 12HRPower; }' \
+#     '3' '{ direction = 0; sort = bytesWritten; }' \
+#     '4' '{ direction = 0; sort = txBytes; }';ok
 
 running "Update refresh frequency (in seconds)"
 # 1: Very often (1 sec)
@@ -1629,20 +1653,20 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 bot "🌐 Configuring Google Chrome" #& Google Chrome Canary
 ###############################################################################
 
-running "Disable the all too sensitive backswipe on trackpads"
-defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false;ok
-#defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
+# running "Disable the all too sensitive backswipe on trackpads"
+# defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false;ok
+# #defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
 
-running "Disable the all too sensitive backswipe on Magic Mouse"
-defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false;ok
-#defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
+# running "Disable the all too sensitive backswipe on Magic Mouse"
+# defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false;ok
+# #defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
 
-running "Use the system-native print preview dialog"
-defaults write com.google.Chrome DisablePrintPreview -bool true;ok
-#defaults write com.google.Chrome.canary DisablePrintPreview -bool true
+# running "Use the system-native print preview dialog"
+# defaults write com.google.Chrome DisablePrintPreview -bool true;ok
+# #defaults write com.google.Chrome.canary DisablePrintPreview -bool true
 
-running "Expand the print dialog by default"
-defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true;ok
+# running "Expand the print dialog by default"
+# defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true;ok
 #defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool true
 
 ###############################################################################

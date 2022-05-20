@@ -172,9 +172,11 @@ alias standup='git log --since="yesterday" --branches"'
 
 
 # Quick Config Editing
-alias vimrc='vim ~/.vimrc'
+alias vimrc='vim ~/.config/nvim/init.vim'
 alias bashrc='vim ~/.bashrc'
 alias reload='source ~/.bashrc'
+alias vim="nvim -O"
+alias vimdiff="nvim -d"
 
 # Diskspace check
 alias diskspace_report="df -P -kHl"
@@ -197,29 +199,3 @@ alias update_brew_npm_gem='brew_update; npm install npm -g; npm update -g; sudo 
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'en0' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en0 -n -s 0 -w - | grep -a -o -E \"Host\\: .*|GET \\/.*\""
-
-
-# Open .txt files in vscode
-alias -s txt=code
-
-#kubernetes
-alias kx="kubectx"
-alias kn="kubens"
-
-alias k="kubectl"
-alias sk="kubectl -n kube-system"
-alias kg="kubectl get"
-alias kgp="kubectl get po"
-alias kga="kubectl get --all-namespaces"
-alias kd="kubectl describe"
-alias kdp="kubectl describe po"
-alias krm="kubectl delete"
-alias ke="kubectl edit"
-alias kex="kubectl exec -it"
-alias kdebug="kubectl run -i -t debug --rm --image=caarlos0/debug --restart=Never"
-alias knrunning="kubectl get pods --field-selector=status.phase!=Running"
-alias kfails="kubectl get po -owide --all-namespaces | grep "0/" | tee /dev/tty | wc -l"
-alias kimg="kubectl get deployment --output=jsonpath='{.spec.template.spec.containers[*].image}'"
-alias kvs="kubectl view-secret"
-alias kgno="kubectl get no --sort-by=.metadata.creationTimestamp"
-alias kdrain="kubectl drain --ignore-daemonsets --delete-local-data"

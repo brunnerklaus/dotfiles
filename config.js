@@ -1,13 +1,13 @@
 module.exports = {
   brew: [
     // Search tool like grep, but optimized for programmers - http://conqueringthecommandline.com/book/ack_ag
-    'ack',
+    // 'ack',
     // Code-search similar to ack - https://github.com/ggreer/the_silver_searcher
-    'ag',
+    // 'ag',
     // Application launcher and productivity software - https://www.alfredapp.com/
     'alfred',
-    'ansible',
-    'ansible-lint',
+    // 'ansible',
+    // 'ansible-lint',
     // https://github.com/wting/autojump
     'autojump',
     // command line interface to Amazon Web Services
@@ -17,10 +17,10 @@ module.exports = {
     'awsume',
     'aws-sam-cli',
     // alternative to `cat`: https://github.com/sharkdp/bat
-    'bat',
+    // 'bat',
     // Record and share terminal sessions - https: //asciinema.org
     //'asciinema',
-    // Binwalk is a fast, easy to use tool for analyzing, reverse engineering-  https: //github.com/ReFirmLabs/binwalk
+    // Binwalk is a fast, easy to use tool for analyzing, reverse engineering-  : //github.com/ReFirmLabs/binwalk
     //'binwalk',
     // Programmable completion for Bash 3.2 - https://salsa.debian.org/debian/bash-completion
     //'bash-completion',
@@ -37,9 +37,9 @@ module.exports = {
     // Command-line DNS client
     'dog',
     // Convert text between DOS, UNIX, and Mac formats - https://waterlan.home.xs4all.nl/dos2unix.html
-    'dos2unix',
+    // 'dos2unix',
     //Modern replacement for 'ls'
-    'exa',
+    // 'exa',
     // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed - https://www.gnu.org/software/findutils/
     'findutils',
     // command-line fuzzy finder
@@ -67,6 +67,7 @@ module.exports = {
     // GNU implementation of the famous stream editor - https://www.gnu.org/software/sed/
     'gnu-sed --with-default-names',
     // upgrade grep so we can get things like inverted match (-v)
+    'gopass',
     'grep --with-default-names',
     // Improved top (interactive process viewer) - https://hisham.hm/htop/
     'htop',
@@ -79,9 +80,11 @@ module.exports = {
     // Utility to optimize/compress JPEG files http://www.iki.fi/tjko/projects.html
     //'jpegoptim',
     // HTTP and GraphQL Client - https://insomnia.rest/
-    'insomnia',
+    // 'insomnia',
     // Lightweight and flexible command-line JSON processor - https://stedolan.github.io/jq/
     'jq',
+    // kubectx + kubens: Power tools for kubect - https://github.com/ahmetb/kubectx
+    'kubectx',
     // Kubernetes command-line interface - https://kubernetes.io/
     'kubernetes-cli',
     // Kubernetes CLI To Manage Your Clusters In Style!
@@ -93,11 +96,12 @@ module.exports = {
     // Install some other useful utilities like `sponge` - https://joeyh.name/code/moreutils/
     'moreutils',
     // Intercept, modify, replay, save HTTP / S traffic - https: //mitmproxy.org
-    'mitmproxy',
+    // 'mitmproxy',
     // traceroute and ping in a single tool - https: //www.bitwizard.nl/mtr/
     'mtr --with-glib',
     // Network grep - https://github.com/jpr5/ngrep
-    'ngrep',
+    // 'ngrep',
+    'mysql-client',
     // Port scanning utility for large networks - https://nmap.org/
     'nmap',
     // 'openconnect',
@@ -105,24 +109,25 @@ module.exports = {
     'pdd',
     //Linux tool to show progress for cp, rm, dd, and more...
     'progress',
+    'pwgen',
     // Reattach process (e.g., tmux) to background - https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
-    'reattach-to-user-namespace',
+    // 'reattach-to-user-namespace',
     'helm',
     // better/more recent version of screen
     'homebrew/dupes/screen',
     //'ssh-copy-id',
     // Man - in -the - middle attacks against SSL encrypted network connection - https://formulae.brew.sh/formula/sslsplit
-    'sslsplit',
+    // 'sslsplit',
     // Command - line interface bandwidth tests - https://github.com/sivel/speedtest-cli
     'speedtest-cli',
     // starship ZSH theme
-    'starship',
-    'terraform',
-    'terraformer',
-    'terragrunt',
+    // 'starship',
+    // 'terraform', // replaced by tfswitch
+    // 'terraformer',
+    // 'terragrunt',
     'terraform-docs',
-    'terraform_landscape',
-    'iam-policy-json-to-terraform',
+    // 'terraform_landscape',
+    // 'iam-policy-json-to-terraform',
     'tf-lint',
     'packer',
     // Terminal multiplexer - https://github.com/tmux/tmux
@@ -134,7 +139,9 @@ module.exports = {
     // Terminal interaction recorder and player - http://0xcc.net/ttyrec/
     //'ttyrec',
     // better, more recent vim
-    'vim --with-client-server --with-override-system-vi',
+    // 'vim --with-client-server --with-override-system-vi',
+    // Ambitious Vim-fork focused on extensibility and agility - https://neovim.io/
+    'neovim',
     // Command line and full screen utilities for browsing procfs - https://gitlab.com/procps-ng/procps
     'watch',
     // Install wget with IRI support (enable internationalized URI)
@@ -142,7 +149,9 @@ module.exports = {
     // Get the password of the wifi you're on (bash) - https://github.com/rauchg/wifi-password
     //'wifi-password'
     // Download videos from YouTube (and more sites) - https://rg3.github.io/youtube-dl/
-    'youtube-dl'
+    'youtube-dl',
+    // Tool for managing your YubiKey configuration - https://developers.yubico.com/yubikey-manager/
+    'ykman'
   ],
   cask: [
     //'adobe-creative-cloud',
@@ -157,19 +166,19 @@ module.exports = {
     // https://github.com/borgbackup/borgbackup.github.io
     //'borgbackup',
     // Get a list of all active short cuts of the current application - https://mediaatelier.com/CheatSheet/
-    'cheatsheet',
+    // 'cheatsheet',
     //'coconutbattery',
     //'diffmerge',
     // docker for mac
     'docker',
-    'dropbox',
+    // 'dropbox',
     //'evernote',
     // f.lux - https://justgetflux.com
     //'flux',
     //'filezilla',
-    'firefox',
+    // 'firefox',
     //'gitkraken',
-    'google-chrome',
+    // 'google-chrome',
     // Manage your GPG Keychain - https://gpgtools.org/
     'gpg-suite',
     // The modern media player for macOS - https://iina.io/
@@ -183,35 +192,37 @@ module.exports = {
     //'macbreakz',
     //'java',
     //'kitematic',
-    'jumpcut',
+    // 'jumpcut',
     // the macOS file archiver - https://www.keka.io/en/
-    'keka',
+    // 'keka',
     'p7zip', //dependencies for keka
     // Host-based application firewall - https://www.obdev.at/products/littlesnitch/index.html
-    'little-snitch',
+    // 'little-snitch',
     // A native OS X KeePass client https://macpassapp.org
     //'macpass',
     // 'meld',
     // App to write, plan, collaborate, and get organized - https://www.notion.so/
-    'notion',
+    // 'notion',
     //OS X player for The Hype Machine
     //'plug',
     //'nextcloud',
     //'phpstorm',
     'rectangle',
-    'signal',
-    'spotify',
+    // 'signal',
+    // 'spotify',
     //'macvim',
     // Powerful, keyboard-centric window management - http://www.irradiatedsoftware.com/sizeup/
     //'sizeup',
     //'sketchup',
-    'slack',
+    // 'slack',
+    // macOS system monitor in your menu bar - https://github.com/exelban/stats
+    'stats',
     // A sophisticated text editor for code, markup and prose - https://www.sublimetext.com
     //'sublime',
     // Free Unarchiving Software for macOS - https://theunarchiver.com/
     //'the-unarchiver', replaced with keka
-    'thunderbird',
-    'tunnelblick',
+    // 'thunderbird',
+    // 'tunnelblick',
     //'torbrowser',
     //'transmission',
     'visual-studio-code',
@@ -236,18 +247,18 @@ module.exports = {
   ],
   mas: [
     //Keynote
-    '409183694',
+    // '409183694',
     //iMovie
-    '408981434',
+    // '408981434',
     //Pages
-    '409201541',
+    // '409201541',
     //Numbers
-    '409203825',
+    // '409203825',
     //com.apple.dt.Xcode
-    '497799835',
+    // '497799835',
     //Encrypto https://macpaw.com/encrypto
     // '935235287',
     //Helium https://heliumfloats.com/
-    '1054607607'
+    // '1054607607'
   ],
 };

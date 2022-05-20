@@ -3,7 +3,6 @@
   "editor.tabSize": 2,
   "editor.tabCompletion": "on",
   "explorer.openEditors.visible": 0,
-  "editor.minimap.enabled": false,
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.renderWhitespace": "all",
   "terminal.integrated.profiles.osx": {
@@ -108,7 +107,5 @@
     "zxvf"
   ],
   "workbench.iconTheme": "file-icons",
-  "workbench.colorTheme": "Zenburn+ Dark",
-  "workbench.preferredDarkColorTheme": "Zenburn",
   "terminal.integrated.fontFamily": "MesloLGS NF"
 }
