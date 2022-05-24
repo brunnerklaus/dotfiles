@@ -220,7 +220,7 @@ module.exports = {
     // A sophisticated text editor for code, markup and prose - https://www.sublimetext.com
     //'sublime',
     // Free Unarchiving Software for macOS - https://theunarchiver.com/
-    //'the-unarchiver', replaced with keka
+    'the-unarchiver',
     // 'thunderbird',
     // 'tunnelblick',
     //'torbrowser',

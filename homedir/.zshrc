@@ -85,7 +85,7 @@ unsetopt correct
 #fortune
 
 #import work related stuff
-test -e "$HOME/bin/.workrc" && source "$HOME/bin/.workrc"
+test -e "$HOME/.workrc" && source "$HOME/.workrc"
 
 #python
 #export PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH
