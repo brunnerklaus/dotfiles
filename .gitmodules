@@ -1,12 +1,12 @@
 [submodule "oh-my-zsh"]
   path = oh-my-zsh
-  url = git://github.com/robbyrussell/oh-my-zsh.git
-[submodule "homedir/.vim/bundle/Vundle.vim"]
-  path = homedir/.vim/bundle/Vundle.vim
-  url = git://github.com/VundleVim/Vundle.vim.git
+  url = https://github.com/robbyrussell/oh-my-zsh.git
+; [submodule "homedir/.vim/bundle/Vundle.vim"]
+;   path = homedir/.vim/bundle/Vundle.vim
+;   url = https://github.com/VundleVim/Vundle.vim.git
 [submodule "z-zsh"]
 	path = z-zsh
-	url = git://github.com/rupa/z.git
+	url = https://github.com/rupa/z.git
 [submodule "powerlevel10k"]
 	path = powerlevel10k
-	url = git://github.com/romkatv/powerlevel10k.git
+	url = https://github.com/romkatv/powerlevel10k.git

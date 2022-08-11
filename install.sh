@@ -273,6 +273,9 @@ fi
 #   git pull "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 # fi
 
+# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
 bot "🗜  Dotfiles Setup"
 read -r -p "symlink ./homedir/* files in ~/ (these are the dotfiles)? [y|N] " response
 if [[ $response =~ (y|yes|Y) ]]; then
@@ -299,6 +302,36 @@ if [[ $response =~ (y|yes|Y) ]]; then
   done
 
   popd > /dev/null 2>&1
+fi
+
+bot "🎺 VIM Setup"
+read -r -p "Do you want to install vim plugins now? [y|N] " response
+if [[ $response =~ (y|yes|Y) ]];then
+  bot "Installing vim plugins"
+  vim +PlugInstall +qall > /dev/null 2>&1
+  ok
+else
+  ok "Skipped. Install by running :PlugInstall within vim"
+fi
+
+bot "🎺 VIM config"
+read -r -p "Do you want to install neovim vimrc? [y|N] " response
+if [[ $response =~ (y|yes|Y) ]]; then
+  bot "Installing vim config"
+  mkdir -p $HOME/.config/nvim/
+
+  simlink? () {
+    test "$(readlink "${1}")";
+  }
+
+  FILE=$HOME/.config/nvim/init.vim
+
+  if simlink? "${FILE}"; then
+    echo "symlink does not exists"
+    ln -s ~/.dotfiles/configs/nvim/init.vim $HOME/.config/nvim/init.vim > /dev/null 2>&1
+  else
+    echo "symlink to config already exists"
+  fi
 fi
 
 bot "🎺 Fonts Setup"
@@ -370,44 +403,6 @@ node index.js
 ok
 
 ###############################################################################
-bot "🎺 VIM config"
-###############################################################################
-read -r -p "Do you want to install neovim vimrc? [y|N] " response
-if [[ $response =~ (y|yes|Y) ]]; then
-  bot "Installing vim config"
-  mkdir -p $HOME/.config/nvim/
-
-  # https://github.com/junegunn/vim-plug
-  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
-  simlink? () {
-    test "$(readlink "${1}")";
-  }
-
-  FILE=$HOME/.config/nvim/init.vim
-
-  if simlink? "${FILE}"; then
-    echo "Symlink does not exists"
-    ln -s ~/.dotfiles/configs/nvim/init.vim $HOME/.config/nvim/init.vim
-  else
-    echo "Symlink to config already exists"
-  fi
-fi
-
-###############################################################################
-bot "🎺 VIM Setup"
-###############################################################################
-read -r -p "Do you want to install vim plugins now? [y|N] " response
-if [[ $response =~ (y|yes|Y) ]];then
-  bot "Installing vim plugins"
-  vim +PlugInstall +qall > /dev/null 2>&1
-  ok
-else
-  ok "Skipped. Install by running :PlugInstall within vim"
-fi
-
-###############################################################################
 bot "📋 Configure Visual Studio Code"
 ###############################################################################
 # Visual Studio Code :: Package list
@@ -452,7 +447,7 @@ read -r -p "Do you want to install Visual Studio Code extensions now? [y|N] " re
 if [[ $response =~ (y|yes|Y) ]]; then
   printf "\n"
 for i in ${pkglist[@]}; do
-  code --install-extension $i
+  code --install-extension $i --force
 done
 else
   ok "Skipped install Visual Studio Code extensions"

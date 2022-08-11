@@ -40,15 +40,14 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=23'
 
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
   autoload -Uz compinit
   compinit
 fi
 
-source /usr/local/share/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/opt/zsh-git-prompt/zshrc.sh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/local/share/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
+# source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /usr/local/opt/zsh-git-prompt/zshrc.sh
+# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # disable colors in ls
 # export DISABLE_LS_COLORS="true"
@@ -58,14 +57,14 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(aws colorize compleat dirhistory docker docker-compose dirpersist autojump git gulp helm history cp npm nvm terraform kubectl)
+plugins=(autojump colorize compleat cp dirhistory dirpersist docker docker-compose fzf git gulp helm history kubectl npm nvm terraform zsh-autosuggestions zsh-syntax-highlighting)
 
 #Ignore permissions and load teh completion normallly
 ZSH_DISABLE_COMPFIX=true
 
 source $ZSH/oh-my-zsh.sh
 
-source /usr/local/opt/nvm/nvm.sh --no-use
+# source /usr/local/opt/nvm/nvm.sh --no-use
 
 autoload -U add-zsh-hook
 load-nvmrc() {
@@ -90,8 +89,30 @@ test -e "$HOME/.workrc" && source "$HOME/.workrc"
 #python
 #export PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
+# autoload -U +X bashcompinit && bashcompinit
+# complete -o nospace -C /usr/local/bin/terraform terraform
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+#mysql-client
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+
+# Check for AWS CLI v2 and enable plugin if exists.
+if ! [[ -x "$(command -v aws)" ]]; then
+  export IS_AWS=False
+  echo "### Binary for aws not installed."
+else
+  export IS_AWS=True
+  plugins+=(aws)
+fi
+
+# Activate Oh-My-ZSH
+autoload bashcompinit
+bashcompinit
+source ${ZSH}/oh-my-zsh.sh
+
+# Fix to enable AWS CLI v2 completion.
+if [[ IS_AWS==True ]]; then
+  complete -C '/opt/homebrew/bin/aws_completer' aws
+fi

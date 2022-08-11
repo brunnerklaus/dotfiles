@@ -89,6 +89,8 @@ module.exports = {
     'kubernetes-cli',
     // Kubernetes CLI To Manage Your Clusters In Style!
     'k9s',
+    // kubecolor
+    'jjuarez/homebrew-tap-1/kubecolor',
     // Mac App Store CLI - https://github.com/mas-cli/mas
     'mas',
     // lsp is like ls command but more human-friendly
@@ -220,7 +222,7 @@ module.exports = {
     // A sophisticated text editor for code, markup and prose - https://www.sublimetext.com
     //'sublime',
     // Free Unarchiving Software for macOS - https://theunarchiver.com/
-    'the-unarchiver',
+    //'the-unarchiver', replaced with keka
     // 'thunderbird',
     // 'tunnelblick',
     //'torbrowser',

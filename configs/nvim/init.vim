@@ -15,8 +15,8 @@ set noshowmatch
 
 set spelllang=en
 
-set relativenumber
-set nu
+" set relativenumber
+" set nu
 
 set autoread
 
