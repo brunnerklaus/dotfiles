@@ -221,9 +221,6 @@ if [[ $response =~ (y|yes|Y) ]];then
   brew doctor
 fi
 
-# bot "Brew cleanup"
-# brew cleanup
-
 bot "Install ZSH dependencies"
 read -r -p "Do you want to run brew doctor now? [y|N] " response
 if [[ $response =~ (y|yes|Y) ]];then
@@ -237,6 +234,8 @@ if [[ $response =~ (y|yes|Y) ]];then
   require_brew zsh-git-prompt
   require_brew zsh-lovers
   require_brew zsh-syntax-highlighting
+  # Fixing insecure directories
+  compaudit | xargs chmod g-w
 fi
 
 # bot "Update ruby to latest"
@@ -349,6 +348,7 @@ if [[ $response =~ (y|yes|Y) ]];then
   require_cask font-inconsolata-dz-for-powerline
   require_cask font-inconsolata-for-powerline
   require_cask font-hack-nerd-font
+  require_cask font-meslolgs-nf
   ok
 else
   ok "Skipped font install"
@@ -964,8 +964,8 @@ bot "💻 Trackpad"
 # defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 # defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true;ok
 
-running "Tracking Speed: from 0 to 3"
-defaults write -g com.apple.trackpad.scaling -float 0;ok
+running "Tracking Speed"
+defaults write -g com.apple.trackpad.scaling -float 4;ok
 
 ###############################################################################
 bot "🕹 Keyboard, Bluetooth accessories, and input"
@@ -1796,60 +1796,9 @@ defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool 
 #cp -r init/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
 
 # ###############################################################################
-# bot "🔧 Set Dock items"
+bot "🔧 Configure macOS dock"
 # ###############################################################################
-# OLDIFS=$IFS
-# IFS=''
-#
-# apps=(
-#   Launchpad
-#   'System Preferences'
-#   iTerm
-#   Atom
-#   Safari
-#   Calendar
-#   Notes
-#   Firefox
-#   Thunderbird
-#   KeePassX
-#   Signal
-#   'Keychain Access'
-# )
-#
-# running "Removing all dock icons"
-# dockutil --no-restart --remove all $HOME;ok
-# for app in "${apps[@]}"
-# do
-#   echo "Keeping $app in Dock"
-#   dockutil --no-restart --add /Applications/$app.app $HOME;ok
-# done
-#
-# running "Restarting Dock"
-# killall Dock
-#
-# # restore $IFS
-# IFS=$OLDIFS
-
-###############################################################################
-# Kill affected applications                                                  #
-###############################################################################
-bot "📣 OK. Note that some of these changes require a logout/restart to take effect. Killing affected applications (so they can reboot)...."
-for app in "Activity Monitor" \
-        "Address Book" \
-        "Calendar" \
-        "cfprefsd" \
-        "Contacts" \
-        "Dock" \
-        "Finder" \
-        "Mail" \
-        "Messages" \
-        "Photos" \
-        "Safari" \
-        "SystemUIServer" \
-        "Terminal" \
-        "iCal"; do
-	killall "${app}" &> /dev/null
-done
+source configure-dock.sh
 
 ###############################################################################
 # Cleanup                                                                     #

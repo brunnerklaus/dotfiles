@@ -54,14 +54,14 @@ fi
 # disable autosetting terminal title.
 # export DISABLE_AUTO_TITLE="true"
 
+source $ZSH/oh-my-zsh.sh
+
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(autojump colorize compleat cp dirhistory dirpersist docker docker-compose fzf git gulp helm history kubectl npm nvm terraform zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(autojump colorize compleat cp dirhistory dirpersist docker docker-compose fzf git gulp helm history kubectl npm nvm terraform)
 
 #Ignore permissions and load teh completion normallly
 ZSH_DISABLE_COMPFIX=true
-
-source $ZSH/oh-my-zsh.sh
 
 # source /usr/local/opt/nvm/nvm.sh --no-use
 
@@ -84,12 +84,12 @@ unsetopt correct
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 #mysql-client
-export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+# export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 
 # Check for AWS CLI v2 and enable plugin if exists.
 if ! [[ -x "$(command -v aws)" ]]; then
   export IS_AWS=False
-  echo "### Binary for aws not installed."
+  # echo "### Binary for aws not installed."
 else
   export IS_AWS=True
   plugins+=(aws)

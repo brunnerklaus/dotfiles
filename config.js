@@ -19,7 +19,7 @@ module.exports = {
     // 'awsume',
     // 'aws-sam-cli',
     // alternative to `cat`: https://github.com/sharkdp/bat
-    // 'bat',
+    'bat',
     // Record and share terminal sessions - https: //asciinema.org
     //'asciinema',
     // Binwalk is a fast, easy to use tool for analyzing, reverse engineering-  : //github.com/ReFirmLabs/binwalk

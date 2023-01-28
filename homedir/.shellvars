@@ -100,12 +100,3 @@ export MANPAGER="less -X"
 
 # Installs app links to /Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
-# Case-insensitive globbing (used in pathname expansion)
-shopt -s nocaseglob;
-
-# Append to the Bash history file, rather than overwriting it
-shopt -s histappend;
-
-# Autocorrect typos in path names when using `cd`
-shopt -s cdspell;
