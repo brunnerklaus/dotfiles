@@ -231,7 +231,6 @@ if [[ $response =~ (y|yes|Y) ]];then
   require_brew zsh
   require_brew zsh-completions
   require_brew zsh-history-substring-search
-  require_brew zsh-navigation-tools
   require_brew zsh-autosuggestions
   require_brew zsh-git-prompt
   require_brew zsh-lovers
@@ -521,15 +520,34 @@ brew cleanup --force > /dev/null 2>&1
 rm -f -r /Library/Caches/Homebrew/* > /dev/null 2>&1
 ok
 
+# # quicklook extensions
+# brew cask install betterzipql
+# brew cask install qlcolorcode
+# brew cask install qlimagesize
+# brew cask install qlmarkdown
+# brew cask install qlprettypatch
+# brew cask install qlstephen
+# brew cask install quicklook-csv
+# brew cask install quicklook-json
+# brew cask install suspicious-package
+# brew cask install webpquicklook
+
+
 ###############################################################################
-bot "OS Configuration"
+bot "Configure macOS"
 ###############################################################################
 read -r -p "Do you want to update the system configurations? [y|N] " response
 if [[ -z $response || $response =~ ^(n|N) ]]; then
   open /Applications/iTerm.app
-  bot "All done"
+  bot "Configure macOS skipped......All done"
   exit
 fi
+
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 ###############################################################################
 bot "💻 Configuring General System UI/UX..."
@@ -539,6 +557,22 @@ bot "💻 Configuring General System UI/UX..."
 running "closing any system preferences to prevent issues with automated changes"
 osascript -e 'tell application "System Preferences" to quit'
 ok
+
+# running "Remove default content..."
+# sudo rm -rf ~/Public/Drop\ Box
+
+# running "Grant Full Disk Access permission..."
+# for app in "com.apple.Terminal" \
+#     "/Applications/Alfred 4.app"; do
+#     sudo tccutil --service "kTCCServiceSystemPolicyAllFiles" --insert "${app}"
+#     sudo tccutil --service "kTCCServiceSystemPolicyAllFiles" --enable "${app}"
+# done
+
+# running "Grant Accessibility permission..."
+# for app in "/Applications/Alfred 4.app"; do
+#     sudo tccutil --insert "${app}"
+#     sudo tccutil --enable "${app}"
+# done
 
 #running "Enable Dark Mode in High Sierra"
 #defaults write -g NSWindowDarkChocolate -bool TRUE;ok
@@ -555,16 +589,17 @@ ok
 #   1 = on for specific sevices
 #   2 = on for essential services
 running "Enable firewall"
-sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
+sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1;ok
 
 # Enable firewall stealth mode (no response to ICMP / ping requests)
+# https://support.apple.com/kb/PH18642
 # Source: https://support.apple.com/guide/mac-help/use-stealth-mode-to-keep-your-mac-more-secure-mh17133/mac
 #sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -int 1
 running "Enable firewall stealth mode"
-sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -int 1
+sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -int 1;ok
 
-# Enable firewall logging
-#sudo defaults write /Library/Preferences/com.apple.alf loggingenabled -int 1
+running "Enable firewall logging"
+sudo defaults write /Library/Preferences/com.apple.alf loggingenabled -int 1;ok
 
 # Do not automatically allow signed software to receive incoming connections
 #sudo defaults write /Library/Preferences/com.apple.alf allowsignedenabled -bool false
@@ -580,8 +615,8 @@ sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -int 1
 #sudo launchctl load /System/Library/LaunchDaemons/com.apple.alf.agent.plist
 #launchctl load /System/Library/LaunchAgents/com.apple.alf.useragent.plist
 
-# Disable IR remote control
-#sudo defaults write /Library/Preferences/com.apple.driver.AppleIRController DeviceEnabled -bool false
+running "Disable IR remote control"
+sudo defaults write /Library/Preferences/com.apple.driver.AppleIRController DeviceEnabled -bool false;ok
 
 # Turn Bluetooth off completely
 #sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 0
@@ -613,11 +648,17 @@ sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -int 1
 # Do not show password hints
 #sudo defaults write /Library/Preferences/com.apple.loginwindow RetriesUntilHint -int 0
 
-# running "Disable guest account login"
-# sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false;ok
+running "Disable guest account login"
+sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false;ok
 
 running "Automatically lock the login keychain for inactivity after 6 hours"
 security set-keychain-settings -t 21600 -l ~/Library/Keychains/login.keychain;ok
+
+running "Enable secure virtual memory"
+sudo defaults write /Library/Preferences/com.apple.virtualMemory UseEncryptedSwap -bool true;ok
+
+running "Show location icon in menu bar when System Services request your location"
+sudo defaults write /Library/Preferences/com.apple.locationmenu.plist ShowSystemServices -bool true;ok
 
 # Destroy FileVault key when going into standby mode, forcing a re-auth.
 # Source: https://web.archive.org/web/20160114141929/http://training.apple.com/pdf/WP_FileVault2.pdf
@@ -732,8 +773,8 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.serve
 # (Uncomment if you’re on an older Mac that messes up the animation)
 # defaults write NSGlobalDomain NSScrollAnimationEnabled -bool false;ok
 
-# running "Disable Resume system-wide"
-# defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false;ok
+running "Disable Resume system-wide"
+defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false;ok
 # TODO: might want to enable this again and set specific apps that this works great for
 # e.g. defaults write com.microsoft.word NSQuitAlwaysKeepsWindows -bool true
 
@@ -788,7 +829,7 @@ sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist > /d
 # sudo pmset -a standbydelay 86400;ok
 
 # running "Disable the sound effects on boot"
-# sudo nvram SystemAudioVolume=" ";ok
+sudo nvram SystemAudioVolume=%80;ok
 
 running "Menu bar: disable transparency"
 defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false;ok
@@ -819,9 +860,16 @@ defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2;ok
 running "Always show scrollbars"
 # Possible values: `WhenScrolling`, `Automatic` and `Always`
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always";ok
+# Possible values: `WhenScrolling`, `Automatic` and `Always`
+
+running "Disable the over-the-top focus ring animation"
+defaults write NSGlobalDomain NSUseAnimatedFocusRing -bool false;ok
 
 running "Increase window resize speed for Cocoa applications"
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001;ok
+
+running "Adjust toolbar title rollover delay"
+defaults write NSGlobalDomain NSToolbarTitleViewRolloverDelay -float 0;ok
 
 running "Expand save panel by default"
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -841,18 +889,18 @@ running "Disable the 'Are you sure you want to open this application?' dialog"
 defaults write com.apple.LaunchServices LSQuarantine -bool false;ok
 
 # https://github.com/atomantic/dotfiles/issues/30#issuecomment-514589462
-#running "Remove duplicates in the “Open With” menu (also see 'lscleanup' alias)"
-#/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user;ok
+running "Remove duplicates in the “Open With” menu (also see 'lscleanup' alias)"
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user;ok
 
 ##running "Display ASCII control characters using caret notation in standard text views"
 ### Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
 ##defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true;ok
 
-# running "Disable automatic termination of inactive apps"
-# defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true;ok
+running "Disable automatic termination of inactive apps"
+defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true;ok
 
-# running "Disable the crash reporter"
-# defaults write com.apple.CrashReporter DialogType -string "none";ok
+running "Disable the crash reporter"
+defaults write com.apple.CrashReporter DialogType -string "none";ok
 
 running "Set Help Viewer windows to non-floating mode"
 defaults write com.apple.helpviewer DevMode -bool true;ok
@@ -872,11 +920,20 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo Hos
 # running "Disable Notification Center and remove the menu bar icon"
 # launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist > /dev/null 2>&1;ok
 
-running "Disable smart quotes as they’re annoying when typing code"
+running "Disable automatic capitalization as it's annoying when typing code"
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false;ok
+
+running "Disable smart quotes as they're annoying when typing code"
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false;ok
 
-running "Disable smart dashes as they’re annoying when typing code"
+running "Disable smart dashes as they're annoying when typing code"
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false;ok
+
+running "Disable automatic period substitution as it's annoying when typing code"
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false;ok
+
+running "Disable auto-correct"
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false;ok
 
 running "Enable 24 hour time"
 defaults write -g AppleICUForce24HourTime -bool true;ok
@@ -886,6 +943,10 @@ defaults write -g AppleFirstWeekday -dict gregorian 2;ok
 
 running "Enable dark mode (Mojave only)"
 defaults write "Apple Global Domain" "AppleInterfaceStyle" "Dark";ok
+
+running "Set Use dark menu bar and Dock"
+sudo defaults write /Library/Preferences/.GlobalPreferences AppleInterfaceStyle Dark;ok
+
 #revert
 #defaults delete "Apple Global Domain" "AppleInterfaceStyle"
 
@@ -932,7 +993,9 @@ running "Disable press-and-hold for keys in favor of key repeat"
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false;ok
 
 running "Set a blazingly fast keyboard repeat rate"
+# KeyRepeat: 120, 90, 60, 30, 12, 6, 2
 defaults write NSGlobalDomain KeyRepeat -int 2 # normal minimum is 2 (30 ms)
+# InitialKeyRepeat: 120, 94, 68, 35, 25, 15
 defaults write NSGlobalDomain InitialKeyRepeat -int 10;ok # normal minimum is 15 (225 ms)
 
 running "Set language and text formats (english/US)"
@@ -946,8 +1009,14 @@ defaults write NSGlobalDomain AppleMetricUnits -bool true;ok
 running "Show language menu in the top right corner of the boot screen"
 sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true;ok
 
-#running "Disable auto-correct"
-#defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false;ok
+# running "Set the timezone"
+# see `sudo systemsetup -listtimezones` for other values
+# sudo systemsetup -settimezone "Europe/Vienna" > /dev/null
+# sudo systemsetup -setnetworktimeserver "time.apple.com"
+# sudo systemsetup -setusingnetworktime on;ok
+
+running "Do not set timezone automatically depending on location"
+sudo defaults write /Library/Preferences/com.apple.timezone.auto.plist Active -bool false;ok
 
 # Read the current state with the following. (1 for F-keys, 0 for media/brightness etc)
 #defaults read "Apple Global Domain" "com.apple.keyboard.fnState"
@@ -978,17 +1047,20 @@ bot "🖥 Configuring the Screen"
 # defaults write com.apple.screensaver askForPasswordDelay -int 0;ok
 
 running "Save screenshots to the sreenshots folder"
-mkdir -p ${HOME}/Pictures/Screenshots
+test -e "${HOME}/Pictures/Screenshots" && mkdir -p ${HOME}/Pictures/Screenshots
 defaults write com.apple.screencapture location -string "${HOME}/Pictures/Screenshots";ok
 
-running "Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)"
-defaults write com.apple.screencapture type -string "png";ok
+running "Save screenshots in JPG format (other options: BMP, GIF, JPG, PDF, TIFF)"
+defaults write com.apple.screencapture type -string "jpg";ok
 
 running "Hide all desktop icons because who need 'em'"
 defaults write com.apple.finder CreateDesktop -bool false;ok
 
 running "Disable shadow in screenshots"
 defaults write com.apple.screencapture disable-shadow -bool true;ok
+
+# Disable screenshot thumbnail previews
+#defaults write com.apple.screencapture show-thumbnail -bool FALSE
 
 running "Enable subpixel font rendering on non-Apple LCDs"
 # Enable subpixel font rendering on non-Apple LCDs
@@ -1058,6 +1130,21 @@ defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
 defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true;ok
 
+running "Enable snap-to-grid for icons on the desktop and in other icon views"
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist;ok
+
+running "Increase grid spacing for icons on the desktop and in other icon views"
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist;ok
+
+running "Increase the size of icons on the desktop and in other icon views"
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 72" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize 72" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 72" ~/Library/Preferences/com.apple.finder.plist;ok
+
 running "Use list view in all Finder windows by default"
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv";ok
@@ -1095,7 +1182,7 @@ defaults write com.apple.dock tilesize -int 49;ok
 running "Change minimize/maximize window effect to scale"
 defaults write com.apple.dock mineffect -string "scale";ok
 
-running "Minimize windows into their application’s icon"
+running "Minimize windows into their application's icon"
 defaults write com.apple.dock minimize-to-application -bool true;ok
 
 running "Enable spring loading for all Dock items"
@@ -1110,7 +1197,7 @@ defaults write com.apple.dock launchanim -bool true;ok
 running "Speed up Mission Control animations"
 defaults write com.apple.dock expose-animation-duration -float 0.1;ok
 
-running "Don’t group windows by application in Mission Control"
+running "Don't group windows by application in Mission Control"
 # (i.e. use the old Exposé behavior instead)
 defaults write com.apple.dock expose-group-by-app -bool false;ok
 
@@ -1123,7 +1210,7 @@ defaults write com.apple.dock expose-group-by-app -bool false;ok
 # running "Don’t show Dashboard as a Space"
 # defaults write com.apple.dock dashboard-in-overlay -bool true;ok
 
-running "Don’t automatically rearrange Spaces based on most recent use"
+running "Don't automatically rearrange Spaces based on most recent use"
 defaults write com.apple.dock mru-spaces -bool false;ok
 
 running "Remove the auto-hiding Dock delay"
@@ -1137,6 +1224,9 @@ defaults write com.apple.dock autohide -bool false;ok
 
 running "Make Dock icons of hidden applications translucent"
 defaults write com.apple.dock showhidden -bool true;ok
+
+running "Don't show recent applications in Dock"
+defaults write com.apple.dock show-recents -bool false;ok
 
 running "Make Dock more transparent"
 defaults write com.apple.dock hide-mirror -bool true;ok
@@ -1192,6 +1282,9 @@ running "Bottom right screen corner → Start screen saver"
 defaults write com.apple.dock wvous-br-corner -int 5
 defaults write com.apple.dock wvous-br-modifier -int 0;ok
 
+running "Start screensaver after 5 minutes"
+defaults -currentHost write com.apple.screensaver idleTime 300;ok
+
 ###############################################################################
 bot "🌍 Configuring Safari & WebKit"
 ###############################################################################
@@ -1201,12 +1294,13 @@ defaults write com.apple.Safari UniversalSearchEnabled -bool false
 defaults write com.apple.Safari SuppressSearchSuggestions -bool true;ok
 
 running "Press Tab to highlight each item on a web page"
-defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true;ok
+defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true;ok
 
-# TODO : doesn't work on macOS Mojave,
+# Doesn't work on macOS Mojave,
 # check for more info : https://apple.stackexchange.com/questions/338313/how-can-i-enable-backspace-to-go-back-in-safari-on-mojave
-running "Allow hitting the Backspace key to go to the previous page in history"
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true;ok
+# running "Allow hitting the Backspace key to go to the previous page in history"
+# defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true;ok
 
 running "Show the full URL in the address bar (note: this still hides the scheme)"
 defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true;ok
@@ -1246,24 +1340,24 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 running "Add a context menu item for showing the Web Inspector in web views"
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true;ok
 
-#running "Enable continuous spellchecking"
-#defaults write com.apple.Safari WebContinuousSpellCheckingEnabled -bool true;ok
+running "Enable continuous spellchecking"
+defaults write com.apple.Safari WebContinuousSpellCheckingEnabled -bool true;ok
 
-#running "Disable auto-correct"
-#defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool false;ok
+running "Disable auto-correct"
+defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool false;ok
 
-#running "Disable AutoFill"
-#defaults write com.apple.Safari AutoFillFromAddressBook -bool false;ok
-#defaults write com.apple.Safari AutoFillPasswords -bool false;ok
-#defaults write com.apple.Safari AutoFillCreditCardData -bool false;ok
-#defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false;ok
+running "Disable AutoFill"
+defaults write com.apple.Safari AutoFillFromAddressBook -bool false
+defaults write com.apple.Safari AutoFillPasswords -bool false
+defaults write com.apple.Safari AutoFillCreditCardData -bool false
+defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false;ok
 
-#running "Warn about fraudulent websites"
-#defaults write com.apple.Safari WarnAboutFraudulentWebsites -bool true;ok
+running "Warn about fraudulent websites"
+defaults write com.apple.Safari WarnAboutFraudulentWebsites -bool true;ok
 
-#running "Disable plug-ins"
-#defaults write com.apple.Safari WebKitPluginsEnabled -bool false;ok
-#defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled -bool false;ok
+running "Disable plug-ins"
+defaults write com.apple.Safari WebKitPluginsEnabled -bool false;ok
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled -bool false;ok
 
 running "Disable Java"
 defaults write com.apple.Safari WebKitJavaEnabled -bool false
@@ -1273,18 +1367,23 @@ running "Block pop-up windows"
 defaults write com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically -bool false
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool false;ok
 
-#running "Disable auto-playing video"
-#defaults write com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false
-#defaults write com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline -bool false
-#defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
-#defaults write com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
+running "Disable auto-playing video"
+defaults write com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false
+defaults write com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline -bool false
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
+defaults write com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
 
 running "Enable 'Do Not Track'"
 defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true;ok
 
-#running "Update extensions automatically"
-#defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true;ok
+running "Update extensions automatically"
+defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true;ok
 
+running "Deny location services access from websites"
+# 0: Deny without Prompting
+# 1: Prompt for each website once each day
+# 2: Prompt for each website one time only
+defaults write com.apple.Safari SafariGeolocationPermissionPolicy -int 0;ok
 ###############################################################################
 bot "📧 Configuring Mail"
 ###############################################################################
@@ -1428,7 +1527,7 @@ defaults write com.apple.terminal SecureKeyboardEntry -bool true;ok
 running "Disable the annoying line marks"
 defaults write com.apple.Terminal ShowLineMarks -int 0;ok
 
-running "Don’t display the annoying prompt when quitting iTerm"
+running "Don't display the annoying prompt when quitting iTerm"
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false;ok
 
 #running "Enable “focus follows mouse” for Terminal.app and all X11 apps"
@@ -1448,7 +1547,10 @@ open "./configs/Solarized Dark Patch.itermcolors";ok
 running "Installing the Zenburn theme for iTerm (opening file)"
 open "./configs/Zenburn.itermcolors";ok
 
-running "Don’t display the annoying prompt when quitting iTerm"
+running "Installing the Zenburn theme for iTerm (opening file)"
+open "./configs/Custom.itermcolors";ok
+
+running "Don't display the annoying prompt when quitting iTerm"
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false;ok
 
 running "Hide tab title bars"
@@ -1607,7 +1709,7 @@ running "Enable the automatic update check"
 defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true;ok
 
 running "Check for software updates per week, not just once per week"
-defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 7;ok
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1;ok
 
 #running "Download newly available updates in background"
 #defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1;ok
@@ -1648,21 +1750,18 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 bot "🌐 Configuring Google Chrome" #& Google Chrome Canary
 ###############################################################################
 
-# running "Disable the all too sensitive backswipe on trackpads"
-# defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false;ok
-# #defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
+running "Disable the all too sensitive backswipe on trackpads"
+defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false;ok
 
-# running "Disable the all too sensitive backswipe on Magic Mouse"
-# defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false;ok
-# #defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
+running "Disable the all too sensitive backswipe on Magic Mouse"
+defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false;ok
 
 # running "Use the system-native print preview dialog"
 # defaults write com.google.Chrome DisablePrintPreview -bool true;ok
 # #defaults write com.google.Chrome.canary DisablePrintPreview -bool true
 
 # running "Expand the print dialog by default"
-# defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true;ok
-#defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool true
+# defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true.ok
 
 ###############################################################################
 # GPGMail 2                                                                   #
@@ -1737,16 +1836,27 @@ bot "🌐 Configuring Google Chrome" #& Google Chrome Canary
 # Kill affected applications                                                  #
 ###############################################################################
 bot "📣 OK. Note that some of these changes require a logout/restart to take effect. Killing affected applications (so they can reboot)...."
-for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
-  "Dock" "Finder" "Mail" "Messages" "Safari" "SystemUIServer" \
-  "iCal" "Terminal"; do
-  killall "${app}" > /dev/null 2>&1
+for app in "Activity Monitor" \
+        "Address Book" \
+        "Calendar" \
+        "cfprefsd" \
+        "Contacts" \
+        "Dock" \
+        "Finder" \
+        "Mail" \
+        "Messages" \
+        "Photos" \
+        "Safari" \
+        "SystemUIServer" \
+        "Terminal" \
+        "iCal"; do
+	killall "${app}" &> /dev/null
 done
 
 ###############################################################################
-# Cleanup                                                #
+# Cleanup                                                                     #
 ###############################################################################
 bot "📣 Cleanup homebrew"
 brew update && brew upgrade && brew cleanup
 
-bot "🎉 Woot! All done. Kill this terminal and launch iTerm"
+bot "🎉 Woot! All done. Kill this terminal and launch iTerm, Note that some of these changes require a logout/restart to take effect."

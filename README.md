@@ -72,28 +72,54 @@ To launch fullscreen, hit `Command + Enter` in iTerm, then use `Command + d` and
 
 ![Running](http://media.giphy.com/media/5xtDarwenxEoFeIMEM0/giphy.gif)
 
-# Installation
+## Step zero
+
+**On a new machine or fresh macOS install:** before you can do much on the command line (like using Git), Xcode Command Line Tools need to be installed and the license agreed to.
+
+1. Open Applications > Utilites > Terminal
+2. Install Xcode Command Line Tools `xcode-select --install`
+3. Click install, agree to license
+
+## Getting started, using Git
 
 > Note: I recommend forking this repo in case you don't like anything I do and want to set your own preferences (and pull request them!)
 >
-> > ☢️ REVIEW WHAT THIS SCRIPT DOES PRIOR TO RUNNING: https://github.com/atomantic/dotfiles/blob/master/install.sh#L275-L1038
+> > ☢️ REVIEW WHAT THIS SCRIPT DOES PRIOR TO RUNNING: https://github.com/brunnerklaus/dotfiles/blob/master/install.sh#L275-L1038
 > It's always a good idea to review arbitrary code from the internet before running it on your machine with sudo power!
 > The creator of this repo has a high tolerance for nuking his machine and starting over. If you have a low tolerance for this, proceed with caution.
 
 ```bash
-git clone --recurse-submodules https://github.com/brunnerklaus/dotfiles ~/.dotfiles
-cd ~/.dotfiles;
+git clone --recurse-submodules https://github.com/brunnerklaus/dotfiles ~/.dotfiles && cd ~/.dotfiles;
 # run this using terminal (not iTerm, lest iTerm settings get discarded on exit)
 ./install.sh
 ```
 
 Pull latest submodules
+
 ```bash
 git pull --recurse-submodules
 ```
 
--   When it finishes, open iTerm and press `Command + ,` to open preferences. Under Profiles > Colors, select "Load Presets" and choose the `Solarized Dark Patch` scheme. If it isn't there for some reason, import it from `~/.dotfiles/configs` -- you may also need to select the `Hack` font and check the box for non-ascii font and set to `Roboto Mono For Powerline` (I've had mixed results for automating these settings--love a pull request that improves this)
--   I've also found that you need to reboot before fast key repeat will be enabled
+### Add private commands and settings to `.extra`
+
+If `~/.extra` exists, it will be sourced along with the other files. You can use this to add commands and settings you don’t want to commit to a public repository. My `~/.extra` looks something like this:
+
+```bash
+# Git credentials
+GIT_AUTHOR_NAME="Max Muster"
+GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
+git config --global user.name "$GIT_AUTHOR_NAME"
+GIT_AUTHOR_EMAIL="max@example.com"
+GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
+git config --global user.email "$GIT_AUTHOR_EMAIL"
+
+# Access tokens
+export APItoken=0000ffff0000ffff0000ffff0000ffff0000ffff
+```
+
+
+- When it finishes, open iTerm and press `Command + ,` to open preferences. Under Profiles > Colors, select "Load Presets" and choose the `Solarized Dark Patch` scheme. If it isn't there for some reason, import it from `~/.dotfiles/configs` -- you may also need to select the `Hack` font and check the box for non-ascii font and set to `Roboto Mono For Powerline` (I've had mixed results for automating these settings--love a pull request that improves this)
+- I've also found that you need to reboot before fast key repeat will be enabled
 
 > Note: if you have problems cloning the submodules behind proxy, you can use this command to convert `git://` to `https://`: `git config --global url.https://github.com/.insteadOf git://github.com/`
 
@@ -105,19 +131,19 @@ If you have existing dotfiles for configuring git, zsh, vim, etc, these will be 
 
 > The restore script does not currently restore system settings--only your original dotfiles. To restore system settings, you'll need to manually undo what you don't like (so don't forget to fork, review, tweak)
 
-# 3.x.x+ Upgrade Instructions!
+# 3.x.x+ Upgrade Instructions
 
 `3.0.0` brings huge changes. If you have made any modifications (and didn't make your own fork), you will want to backup your dotfiles prior to running `git-up` or `git pull` on `~/.dotfiles`.
 
 Do the following to upgrade your ~/.dotfiles safely:
 
-1.  backup your dotfiles: `cp -R ~/.dotfiles ~/.dotfiles_old`
-2.  `cd ~/.dotfiles`
-3.  update dotfiles: `git-up` or `git pull`
-4.  remove old submodule location: `rm -rf .vim` (now lives in `homedir/.vim`)
-5.  inspect `install.sh` and `config.js` to make sure all the software you want is installed
-6.  inspect `homedir/*` for any changes you want to port from `./dotfiles_old`
-7.  run `install.sh` again
+1. backup your dotfiles: `cp -R ~/.dotfiles ~/.dotfiles_old`
+2. `cd ~/.dotfiles`
+3. update dotfiles: `git-up` or `git pull`
+4. remove old submodule location: `rm -rf .vim` (now lives in `homedir/.vim`)
+5. inspect `install.sh` and `config.js` to make sure all the software you want is installed
+6. inspect `homedir/*` for any changes you want to port from `./dotfiles_old`
+7. run `install.sh` again
 
 # Additional
 

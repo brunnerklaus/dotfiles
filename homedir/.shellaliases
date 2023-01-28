@@ -8,6 +8,8 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
+alias home="cd ~/"
+alias downloads="cd ~/Downloads"
 
 #################################
 # Simple Program Name Shortening
@@ -29,6 +31,9 @@ alias dos2lf='dos2unix `find ./ -type f`'
 
 # Flush the DNS on Mac
 alias dnsflush='dscacheutil -flushcache'
+
+# Flush Directory Service cache
+alias flush="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
 
 # Empty the Trash on all mounted volumes and the main HDD.
 # Also, clear Apple’s System Logs to improve shell startup speed.
@@ -174,7 +179,6 @@ alias dark="pmset displaysleepnow"
 # review for standups
 alias standup='git log --since="yesterday" --branches"'
 
-
 # Quick Config Editing
 alias vimrc='vim ~/.config/nvim/init.vim'
 alias bashrc='vim ~/.bashrc'
@@ -205,3 +209,29 @@ alias sniff="sudo ngrep -d 'en0' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en0 -n -s 0 -w - | grep -a -o -E \"Host\\: .*|GET \\/.*\""
 
 alias kubectl="kubecolor"
+
+# Convert JPGs in current directory to q=50 WebP
+alias webpme='for F in *.jpg; do cwebp $F -q 50 -o $(basename ${F%.jpg}).webp; done'
+
+# Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
+alias update='sudo softwareupdate -l; mas outdated; mas upgrade; brew update; brew upgrade; brew cleanup; gem update; gem cleanup; nvm install node --latest-npm; nvm use node; npmu -gy; ncu -g;'
+
+# Launch Chrome with localStorage disabled
+alias localstorage="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-local-storage"
+
+# Show/hide hidden files in Finder
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# Speed up Time Machine backups - re-run after every reboot
+# http://www.imore.com/how-speed-your-time-machine-backups
+alias timemachine="sudo sysctl debug.lowpri_throttle_enabled=0"
+
+# Strongly check for and update Node modules in package.json
+alias npmupdate="rm -rf node_modules && rm -f package-lock.json && ncu -u && npm install"
+
+# Use bat (https://github.com/sharkdp/bat) instead of cat
+alias cat="bat"
+
+# Weekly cleanup
+alias weekly="update; flush; emptytrash;"

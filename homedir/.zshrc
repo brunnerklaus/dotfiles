@@ -44,7 +44,6 @@ if type brew &>/dev/null; then
   compinit
 fi
 
-# source /usr/local/share/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
 # source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # source /usr/local/opt/zsh-git-prompt/zshrc.sh
 # source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -74,20 +73,9 @@ load-nvmrc() {
     nvm use stable
   fi
 }
-# add-zsh-hook chpwd load-nvmrc
-# load-nvmrc
 
 # Customize to your needs...
 unsetopt correct
-
-# run fortune on new terminal :)
-#fortune
-
-#import work related stuff
-test -e "$HOME/.workrc" && source "$HOME/.workrc"
-
-#python
-#export PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH
 
 # autoload -U +X bashcompinit && bashcompinit
 # complete -o nospace -C /usr/local/bin/terraform terraform
@@ -116,3 +104,6 @@ source ${ZSH}/oh-my-zsh.sh
 if [[ IS_AWS==True ]]; then
   complete -C '/opt/homebrew/bin/aws_completer' aws
 fi
+
+# To customize prompt, run `p10k configure` or edit ~/.dotfiles/homedir/.p10k.zsh.
+[[ ! -f ~/.dotfiles/homedir/.p10k.zsh ]] || source ~/.dotfiles/homedir/.p10k.zsh

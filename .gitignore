@@ -1,7 +1,6 @@
 .DS_Store
 .AppleDouble
 .LSOverride
-# Thumbnails
 ._*
 id_rsa
 node_modules
@@ -15,3 +14,6 @@ homedir/.vim/bundle/*
 !homedir/.vim/bundle/Vundle.vim
 package-lock.json
 *-workspace
+.extra
+.workrc
+.gnupg

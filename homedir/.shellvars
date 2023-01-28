@@ -9,10 +9,13 @@ bindkey -v
 #########################################################################
 # keep history up to date, across sessions, in realtime
 # http://unix.stackexchange.com/a/48113
-export HISTCONTROL="erasedups:ignoreboth"       # no duplicate entries
+export HISTCONTROL="erasedups:ignoreboth"       # omit duplicates and commands that begin with a space from history
 export HISTSIZE=32768                           # big big history (default is 500)
 export HISTFILESIZE=$HISTSIZE                   # big big history
 type shopt &> /dev/null && shopt -s histappend  # append to history, don't overwrite it
+
+# Disable Homebrew analytics
+export HOMEBREW_NO_ANALYTICS=1;
 
 # Use standard ISO 8601 timestamp
 # %F equivalent to %Y-%m-%d
@@ -89,19 +92,20 @@ export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
 export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
-# vim as default
+# vim as default editor
 export EDITOR="vim"
 
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X"
 
-# Prefer US English and use UTF-8
-export LC_ALL="en_US.UTF-8"
-
 # Installs app links to /Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
-# here's LS_COLORS
-# github.com/trapd00r/LS_COLORS
-#command -v gdircolors >/dev/null 2>&1 || alias gdircolors="dircolors"
-#eval "$(gdircolors -b ~/.dircolors)"
+# Case-insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob;
+
+# Append to the Bash history file, rather than overwriting it
+shopt -s histappend;
+
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell;

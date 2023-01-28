@@ -8,14 +8,16 @@ module.exports = {
     'alfred',
     // 'ansible',
     // 'ansible-lint',
+    // Tool for generating GNU Standards-compliant Makefiles - https://www.gnu.org/software/automake/
+    'automake',
     // https://github.com/wting/autojump
     'autojump',
     // command line interface to Amazon Web Services
-    'awscli',
-    'awslogs',
-    'aws-shell',
-    'awsume',
-    'aws-sam-cli',
+    // 'awscli',
+    // 'awslogs',
+    // 'aws-shell',
+    // 'awsume',
+    // 'aws-sam-cli',
     // alternative to `cat`: https://github.com/sharkdp/bat
     // 'bat',
     // Record and share terminal sessions - https: //asciinema.org
@@ -33,13 +35,15 @@ module.exports = {
     // Curl - Get a file from an HTTP, HTTPS or FTP server - https://curl.haxx.se/
     'curl --with-openssl',
     // Utility for managing Mac OS X dock items - https://github.com/kcrawford/dockutil
-    'dockutil',
-    // Command-line DNS client
+    // 'dockutil',
+    // Command-line DNS client - https://dns.lookup.dog/
     'dog',
     // Convert text between DOS, UNIX, and Mac formats - https://waterlan.home.xs4all.nl/dos2unix.html
     // 'dos2unix',
     //Modern replacement for 'ls'
     // 'exa',
+    // Play, record, convert, and stream audio and video - https://ffmpeg.org/
+    'ffmpeg --with-libvpx',
     // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed - https://www.gnu.org/software/findutils/
     'findutils',
     // command-line fuzzy finder
@@ -47,7 +51,7 @@ module.exports = {
     // TCP / IP packet demultiplexer - https: //github.com/simsong/tcpflow
     'tcpflow',
     // Library for command-line editing - https://tiswww.case.edu/php/chet/readline/rltop.html
-    'readline', // ensure gawk gets good readline
+    // 'readline', // ensure gawk gets good readline
     // GNU awk utility - https://www.gnu.org/software/gawk/
     'gawk',
     // Interactive command-line tool for using emoji in commit messages
@@ -56,8 +60,8 @@ module.exports = {
     'git-delta',
     // Glances an Eye on your system. A top/htop alternative
     'glances',
-    // http://www.lcdf.org/gifsicle/ (because I'm a gif junky)
-    'gifsicle',
+    // http://www.lcdf.org/gifsicle/ (because I'm a gif junky) - https://github.com/kohler/gifsicle
+    // 'gifsicle',
     // Good-lookin' diffs for git - https://github.com/so-fancy/diff-so-fancy
     'diff-so-fancy',
     // GNU Pretty Good Privacy (PGP) package - https://gnupg.org/
@@ -67,34 +71,37 @@ module.exports = {
     // GNU implementation of the famous stream editor - https://www.gnu.org/software/sed/
     'gnu-sed --with-default-names',
     // upgrade grep so we can get things like inverted match (-v)
-    'gopass',
-    'grep --with-default-names',
+    // 'gopass',
+    // GNU grep, egrep and fgrep - https://www.gnu.org/software/grep/
+    'grep',
     // Improved top (interactive process viewer) - https://hisham.hm/htop/
     'htop',
     // better, more recent grep
-    'homebrew/dupes/grep',
+    // 'homebrew/dupes/grep',
     // Open source programming language - https://golang.org
-    'go',
+    // 'go',
     // User-friendly cURL replacement (command-line HTTP client) - https://github.com/jkbrzt/httpie
-    'httpie',
+    // 'httpie',
     // Utility to optimize/compress JPEG files http://www.iki.fi/tjko/projects.html
     //'jpegoptim',
+    // Tools and libraries to manipulate images in many formats - https://imagemagick.org/index.php
+    'imagemagick --with-webp',
     // HTTP and GraphQL Client - https://insomnia.rest/
     // 'insomnia',
     // Lightweight and flexible command-line JSON processor - https://stedolan.github.io/jq/
     'jq',
     // kubectx + kubens: Power tools for kubect - https://github.com/ahmetb/kubectx
-    'kubectx',
+    // 'kubectx',
     // Kubernetes command-line interface - https://kubernetes.io/
-    'kubernetes-cli',
+    // 'kubernetes-cli',
     // Kubernetes CLI To Manage Your Clusters In Style!
-    'k9s',
+    // 'k9s',
     // kubecolor
-    'jjuarez/homebrew-tap-1/kubecolor',
+    // 'jjuarez/homebrew-tap-1/kubecolor',
     // Mac App Store CLI - https://github.com/mas-cli/mas
     'mas',
     // lsp is like ls command but more human-friendly
-    'lsp',
+    // 'lsp',
     // Install some other useful utilities like `sponge` - https://joeyh.name/code/moreutils/
     'moreutils',
     // Intercept, modify, replay, save HTTP / S traffic - https: //mitmproxy.org
@@ -103,20 +110,30 @@ module.exports = {
     'mtr --with-glib',
     // Network grep - https://github.com/jpr5/ngrep
     // 'ngrep',
-    'mysql-client',
+    // 'mysql-client',
     // Port scanning utility for large networks - https://nmap.org/
     'nmap',
+    // OpenBSD freely-licensed SSH connectivity tools - https://www.openssh.com/
+    'openssh',
+    // Cryptography and SSL/TLS Toolkit - https://openssl.org/
+    'openssl@1.1',
     // 'openconnect',
     // Tiny date, time diff calculator with timers
     'pdd',
     //Linux tool to show progress for cp, rm, dd, and more...
     'progress',
+    // Pretty, minimal and fast ZSH prompt - https://github.com/sindresorhus/pure
+    // 'pure',
+    // Password generator - https://pwgen.sourceforge.io/
     'pwgen',
     // Reattach process (e.g., tmux) to background - https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
     // 'reattach-to-user-namespace',
-    'helm',
+    // Kubernetes package manager - https://helm.sh/
+    // 'helm',
     // better/more recent version of screen
     'homebrew/dupes/screen',
+    // Static analysis and lint tool, for (ba)sh scripts - https://www.shellcheck.net/
+    'shellcheck',
     //'ssh-copy-id',
     // Man - in -the - middle attacks against SSL encrypted network connection - https://formulae.brew.sh/formula/sslsplit
     // 'sslsplit',
@@ -127,11 +144,12 @@ module.exports = {
     // 'terraform', // replaced by tfswitch
     // 'terraformer',
     // 'terragrunt',
-    'terraform-docs',
+    // 'terraform-docs',
     // 'terraform_landscape',
     // 'iam-policy-json-to-terraform',
-    'tf-lint',
-    'packer',
+    // 'tf-lint',
+    // Tool for creating identical machine images for multiple platforms - https://packer.io
+    // 'packer',
     // Terminal multiplexer - https://github.com/tmux/tmux
     'tmux',
     // If you want to get it done, first write it down - http://todotxt.org/
@@ -148,50 +166,60 @@ module.exports = {
     'watch',
     // Install wget with IRI support (enable internationalized URI)
     'wget --enable-iri',
+    // Image format providing lossless and lossy compression for web images - https://developers.google.com/speed/webp/
+    // 'webp',
     // Get the password of the wifi you're on (bash) - https://github.com/rauchg/wifi-password
     //'wifi-password'
     // Download videos from YouTube (and more sites) - https://rg3.github.io/youtube-dl/
     'youtube-dl',
     // Tool for managing your YubiKey configuration - https://developers.yubico.com/yubikey-manager/
-    'ykman'
+    'ykman',
+    // New zlib (gzip, deflate) compatible compressor - https://github.com/google/zopfli
+    'zopfli',
   ],
   cask: [
     //'adobe-creative-cloud',
     //'adium',
     //'amazon-cloud-drive',
     // 'atom',
-    'aws-vault',
+    // 'aws-vault',
     // Padbury Clock
     //'padbury-clock',
     // 'box-sync',
     //'comicbooklover',
     // https://github.com/borgbackup/borgbackup.github.io
     //'borgbackup',
+    // Server and cloud storage browser - https://cyberduck.io/
+    // 'cyberduck',
     // Get a list of all active short cuts of the current application - https://mediaatelier.com/CheatSheet/
     // 'cheatsheet',
     //'coconutbattery',
     //'diffmerge',
     // docker for mac
     'docker',
-    // 'dropbox',
-    //'evernote',
+    'dropbox',
     // f.lux - https://justgetflux.com
     //'flux',
     //'filezilla',
-    // 'firefox',
+    'firefox',
+    // Tool to create GIFs from videos - https://www.gifrocket.com/
+    'gifrocket',
+    // Update multiple git repositories at once - https://github.com/earwig/git-repo-updater
+    'gitup',
     //'gitkraken',
-    // 'google-chrome',
+    'google-chrome',
     // Manage your GPG Keychain - https://gpgtools.org/
-    'gpg-suite',
+    // 'gpg-suite',
     // The modern media player for macOS - https://iina.io/
     'iina',
     //'intel-power-gadget',
     //'ireadfast',
     // Replacement for Terminal and the successor to iTerm - https://www.iterm2.com/
     'iterm2',
-    //'little-snitch',
     // Your Personal Ergonomic Assistant - http://www.publicspace.net/MacBreakZ/
     //'macbreakz',
+    // Calculator and converter application - https://numi.app/
+    // 'numi',
     //'java',
     //'kitematic',
     // 'jumpcut',
@@ -209,6 +237,8 @@ module.exports = {
     //'plug',
     //'nextcloud',
     //'phpstorm',
+    // Imaging utility to install operating systems to a microSD card - https://www.raspberrypi.org/downloads/
+    // 'raspberry-pi-imager',
     'rectangle',
     // 'signal',
     // 'spotify',
@@ -218,7 +248,7 @@ module.exports = {
     //'sketchup',
     // 'slack',
     // macOS system monitor in your menu bar - https://github.com/exelban/stats
-    'stats',
+    // 'stats',
     // A sophisticated text editor for code, markup and prose - https://www.sublimetext.com
     //'sublime',
     // Free Unarchiving Software for macOS - https://theunarchiver.com/
@@ -230,7 +260,11 @@ module.exports = {
     'visual-studio-code',
     //'vlc',
     //'virtualbox',
+    // Lossless audio decoder - https://tmkk.undo.jp/xld/index_e.html
+    // 'xld',
     //'xquartz'
+    // Video communication and virtual meeting platform - https://www.zoom.us/
+    // 'zoom',
   ],
   gem: [],
   npm: [
