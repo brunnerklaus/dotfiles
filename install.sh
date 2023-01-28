@@ -224,8 +224,6 @@ fi
 bot "Install ZSH dependencies"
 read -r -p "Do you want to run brew doctor now? [y|N] " response
 if [[ $response =~ (y|yes|Y) ]];then
-  # skip those GUI clients, git command-line all the way
-  require_brew git
   # update zsh to latest and install plugins
   require_brew zsh
   require_brew zsh-completions

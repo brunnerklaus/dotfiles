@@ -114,7 +114,7 @@ add_app_to_dock "Photos"
 add_app_to_dock "Calendar"
 add_app_to_dock "Notes"
 add_app_to_dock "Firefox"
-add_app_to_dock "System Preferences"
+add_app_to_dock "System Settings"
 # add_spacer_to_dock
 add_app_to_dock "Signal"
 add_app_to_dock "Visual Studio Code"
