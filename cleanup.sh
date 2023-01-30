@@ -35,18 +35,18 @@ deleteCaches() {
 # Take in arguments
 # Can add more arguments in the future
 while getopts ":n" opt; do
-  case ${opt} in
-    n ) doUpdates=false
-      ;;
-    \? )
+    case ${opt} in
+        n ) doUpdates=false
+        ;;
+        \? )
         printf 'A Mac Cleanup Utility\n'
         printf 'USAGE:\n cleanup [FLAGS]\n\n'
         printf 'FLAGS:\n'
         printf -- '-h,   prints help menu\n'
         printf -- '-n    no brew updates\n'
         exit
-      ;;
-  esac
+        ;;
+    esac
 done
 
 
@@ -117,22 +117,22 @@ rm -rfv ~/Library/Developer/Xcode/iOS Device Logs/* &>/dev/null
 #  xcrun simctl erase all
 #fi
 
-# ###########################################################
-# CocoaPods cache
-# ###########################################################
-if [ -d "/Users/${HOST}/Library/Caches/CocoaPods" ]; then
-    bot "Cleanup CocoaPods cache..."
-    rm -rfv ~/Library/Caches/CocoaPods/* &>/dev/null
-fi
+# # ###########################################################
+# # CocoaPods cache
+# # ###########################################################
+# if [ -d "/Users/${HOST}/Library/Caches/CocoaPods" ]; then
+#     bot "Cleanup CocoaPods cache..."
+#     rm -rfv ~/Library/Caches/CocoaPods/* &>/dev/null
+# fi
 
 # ###########################################################
 # Gradle cache
 # ###########################################################
 # support delete gradle caches
-if [ -d "/Users/${HOST}/.gradle/caches" ]; then
-    bot "Cleanup Gradle cache..."
-    rm -rfv ~/.gradle/caches/ &> /dev/null
-fi
+# if [ -d "/Users/${HOST}/.gradle/caches" ]; then
+#     bot "Cleanup Gradle cache..."
+#     rm -rfv ~/.gradle/caches/ &> /dev/null
+# fi
 
 # ###########################################################
 # Clear Dropbox Cache
