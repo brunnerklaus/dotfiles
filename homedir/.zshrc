@@ -38,11 +38,11 @@ export DISABLE_AUTO_UPDATE="true"
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=23'
 
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-  autoload -Uz compinit
-  compinit
-fi
+# if type brew &>/dev/null; then
+#   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+#   autoload -Uz compinit
+#   compinit
+# fi
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 

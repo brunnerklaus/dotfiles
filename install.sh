@@ -444,15 +444,15 @@ else
 fi
 
 ###############################################################################
-bot "📋 Install k9s configuration"
+# bot "📋 Install k9s configuration"
 ###############################################################################
-read -r -p "Do you want to install k9s configuration now? [y|N] " response
-if [[ $response =~ (y|yes|Y) ]]; then
-  cp ./k9s/solarized_dark.yml ~/Library/Preferences/k9s/skin.yml
-  cp ./k9s/views.yml ~/Library/Preferences/k9s/views.yml
-else
-  ok "Skipped installing k9s configuration"
-fi
+# read -r -p "Do you want to install k9s configuration now? [y|N] " response
+# if [[ $response =~ (y|yes|Y) ]]; then
+#   cp ./k9s/solarized_dark.yml ~/Library/Preferences/k9s/skin.yml
+#   cp ./k9s/views.yml ~/Library/Preferences/k9s/views.yml
+# else
+#   ok "Skipped installing k9s configuration"
+# fi
 
 # ###############################################################################
 # bot "📋 Configure Atom editor packages"
