@@ -120,7 +120,7 @@ add_app_to_dock "Signal"
 add_app_to_dock "Visual Studio Code"
 # add_spacer_to_dock
 add_app_to_dock "Thunderbird"
-add_app_to_dock "KeePassX"
+add_app_to_dock "KeePassXC"
 add_app_to_dock "Notion"
 add_app_to_dock "iTerm"
 # add_folder_to_dock "${HOME}/Pictures/Screenshots" -s 2 -d 0 -v 2
