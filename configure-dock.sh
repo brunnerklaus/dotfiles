@@ -107,8 +107,6 @@ function reset_dock {
 # WARNING: permanently clears existing dock
 clear_dock
 
-add_app_to_dock "Finder"
-# add_spacer_to_dock
 add_app_to_dock "Launchpad"
 add_app_to_dock "Photos"
 add_app_to_dock "Calendar"
