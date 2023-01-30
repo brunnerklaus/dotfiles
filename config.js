@@ -10,8 +10,8 @@ module.exports = {
     // 'ansible-lint',
     // Tool for generating GNU Standards-compliant Makefiles - https://www.gnu.org/software/automake/
     'automake',
-    // https://github.com/wting/autojump
-    'autojump',
+    // a faster way to navigate your filesystem - https://github.com/wting/autojump
+    // 'autojump',
     // command line interface to Amazon Web Services
     // 'awscli',
     // 'awslogs',
@@ -31,7 +31,7 @@ module.exports = {
     // GNU File, Shell, and Text utilities - https://www.gnu.org/software/coreutils/coreutils.html
     'coreutils',
     // ccat is the colorizing cat. It works similar to cat but displays content with syntax highlighting.
-    'ccat',
+    // 'ccat',
     // Curl - Get a file from an HTTP, HTTPS or FTP server - https://curl.haxx.se/
     'curl --with-openssl',
     // Utility for managing Mac OS X dock items - https://github.com/kcrawford/dockutil
@@ -46,10 +46,10 @@ module.exports = {
     'ffmpeg --with-libvpx',
     // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed - https://www.gnu.org/software/findutils/
     'findutils',
-    // command-line fuzzy finder
-    'fzf',
+    // Command-line fuzzy finder written in Go - https://github.com/junegunn/fzf
+    // 'fzf',
     // TCP / IP packet demultiplexer - https: //github.com/simsong/tcpflow
-    'tcpflow',
+    // 'tcpflow',
     // Library for command-line editing - https://tiswww.case.edu/php/chet/readline/rltop.html
     // 'readline', // ensure gawk gets good readline
     // GNU awk utility - https://www.gnu.org/software/gawk/
@@ -131,7 +131,9 @@ module.exports = {
     // Kubernetes package manager - https://helm.sh/
     // 'helm',
     // better/more recent version of screen
-    'homebrew/dupes/screen',
+    // 'homebrew/dupes/screen',
+    // Terminal multiplexer with VT100/ANSI terminal emulation - https://www.gnu.org/software/screen
+    'screen',
     // Static analysis and lint tool, for (ba)sh scripts - https://www.shellcheck.net/
     'shellcheck',
     //'ssh-copy-id',
@@ -175,7 +177,7 @@ module.exports = {
     // Tool for managing your YubiKey configuration - https://developers.yubico.com/yubikey-manager/
     'ykman',
     // New zlib (gzip, deflate) compatible compressor - https://github.com/google/zopfli
-    'zopfli',
+    // 'zopfli',
   ],
   cask: [
     //'adobe-creative-cloud',
@@ -203,9 +205,9 @@ module.exports = {
     //'filezilla',
     'firefox',
     // Tool to create GIFs from videos - https://www.gifrocket.com/
-    'gifrocket',
+    // 'gifrocket',
     // Update multiple git repositories at once - https://github.com/earwig/git-repo-updater
-    'gitup',
+    // 'gitup',
     //'gitkraken',
     'google-chrome',
     // Manage your GPG Keychain - https://gpgtools.org/
@@ -225,14 +227,14 @@ module.exports = {
     // 'jumpcut',
     // the macOS file archiver - https://www.keka.io/en/
     // 'keka',
-    'p7zip', //dependencies for keka
+    // 'p7zip', //dependencies for keka
     // Host-based application firewall - https://www.obdev.at/products/littlesnitch/index.html
     // 'little-snitch',
     // A native OS X KeePass client https://macpassapp.org
     //'macpass',
     // 'meld',
     // App to write, plan, collaborate, and get organized - https://www.notion.so/
-    // 'notion',
+    'notion',
     //OS X player for The Hype Machine
     //'plug',
     //'nextcloud',

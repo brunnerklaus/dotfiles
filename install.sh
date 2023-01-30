@@ -335,7 +335,6 @@ fi
 bot "🎺 Fonts Setup"
 read -r -p "Install fonts? [y|N] " response
 if [[ $response =~ (y|yes|Y) ]];then
-  bot "🎹 Installing fonts"
   # need fontconfig to install/build fonts
   require_brew fontconfig
   ./fonts/install.sh
