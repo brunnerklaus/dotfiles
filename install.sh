@@ -263,17 +263,6 @@ fi
 # ln -s "oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" "oh-my-zsh/custom/themes/spaceship.zsh-theme"
 # fi
 
-# bot "ZSH autosuggestions"
-# # https://github.com/zsh-users/zsh-autosuggestions
-# if [[ ! -d "$ZSH_CUSTOM/themes/spaceship-prompt" ]]; then
-# git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-# else
-#   git pull "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-# fi
-
-# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
 bot "🗜  Dotfiles Setup"
 read -r -p "symlink ./homedir/* files in ~/ (these are the dotfiles)? [y|N] " response
 if [[ $response =~ (y|yes|Y) ]]; then

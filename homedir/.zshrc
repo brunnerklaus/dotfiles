@@ -44,9 +44,7 @@ if type brew &>/dev/null; then
   compinit
 fi
 
-# source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# source /usr/local/opt/zsh-git-prompt/zshrc.sh
-# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # disable colors in ls
 # export DISABLE_LS_COLORS="true"
