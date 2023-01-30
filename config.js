@@ -231,6 +231,8 @@ module.exports = {
     // Host-based application firewall - https://www.obdev.at/products/littlesnitch/index.html
     // 'little-snitch',
     // A native OS X KeePass client https://macpassapp.org
+    // Password manager app - https://keepassxc.org/
+    'keepassxc',
     //'macpass',
     // 'meld',
     // App to write, plan, collaborate, and get organized - https://www.notion.so/
@@ -242,7 +244,7 @@ module.exports = {
     // Imaging utility to install operating systems to a microSD card - https://www.raspberrypi.org/downloads/
     // 'raspberry-pi-imager',
     'rectangle',
-    // 'signal',
+    'signal',
     // 'spotify',
     //'macvim',
     // Powerful, keyboard-centric window management - http://www.irradiatedsoftware.com/sizeup/
@@ -255,7 +257,8 @@ module.exports = {
     //'sublime',
     // Free Unarchiving Software for macOS - https://theunarchiver.com/
     //'the-unarchiver', replaced with keka
-    // 'thunderbird',
+    // Customizable email client - https://www.thunderbird.net/
+    'thunderbird',
     // 'tunnelblick',
     //'torbrowser',
     //'transmission',
