@@ -11,7 +11,7 @@ module.exports = {
     // Tool for generating GNU Standards-compliant Makefiles - https://www.gnu.org/software/automake/
     'automake',
     // a faster way to navigate your filesystem - https://github.com/wting/autojump
-    // 'autojump',
+    'autojump',
     // command line interface to Amazon Web Services
     // 'awscli',
     // 'awslogs',
@@ -47,7 +47,7 @@ module.exports = {
     // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed - https://www.gnu.org/software/findutils/
     'findutils',
     // Command-line fuzzy finder written in Go - https://github.com/junegunn/fzf
-    // 'fzf',
+    'fzf',
     // TCP / IP packet demultiplexer - https: //github.com/simsong/tcpflow
     // 'tcpflow',
     // Library for command-line editing - https://tiswww.case.edu/php/chet/readline/rltop.html
@@ -111,6 +111,8 @@ module.exports = {
     // Network grep - https://github.com/jpr5/ngrep
     // 'ngrep',
     // 'mysql-client',
+    // Fast, highly customisable system info script - https://github.com/dylanaraps/neofetch
+    'neofetch',
     // Port scanning utility for large networks - https://nmap.org/
     'nmap',
     // OpenBSD freely-licensed SSH connectivity tools - https://www.openssh.com/
