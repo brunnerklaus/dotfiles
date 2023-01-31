@@ -390,22 +390,22 @@ bot "📋 Configure Visual Studio Code"
 ###############################################################################
 # Visual Studio Code :: Package list
 pkglist=(
-alefragnani.project-manager
+arturock.gitstash
 DavidAnson.vscode-markdownlint
 donjayamanne.githistory
-eamodio.gitlens
-equinusocio.vsc-material-theme-icons
+dunstontc.viml
+dzhavat.git-cheatsheet
 esbenp.prettier-vscode
 file-icons.file-icons
 GitHub.github-vscode-theme
 GitHub.vscode-pull-request-github
 Gruntfuggly.todo-tree
 hashicorp.terraform
-hediet.vscode-drawio
 HookyQR.beautify
 huizhou.githd
 igolskyi.vscode-zenburn-plus-theme
 jaspernorth.vscode-pigments
+JSCharting-JavaScript-Charts.vscode-jscharting
 jvalecillos.gpg
 mhutchie.git-graph
 ms-azuretools.vscode-docker
@@ -415,15 +415,13 @@ ms-toolsai.jupyter
 ms-toolsai.jupyter-keymap
 nicola-granata.zenburn-dark-matter
 oderwat.indent-rainbow
+pomber.git-file-history
 ryanolsonx.zenburn
 shardulm94.trailing-spaces
 shd101wyy.markdown-preview-enhanced
-shuworks.vscode-table-formatter
 torn4dom4n.latex-support
 Tyriar.sort-lines
 wayou.file-icons-mac
-yzane.markdown-pdf
-vscode-viml-syntax
 )
 
 read -r -p "Do you want to install Visual Studio Code extensions now? [y|N] " response
