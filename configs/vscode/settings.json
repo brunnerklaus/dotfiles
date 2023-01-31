@@ -112,5 +112,5 @@
   "window.zoomLevel": 1,
   "files.insertFinalNewline": true,
   "workbench.iconTheme": "file-icons",
-  "editor.fontFamily": "Menlo",
+  "editor.fontFamily": "Menlo"
 }
