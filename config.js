@@ -58,6 +58,8 @@ module.exports = {
     'gitmoji',
     // A viewer for git and diff output
     'git-delta',
+    // Open GitHub webpages from a terminal - https://github.com/jeffreyiacono/git-open
+    'git-open',
     // Glances an Eye on your system. A top/htop alternative
     'glances',
     // http://www.lcdf.org/gifsicle/ (because I'm a gif junky) - https://github.com/kohler/gifsicle
@@ -275,6 +277,7 @@ module.exports = {
   ],
   gem: [],
   npm: [
+    // 'alfred-amphetamine',
     //'antic',
     //'buzzphrase',
     //'eslint',
@@ -282,6 +285,7 @@ module.exports = {
     'instant-markdown-d',
     // 'generator-dockerize',
     // 'gulp',
+    'npm-check',
     'npm-check-updates',
     'prettyjson',
     //'trash',
