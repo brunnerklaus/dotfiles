@@ -21,7 +21,7 @@ You don't need to install or configure anything upfront! This works with a brand
   - [SSD-specific tweaks](#ssd-specific-tweaks)
   - [General System Changes](#general-system-changes)
   - [Security](#security)
-  - [Trackpad, mouse, keyboard, Bluetooth accessories, and input]  (#trackpad-mouse-keyboard-bluetooth-accessories-and-input)
+  - [Trackpad, mouse, keyboard, Bluetooth accessories, and input](#trackpad-mouse-keyboard-bluetooth-accessories-and-input)
   - [Configuring the Screen](#configuring-the-screen)
   - [Finder Configs](#finder-configs)
   - [Dock & Dashboard](#dock--dashboard)
