@@ -421,7 +421,6 @@ shardulm94.trailing-spaces
 shd101wyy.markdown-preview-enhanced
 torn4dom4n.latex-support
 Tyriar.sort-lines
-wayou.file-icons-mac
 )
 
 read -r -p "Do you want to install Visual Studio Code extensions now? [y|N] " response

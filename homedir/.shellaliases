@@ -231,7 +231,7 @@ alias timemachine="sudo sysctl debug.lowpri_throttle_enabled=0"
 alias npmupdate="rm -rf node_modules && rm -f package-lock.json && ncu -u && npm install"
 
 # Use bat (https://github.com/sharkdp/bat) instead of cat
-alias cat="bat"
+# alias cat="bat"
 
 # Weekly cleanup
 alias weekly="update; flush; emptytrash;"

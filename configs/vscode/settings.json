@@ -106,6 +106,8 @@
     "youneedabudget",
     "zxvf"
   ],
-  "workbench.iconTheme": "file-icons",
-  "terminal.integrated.fontFamily": "MesloLGS NF"
+  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "window.zoomLevel": 1,
+  "files.insertFinalNewline": true,
+  "workbench.iconTheme": "file-icons"
 }
