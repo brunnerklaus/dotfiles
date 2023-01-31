@@ -106,8 +106,11 @@
     "youneedabudget",
     "zxvf"
   ],
-  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "terminal.external.linuxExec":"iterm",
+  "terminal.external.osxExec":"Iterm.app",
+  "terminal.integrated.fontFamily": "monospace, PowerlineSymbols",
   "window.zoomLevel": 1,
   "files.insertFinalNewline": true,
-  "workbench.iconTheme": "file-icons"
+  "workbench.iconTheme": "file-icons",
+  "editor.fontFamily": "Menlo",
 }
