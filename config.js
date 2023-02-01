@@ -29,6 +29,8 @@ module.exports = {
     // Install GNU core utilities (those that come with macOS are outdated)
     // Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
     // GNU File, Shell, and Text utilities - https://www.gnu.org/software/coreutils/coreutils.html
+    // Deduplicating archiver with compression and authenticated encryption - https://borgbackup.org/
+    //'borgbackup',
     'coreutils',
     // ccat is the colorizing cat. It works similar to cat but displays content with syntax highlighting.
     // 'ccat',
@@ -193,8 +195,6 @@ module.exports = {
     //'padbury-clock',
     // 'box-sync',
     //'comicbooklover',
-    // https://github.com/borgbackup/borgbackup.github.io
-    //'borgbackup',
     // Server and cloud storage browser - https://cyberduck.io/
     // 'cyberduck',
     // Get a list of all active short cuts of the current application - https://mediaatelier.com/CheatSheet/
