@@ -233,7 +233,7 @@ module.exports = {
     // 'keka',
     // 'p7zip', //dependencies for keka
     // Host-based application firewall - https://www.obdev.at/products/littlesnitch/index.html
-    // 'little-snitch',
+    'little-snitch',
     // A native OS X KeePass client https://macpassapp.org
     // Password manager app - https://keepassxc.org/
     'keepassxc',
