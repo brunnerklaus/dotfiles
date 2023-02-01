@@ -196,12 +196,12 @@ if [[ $? != 0 ]]; then
     error "Unable to install homebrew, script $0 abort!"
     exit 2
   fi
-  brew analytics off
 else
   ok
   bot "Homebrew"
   read -r -p "Run brew update && upgrade? [y|N] " response
   if [[ $response =~ (y|yes|Y) ]]; then
+    brew analytics off
     action "Updating homebrew..."
     brew update
     ok "Homebrew updated"
