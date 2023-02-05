@@ -1,6 +1,3 @@
-[include]
-  path = ~/.gitconfig-user
-
 # User and email settings
 # Generated via .extras in .profile
 [include]

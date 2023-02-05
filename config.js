@@ -132,6 +132,8 @@ module.exports = {
     // 'pure',
     // Password generator - https://pwgen.sourceforge.io/
     'pwgen',
+    // Utility that provides fast incremental file transfer - https://rsync.samba.org/
+    'rsync',
     // Reattach process (e.g., tmux) to background - https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
     // 'reattach-to-user-namespace',
     // Kubernetes package manager - https://helm.sh/
@@ -202,7 +204,7 @@ module.exports = {
     //'coconutbattery',
     //'diffmerge',
     // docker for mac
-    'docker',
+    //'docker',
     'dropbox',
     // f.lux - https://justgetflux.com
     //'flux',

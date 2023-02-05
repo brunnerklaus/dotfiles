@@ -105,3 +105,6 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.dotfiles/homedir/.p10k.zsh.
 [[ ! -f ~/.dotfiles/homedir/.p10k.zsh ]] || source ~/.dotfiles/homedir/.p10k.zsh
+
+export PATH=/opt/homebrew/bin:$PATH
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
