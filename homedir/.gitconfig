@@ -1,8 +1,3 @@
-# User and email settings
-# Generated via .extras in .profile
-[include]
-  path = .gitconfig.extra
-
 [alias]
   # most commonly used
   # Shorthand for checkout
@@ -550,3 +545,8 @@
 [url "git://gist.github.com/"]
 
   insteadOf = "gist:"
+[user]
+	name = Klaus Brunner
+	email = bruklaus@gmmail.com
+[github]
+	user = brunnerklaus
