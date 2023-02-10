@@ -45,7 +45,7 @@ module.exports = {
     //Modern replacement for 'ls'
     // 'exa',
     // Play, record, convert, and stream audio and video - https://ffmpeg.org/
-    'ffmpeg --with-libvpx',
+    'ffmpeg',
     // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed - https://www.gnu.org/software/findutils/
     'findutils',
     // Command-line fuzzy finder written in Go - https://github.com/junegunn/fzf
