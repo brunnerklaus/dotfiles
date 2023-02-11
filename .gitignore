@@ -15,5 +15,5 @@ homedir/.vim/bundle/*
 package-lock.json
 *-workspace
 .extra
-.workrc
+.gitconfig_local
 .gnupg

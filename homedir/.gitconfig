@@ -1,7 +1,8 @@
-# User and email settings
-# Generated via .extras in .profile
+[user]
+# These values are set in ~/.gitconfig_local
+
 [include]
-  path = .gitconfig.extra
+  path = ~/.gitconfig_local
 
 [alias]
   # most commonly used
@@ -129,6 +130,9 @@
   # Pretty log of commits. Supports options of git log
   # The 8-char abbreviation works well with the default pretty format below
   l = log --abbrev-commit --abbrev=8
+
+  # # View abbreviated SHA, description, and history graph of the latest 20 commits
+	# l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
   # Reverse log
   lr = log --abbrev-commit --abbrev=8 --reverse
@@ -354,7 +358,7 @@
   fontdiff = -family Monaco -size 10 -weight normal -slant roman -underline 0 -overstrike 0
 
 [core]
- # Global `.gitattributes`
+  # Global `.gitattributes`
   attributesfile = ~/.gitattributes
 
   #`.gitignore`

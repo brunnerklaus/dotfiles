@@ -100,21 +100,18 @@ Pull latest submodules
 git pull --recurse-submodules
 ```
 
-### Add private commands and settings to `.extra`
+### Add private commands and settings to `~/.extra`
 
-If `~/.extra` exists, it will be sourced along with the other files. You can use this to add commands and settings you don’t want to commit to a public repository. My `~/.extra` looks something like this:
+If `~/.extra` exists, it will be sourced along with the other files. You can use this to add commands, tokens or settings you don’t want to commit to a public repository.
+
+### Add private git settings to `~/.gitconfig_local`
+
+You can use to set git settings in  `~/.gitconfig_local`. Example looks like this:
 
 ```bash
-# Git credentials
-GIT_AUTHOR_NAME="Max Muster"
-GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
-git config --global user.name "$GIT_AUTHOR_NAME"
-GIT_AUTHOR_EMAIL="max@example.com"
-GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
-git config --global user.email "$GIT_AUTHOR_EMAIL"
-
-# Access tokens
-export APItoken=0000ffff0000ffff0000ffff0000ffff0000ffff
+[user]
+  name = Max Muster
+  email = max@example.com
 ```
 
 - When it finishes, open iTerm and press `Command + ,` to open preferences. Under Profiles > Colors, select "Load Presets" and choose the `Solarized Dark Patch` scheme. If it isn't there for some reason, import it from `~/.dotfiles/configs` -- you may also need to select the `Hack` font and check the box for non-ascii font and set to `Roboto Mono For Powerline` (I've had mixed results for automating these settings--love a pull request that improves this)
