@@ -29,8 +29,10 @@ module.exports = {
     // Install GNU core utilities (those that come with macOS are outdated)
     // Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
     // GNU File, Shell, and Text utilities - https://www.gnu.org/software/coreutils/coreutils.html
+    // Cross-platform make - https://www.cmake.org/
+    'cmake',
     // Deduplicating archiver with compression and authenticated encryption - https://borgbackup.org/
-    //'borgbackup',
+    'borgbackup',
     'coreutils',
     // ccat is the colorizing cat. It works similar to cat but displays content with syntax highlighting.
     // 'ccat',
@@ -60,6 +62,8 @@ module.exports = {
     'gitmoji',
     // A viewer for git and diff output
     'git-delta',
+    // Git extension for versioning large files - https://git-lfs.github.com/
+    'git-lfs',
     // Open GitHub webpages from a terminal - https://github.com/jeffreyiacono/git-open
     'git-open',
     // Glances an Eye on your system. A top/htop alternative
@@ -128,10 +132,14 @@ module.exports = {
     'pdd',
     //Linux tool to show progress for cp, rm, dd, and more...
     'progress',
+    // Protocol buffers (Google's data interchange format) - https://github.com/protocolbuffers/protobuf/
+    'protobuf',
     // Pretty, minimal and fast ZSH prompt - https://github.com/sindresorhus/pure
     // 'pure',
     // Password generator - https://pwgen.sourceforge.io/
     'pwgen',
+    // Safe, concurrent, practical language - https://www.rust-lang.org/
+    'rust',
     // Utility that provides fast incremental file transfer - https://rsync.samba.org/
     'rsync',
     // Reattach process (e.g., tmux) to background - https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
@@ -175,7 +183,7 @@ module.exports = {
     // Command line and full screen utilities for browsing procfs - https://gitlab.com/procps-ng/procps
     'watch',
     // Install wget with IRI support (enable internationalized URI)
-    'wget --enable-iri',
+    'wget',
     // Image format providing lossless and lossy compression for web images - https://developers.google.com/speed/webp/
     // 'webp',
     // Get the password of the wifi you're on (bash) - https://github.com/rauchg/wifi-password
@@ -203,8 +211,8 @@ module.exports = {
     // 'cheatsheet',
     //'coconutbattery',
     //'diffmerge',
-    // docker for mac
-    //'docker',
+    // Pack, ship and run any application as a lightweight container- https://www.docker.com/
+    // 'docker',
     'dropbox',
     // f.lux - https://justgetflux.com
     //'flux',
