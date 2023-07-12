@@ -37,7 +37,11 @@ module.exports = {
     // ccat is the colorizing cat. It works similar to cat but displays content with syntax highlighting.
     // 'ccat',
     // Curl - Get a file from an HTTP, HTTPS or FTP server - https://curl.haxx.se/
-    'curl --with-openssl',
+    'curl',
+    // Pack, ship and run any application as a lightweight container- https://www.docker.com/
+    // 'docker',
+    // Isolated development environments using Docker
+    // 'docker-compose',
     // Utility for managing Mac OS X dock items - https://github.com/kcrawford/dockutil
     // 'dockutil',
     // Command-line DNS client - https://dns.lookup.dog/
@@ -188,8 +192,8 @@ module.exports = {
     // 'webp',
     // Get the password of the wifi you're on (bash) - https://github.com/rauchg/wifi-password
     //'wifi-password'
-    // Download videos from YouTube (and more sites) - https://rg3.github.io/youtube-dl/
-    'youtube-dl',
+    // Fork of youtube-dl with additional features and fixes - https://github.com/yt-dlp/yt-dlp
+    'yt-dlp',
     // Tool for managing your YubiKey configuration - https://developers.yubico.com/yubikey-manager/
     'ykman',
     // New zlib (gzip, deflate) compatible compressor - https://github.com/google/zopfli
@@ -211,8 +215,6 @@ module.exports = {
     // 'cheatsheet',
     //'coconutbattery',
     //'diffmerge',
-    // Pack, ship and run any application as a lightweight container- https://www.docker.com/
-    // 'docker',
     'dropbox',
     // f.lux - https://justgetflux.com
     //'flux',
