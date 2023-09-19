@@ -45,7 +45,7 @@ module.exports = {
     // Utility for managing Mac OS X dock items - https://github.com/kcrawford/dockutil
     // 'dockutil',
     // Command-line DNS client - https://dns.lookup.dog/
-    'dog',
+    // 'dog',
     // Convert text between DOS, UNIX, and Mac formats - https://waterlan.home.xs4all.nl/dos2unix.html
     // 'dos2unix',
     //Modern replacement for 'ls'

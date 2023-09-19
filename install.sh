@@ -291,31 +291,31 @@ if [[ $response =~ (y|yes|Y) ]]; then
   popd > /dev/null 2>&1
 fi
 
-bot "🎺 VIM Setup"
-read -r -p "Do you want to install vim plugins now? [y|N] " response
-if [[ $response =~ (y|yes|Y) ]];then
-  bot "Installing vim plugins"
-  vim +PlugInstall +qall > /dev/null 2>&1
-  ok
-else
-  ok "Skipped. Install by running :PlugInstall within vim"
-fi
+# bot "🎺 VIM Setup"
+# read -r -p "Do you want to install vim plugins now? [y|N] " response
+# if [[ $response =~ (y|yes|Y) ]];then
+#   bot "Installing vim plugins"
+#   vim +PlugInstall +qall > /dev/null 2>&1
+#   ok
+# else
+#   ok "Skipped. Install by running :PlugInstall within vim"
+# fi
 
 bot "🎺 VIM config"
-read -r -p "Do you want to install neovim vimrc? [y|N] " response
+read -r -p "Do you want to install neovim config? [y|N] " response
 if [[ $response =~ (y|yes|Y) ]]; then
-  bot "Installing vim config"
-  mkdir -p $HOME/.config/nvim/
+  # bot "Installing vim config"
+  # mkdir -p $HOME/.config/nvim/
 
-  simlink? () {
-    test "$(readlink "${1}")";
-  }
+  # simlink? () {
+  #   test "$(readlink "${1}")";
+  # }
 
-  FILE=$HOME/.config/nvim/init.vim
+  DIR=$HOME/.config/nvim/init.vim
 
-  if simlink? "${FILE}"; then
-    echo "symlink does not exists"
-    ln -s ~/.dotfiles/configs/nvim/init.vim $HOME/.config/nvim/init.vim > /dev/null 2>&1
+  if simlink? "${DIR}"; then
+    echo "Creating symlink"
+    ln -s ~/.dotfiles/nvim-basic-ide $HOME/.config/nvim > /dev/null 2>&1
   else
     echo "symlink to config already exists"
   fi
