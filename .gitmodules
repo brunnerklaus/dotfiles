@@ -12,3 +12,6 @@
 	path = oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
 	branch = master
+[submodule "nvim-basic-ide"]
+	path = nvim-basic-ide
+	url = https://github.com/brunnerklaus/nvim-basic-ide
