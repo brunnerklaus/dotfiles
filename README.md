@@ -90,14 +90,17 @@ To launch fullscreen, hit `Command + Enter` in iTerm, then use `Command + d` and
 
 ```bash
 git clone --recurse-submodules https://github.com/brunnerklaus/dotfiles ~/.dotfiles && cd ~/.dotfiles;
-# run this using terminal (not iTerm, lest iTerm settings get discarded on exit)
-./install.sh
 ```
 
 Pull latest submodules
 
 ```bash
 git pull --recurse-submodules
+```
+Install
+
+```bash
+./install.sh
 ```
 
 ### Add private commands and settings to `~/.extra`
