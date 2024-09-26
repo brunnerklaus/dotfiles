@@ -304,12 +304,11 @@ fi
 bot "🎺 VIM config"
 read -r -p "Do you want to install neovim config? [y|N] " response
 if [[ $response =~ (y|yes|Y) ]]; then
-  # bot "Installing vim config"
-  # mkdir -p $HOME/.config/nvim/
+  bot "Installing vim config"
 
-  # simlink? () {
-  #   test "$(readlink "${1}")";
-  # }
+  simlink? () {
+    test "$(readlink "${1}")";
+  }
 
   DIR=$HOME/.config/nvim/init.vim
 
