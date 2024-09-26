@@ -215,7 +215,7 @@ module.exports = {
     // 'cheatsheet',
     //'coconutbattery',
     //'diffmerge',
-    'dropbox',
+    // 'dropbox',
     // f.lux - https://justgetflux.com
     //'flux',
     //'filezilla',
@@ -225,7 +225,7 @@ module.exports = {
     // Update multiple git repositories at once - https://github.com/earwig/git-repo-updater
     // 'gitup',
     //'gitkraken',
-    'google-chrome',
+    // 'google-chrome',
     // Manage your GPG Keychain - https://gpgtools.org/
     // 'gpg-suite',
     // The modern media player for macOS - https://iina.io/
@@ -245,14 +245,14 @@ module.exports = {
     // 'keka',
     // 'p7zip', //dependencies for keka
     // Host-based application firewall - https://www.obdev.at/products/littlesnitch/index.html
-    'little-snitch',
+    // 'little-snitch',
     // A native OS X KeePass client https://macpassapp.org
     // Password manager app - https://keepassxc.org/
     'keepassxc',
     //'macpass',
     // 'meld',
     // App to write, plan, collaborate, and get organized - https://www.notion.so/
-    'notion',
+    // 'notion',
     //OS X player for The Hype Machine
     //'plug',
     //'nextcloud',
@@ -260,7 +260,7 @@ module.exports = {
     // Imaging utility to install operating systems to a microSD card - https://www.raspberrypi.org/downloads/
     // 'raspberry-pi-imager',
     'rectangle',
-    'signal',
+    // 'signal',
     // 'spotify',
     //'macvim',
     // Powerful, keyboard-centric window management - http://www.irradiatedsoftware.com/sizeup/
@@ -274,7 +274,7 @@ module.exports = {
     // Free Unarchiving Software for macOS - https://theunarchiver.com/
     //'the-unarchiver', replaced with keka
     // Customizable email client - https://www.thunderbird.net/
-    'thunderbird',
+    // 'thunderbird',
     // 'tunnelblick',
     //'torbrowser',
     //'transmission',
